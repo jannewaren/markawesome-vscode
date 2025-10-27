@@ -1,0 +1,226 @@
+{
+  "Callout Info": {
+    "prefix": "wa-callout-info",
+    "body": [
+      ":::info",
+      "${1:This is an info callout.}",
+      ":::"
+    ],
+    "description": "Insert info callout"
+  },
+  "Callout Success": {
+    "prefix": "wa-callout-success",
+    "body": [
+      ":::success",
+      "${1:This is a success callout.}",
+      ":::"
+    ],
+    "description": "Insert success callout"
+  },
+  "Callout Warning": {
+    "prefix": "wa-callout-warning",
+    "body": [
+      ":::warning",
+      "${1:This is a warning callout.}",
+      ":::"
+    ],
+    "description": "Insert warning callout"
+  },
+  "Callout Danger": {
+    "prefix": "wa-callout-danger",
+    "body": [
+      ":::danger",
+      "${1:This is a danger callout.}",
+      ":::"
+    ],
+    "description": "Insert danger callout"
+  },
+  "Callout Neutral": {
+    "prefix": "wa-callout-neutral",
+    "body": [
+      ":::neutral",
+      "${1:This is a neutral callout.}",
+      ":::"
+    ],
+    "description": "Insert neutral callout"
+  },
+  "Card Basic": {
+    "prefix": "wa-card",
+    "body": [
+      "===",
+      "${1:Card content here.}",
+      "==="
+    ],
+    "description": "Insert basic card"
+  },
+  "Card Full": {
+    "prefix": "wa-card-full",
+    "body": [
+      "===${1:filled}",
+      "![${2:Alt text}](${3:image.jpg})",
+      "# ${4:Card Title}",
+      "${5:Card content here.}",
+      "[${6:Learn More}](${7:https://example.com})",
+      "==="
+    ],
+    "description": "Insert card with header, image, and footer"
+  },
+  "Card Filled": {
+    "prefix": "wa-card-filled",
+    "body": [
+      "===filled",
+      "# ${1:Card Title}",
+      "${2:Card content here.}",
+      "==="
+    ],
+    "description": "Insert filled card"
+  },
+  "Comparison": {
+    "prefix": "wa-comparison",
+    "body": [
+      "|||${1:50}",
+      "![${2:Before}](${3:before.jpg})",
+      "![${4:After}](${5:after.jpg})",
+      "|||"
+    ],
+    "description": "Insert image comparison"
+  },
+  "Carousel Basic": {
+    "prefix": "wa-carousel",
+    "body": [
+      "~~~~~~",
+      "~~~",
+      "${1:Slide 1}",
+      "~~~",
+      "~~~",
+      "${2:Slide 2}",
+      "~~~",
+      "~~~",
+      "${3:Slide 3}",
+      "~~~",
+      "~~~~~~"
+    ],
+    "description": "Insert basic carousel"
+  },
+  "Carousel Navigation": {
+    "prefix": "wa-carousel-nav",
+    "body": [
+      "~~~~~~navigation pagination ${1:loop}",
+      "~~~",
+      "${2:Slide 1}",
+      "~~~",
+      "~~~",
+      "${3:Slide 2}",
+      "~~~",
+      "~~~",
+      "${4:Slide 3}",
+      "~~~",
+      "~~~~~~"
+    ],
+    "description": "Insert carousel with navigation and pagination"
+  },
+  "Details": {
+    "prefix": "wa-details",
+    "body": [
+      "^^^${1:filled}",
+      "${2:Click to expand}",
+      ">>>",
+      "${3:Hidden content here.}",
+      "^^^"
+    ],
+    "description": "Insert collapsible details"
+  },
+  "Dialog": {
+    "prefix": "wa-dialog",
+    "body": [
+      "???${1:light-dismiss}",
+      "${2:Open Dialog}",
+      ">>>",
+      "${3:Dialog content here.}",
+      "???"
+    ],
+    "description": "Insert modal dialog"
+  },
+  "Tab Group": {
+    "prefix": "wa-tabs",
+    "body": [
+      "++++++${1:top}",
+      "+++ ${2:Tab 1}",
+      "${3:Content 1}",
+      "+++",
+      "+++ ${4:Tab 2}",
+      "${5:Content 2}",
+      "+++",
+      "+++ ${6:Tab 3}",
+      "${7:Content 3}",
+      "+++",
+      "++++++"
+    ],
+    "description": "Insert tab group with 3 tabs"
+  },
+  "Tag": {
+    "prefix": "wa-tag",
+    "body": [
+      "@@@${1:brand}",
+      "${2:Tag text}",
+      "@@@"
+    ],
+    "description": "Insert tag"
+  },
+  "Copy Button": {
+    "prefix": "wa-copy",
+    "body": [
+      "<<<",
+      "${1:Text to copy}",
+      "<<<"
+    ],
+    "description": "Insert copy button"
+  },
+  "Badge": {
+    "prefix": "wa-badge",
+    "body": [
+      "!!!${1:brand}",
+      "${2:Badge text}",
+      "!!!"
+    ],
+    "description": "Insert badge"
+  },
+  "Button": {
+    "prefix": "wa-button",
+    "body": [
+      "%%%${1:brand}",
+      "[${2:Button Text}](${3:https://example.com})",
+      "%%%"
+    ],
+    "description": "Insert button with link"
+  },
+  "Alternative Callout": {
+    "prefix": "wa-alt-callout",
+    "body": [
+      ":::wa-callout ${1:info}",
+      "${2:Callout content}",
+      ":::"
+    ],
+    "description": "Insert callout (alternative syntax)"
+  },
+  "Alternative Card": {
+    "prefix": "wa-alt-card",
+    "body": [
+      ":::wa-card ${1:filled}",
+      "${2:Card content}",
+      ":::"
+    ],
+    "description": "Insert card (alternative syntax)"
+  },
+  "Alternative Details": {
+    "prefix": "wa-alt-details",
+    "body": [
+      ":::wa-details ${1:filled}",
+      "${2:Summary text}",
+      ">>>",
+      "${3:Details content}",
+      ":::"
+    ],
+    "description": "Insert details (alternative syntax)"
+  }
+}
