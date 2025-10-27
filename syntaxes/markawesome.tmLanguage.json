@@ -1,0 +1,418 @@
+{
+  "scopeName": "text.html.markdown.markawesome",
+  "injectionSelector": "L:text.html.markdown",
+  "patterns": [
+    {
+      "include": "#callouts"
+    },
+    {
+      "include": "#cards"
+    },
+    {
+      "include": "#comparison"
+    },
+    {
+      "include": "#carousel"
+    },
+    {
+      "include": "#details"
+    },
+    {
+      "include": "#dialog"
+    },
+    {
+      "include": "#tabs"
+    },
+    {
+      "include": "#tags"
+    },
+    {
+      "include": "#copy-button"
+    },
+    {
+      "include": "#badge"
+    },
+    {
+      "include": "#button"
+    },
+    {
+      "include": "#alternative-syntax"
+    },
+    {
+      "include": "#separator"
+    }
+  ],
+  "repository": {
+    "callouts": {
+      "patterns": [
+        {
+          "begin": "^(:::)(info|success|warning|danger|neutral)\\s*$",
+          "end": "^(:::)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.callout.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.callout.type.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.callout.markawesome"
+            }
+          },
+          "contentName": "markup.quote.callout.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "cards": {
+      "patterns": [
+        {
+          "begin": "^(===)(outlined|filled|filled-outlined|plain|accent)?\\s*$",
+          "end": "^(===)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.card.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.card.appearance.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.card.markawesome"
+            }
+          },
+          "contentName": "markup.quote.card.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "comparison": {
+      "patterns": [
+        {
+          "begin": "^(\\|\\|\\|)(\\d+)?\\s*$",
+          "end": "^(\\|\\|\\|)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.comparison.markawesome"
+            },
+            "2": {
+              "name": "constant.numeric.comparison.position.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.comparison.markawesome"
+            }
+          },
+          "contentName": "markup.quote.comparison.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "carousel": {
+      "patterns": [
+        {
+          "begin": "^(~~~~~~)(.*)$",
+          "end": "^(~~~~~~)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.carousel.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.carousel.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.carousel.markawesome"
+            }
+          },
+          "contentName": "markup.quote.carousel.markawesome",
+          "patterns": [
+            {
+              "match": "^(~~~)\\s*$",
+              "name": "punctuation.definition.carousel.slide.markawesome"
+            },
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "details": {
+      "patterns": [
+        {
+          "begin": "^(\\^\\^\\^)(outlined|filled|filled-outlined|plain)?\\s*(start|end)?\\s*$",
+          "end": "^(\\^\\^\\^)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.details.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.details.appearance.markawesome"
+            },
+            "3": {
+              "name": "entity.name.tag.details.placement.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.details.markawesome"
+            }
+          },
+          "contentName": "markup.quote.details.markawesome",
+          "patterns": [
+            {
+              "match": "^(>>>)\\s*$",
+              "name": "punctuation.definition.details.separator.markawesome"
+            },
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "patterns": [
+        {
+          "begin": "^(\\?\\?\\?)(.*)$",
+          "end": "^(\\?\\?\\?)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.dialog.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.dialog.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.dialog.markawesome"
+            }
+          },
+          "contentName": "markup.quote.dialog.markawesome",
+          "patterns": [
+            {
+              "match": "^(>>>)\\s*$",
+              "name": "punctuation.definition.dialog.separator.markawesome"
+            },
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "tabs": {
+      "patterns": [
+        {
+          "begin": "^(\\+\\+\\+\\+\\+\\+)(top|bottom|start|end)?\\s*$",
+          "end": "^(\\+\\+\\+\\+\\+\\+)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tabs.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.tabs.placement.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.tabs.markawesome"
+            }
+          },
+          "contentName": "markup.quote.tabs.markawesome",
+          "patterns": [
+            {
+              "begin": "^(\\+\\+\\+)\\s+(.+)$",
+              "end": "^(\\+\\+\\+)\\s*$",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.definition.tab.markawesome"
+                },
+                "2": {
+                  "name": "entity.name.tag.tab.title.markawesome"
+                }
+              },
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.definition.tab.markawesome"
+                }
+              },
+              "contentName": "markup.quote.tab.markawesome",
+              "patterns": [
+                {
+                  "include": "text.html.markdown"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "tags": {
+      "patterns": [
+        {
+          "begin": "^(@@@)(brand|success|neutral|warning|danger)?\\s*$",
+          "end": "^(@@@)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.tag.variant.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.markawesome"
+            }
+          },
+          "contentName": "markup.quote.tag.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "copy-button": {
+      "patterns": [
+        {
+          "begin": "^(<<<)\\s*$",
+          "end": "^(<<<)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.copy-button.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.copy-button.markawesome"
+            }
+          },
+          "contentName": "markup.quote.copy-button.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "badge": {
+      "patterns": [
+        {
+          "begin": "^(!!!)(brand|success|neutral|warning|danger)?\\s*$",
+          "end": "^(!!!)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.badge.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.badge.variant.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.badge.markawesome"
+            }
+          },
+          "contentName": "markup.quote.badge.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "button": {
+      "patterns": [
+        {
+          "begin": "^(%%%)(brand|success|neutral|warning|danger)?\\s*$",
+          "end": "^(%%%)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.button.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.button.variant.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.button.markawesome"
+            }
+          },
+          "contentName": "markup.quote.button.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "alternative-syntax": {
+      "patterns": [
+        {
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-dialog|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button)\\s+(.*)$",
+          "end": "^(:::)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.webawesome.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.component.markawesome"
+            },
+            "3": {
+              "name": "entity.name.tag.component.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.webawesome.markawesome"
+            }
+          },
+          "contentName": "markup.quote.webawesome.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "separator": {
+      "patterns": [
+        {
+          "match": "^(>>>)\\s*$",
+          "name": "punctuation.definition.separator.markawesome"
+        },
+        {
+          "match": "^(~~~)\\s*$",
+          "name": "punctuation.definition.separator.markawesome"
+        }
+      ]
+    }
+  }
+}

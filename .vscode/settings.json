@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
+}

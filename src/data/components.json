@@ -1,0 +1,114 @@
+{
+  "components": [
+    {
+      "name": "Callout",
+      "primarySyntax": ":::type",
+      "altSyntax": ":::wa-callout type",
+      "types": ["info", "success", "warning", "danger", "neutral"],
+      "description": "Highlight important information with icons and colored styling",
+      "example": ":::info\nThis is an important note.\n:::",
+      "documentation": "Callouts draw attention to important information. Each type has a different color and icon:\n- **info**: Blue with info icon\n- **success**: Green with checkmark\n- **warning**: Yellow with warning icon\n- **danger**: Red with exclamation\n- **neutral**: Gray with gear icon"
+    },
+    {
+      "name": "Card",
+      "primarySyntax": "===appearance?",
+      "altSyntax": ":::wa-card appearance?",
+      "types": ["outlined", "filled", "filled-outlined", "plain", "accent"],
+      "description": "Container for content with optional header, media, and footer",
+      "example": "===\n# Card Title\nCard content here.\n===",
+      "documentation": "Cards are flexible containers that can include:\n- **Media**: First image becomes card media\n- **Header**: First # heading becomes header\n- **Content**: Main text content\n- **Footer**: Trailing links become footer buttons\n\nAppearances: outlined (default), filled, filled-outlined, plain, accent"
+    },
+    {
+      "name": "Comparison",
+      "primarySyntax": "|||position?",
+      "altSyntax": ":::wa-comparison position?",
+      "description": "Before/after image comparison with draggable slider",
+      "example": "|||\n![Before](before.jpg)\n![After](after.jpg)\n|||",
+      "documentation": "Interactive image comparison slider. Requires exactly 2 images:\n- First image: 'before' slot\n- Second image: 'after' slot\n- Optional position parameter (0-100): Initial slider position"
+    },
+    {
+      "name": "Carousel",
+      "primarySyntax": "~~~~~~params?",
+      "altSyntax": ":::wa-carousel params?",
+      "parameters": [
+        "navigation",
+        "pagination",
+        "loop",
+        "autoplay",
+        "mouse-dragging",
+        "vertical",
+        "scroll-hint:value",
+        "aspect-ratio:value",
+        "slide-gap:value",
+        "slides-per-page:value",
+        "slides-per-move:value"
+      ],
+      "description": "Image slider or content rotator with navigation",
+      "example": "~~~~~~navigation pagination\n~~~\nSlide 1\n~~~\n~~~\nSlide 2\n~~~\n~~~~~~",
+      "documentation": "Carousel for sliding content. Use ~~~ to separate slides.\n\nParameters:\n- **navigation**: Show prev/next arrows\n- **pagination**: Show dot indicators\n- **loop**: Enable infinite loop\n- **autoplay**: Auto-advance slides\n- **mouse-dragging**: Enable drag to slide\n- **vertical**: Vertical orientation\n- **scroll-hint:value**: Show scroll hint\n- **aspect-ratio:value**: e.g., 16/9, 4/3\n- **slide-gap:value**: Gap between slides\n- **slides-per-page:n**: Slides visible at once\n- **slides-per-move:n**: Slides to move at once"
+    },
+    {
+      "name": "Details",
+      "primarySyntax": "^^^appearance? icon-placement?",
+      "altSyntax": ":::wa-details appearance? icon-placement?",
+      "appearances": ["outlined", "filled", "filled-outlined", "plain"],
+      "placements": ["start", "end"],
+      "description": "Collapsible details/summary component",
+      "example": "^^^\nClick to expand\n>>>\nHidden content here.\n^^^",
+      "documentation": "Collapsible content section. Use >>> to separate summary from details.\n\nAppearances: outlined (default), filled, filled-outlined, plain\nIcon placement: end (default), start"
+    },
+    {
+      "name": "Dialog",
+      "primarySyntax": "???params?",
+      "altSyntax": ":::wa-dialog params?",
+      "parameters": ["light-dismiss", "width (e.g., 600px, 50vw)"],
+      "description": "Modal dialog with trigger button",
+      "example": "???\nOpen Dialog\n>>>\nDialog content here.\n???",
+      "documentation": "Modal dialog component. Use >>> to separate trigger button text from dialog content.\n\nParameters:\n- **light-dismiss**: Close when clicking outside\n- **width**: Custom width (e.g., 600px, 50vw)"
+    },
+    {
+      "name": "Tab Group",
+      "primarySyntax": "++++++placement?",
+      "altSyntax": ":::wa-tabs placement?",
+      "placements": ["top", "bottom", "start", "end"],
+      "description": "Tabbed content interface",
+      "example": "++++++\n+++ Tab 1\nContent 1\n+++\n+++ Tab 2\nContent 2\n+++\n++++++",
+      "documentation": "Create tabbed content sections. Use +++ with tab title to define each tab.\n\nPlacements: top (default), bottom, start, end"
+    },
+    {
+      "name": "Tag",
+      "primarySyntax": "@@@variant?",
+      "altSyntax": ":::wa-tag variant?",
+      "variants": ["brand", "success", "neutral", "warning", "danger"],
+      "description": "Colored label or tag",
+      "example": "@@@brand\nNew Feature\n@@@",
+      "documentation": "Small colored labels for categorization or status.\n\nVariants: brand, success, neutral, warning, danger"
+    },
+    {
+      "name": "Copy Button",
+      "primarySyntax": "<<<",
+      "altSyntax": ":::wa-copy-button",
+      "description": "Button that copies content to clipboard",
+      "example": "<<<\nnpm install markawesome\n<<<",
+      "documentation": "Creates a button that copies the content to clipboard when clicked. Supports markdown formatting in display while preserving raw text for copying."
+    },
+    {
+      "name": "Badge",
+      "primarySyntax": "!!!variant?",
+      "altSyntax": ":::wa-badge variant?",
+      "variants": ["brand", "success", "neutral", "warning", "danger"],
+      "description": "Small badge component",
+      "example": "!!!brand\nNew\n!!!",
+      "documentation": "Small badge indicators for status or counts.\n\nVariants: brand, success, neutral, warning, danger"
+    },
+    {
+      "name": "Button",
+      "primarySyntax": "%%%variant?",
+      "altSyntax": ":::wa-button variant?",
+      "variants": ["brand", "success", "neutral", "warning", "danger"],
+      "description": "Button component with optional link",
+      "example": "%%%brand\n[Click Me](https://example.com)\n%%%",
+      "documentation": "Styled button component. Include a markdown link to make it clickable.\n\nVariants: brand, success, neutral, warning, danger"
+    }
+  ]
+}

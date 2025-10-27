@@ -1,0 +1,209 @@
+{
+  "name": "markawesome-vscode",
+  "displayName": "Markawesome (Markdown to Web Awesome)",
+  "description": "Syntax highlighting, snippets, and IntelliSense for Markawesome custom Markdown components",
+  "version": "0.1.0",
+  "publisher": "jannewaren",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Snippets",
+    "Programming Languages",
+    "Formatters"
+  ],
+  "keywords": [
+    "markawesome",
+    "markdown",
+    "web-awesome",
+    "components",
+    "syntax"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jannewaren/markawesome-vscode"
+  },
+  "license": "MIT",
+  "contributes": {
+    "languages": [
+      {
+        "id": "markdown",
+        "extensions": [
+          ".md",
+          ".markdown"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "markdown",
+        "scopeName": "text.html.markdown.markawesome",
+        "path": "./syntaxes/markawesome.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown"
+        ]
+      }
+    ],
+    "snippets": [
+      {
+        "language": "markdown",
+        "path": "./snippets/markawesome.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "markawesome.insertComponent",
+        "title": "Markawesome: Insert Component"
+      },
+      {
+        "command": "markawesome.wrapInCallout",
+        "title": "Markawesome: Wrap in Callout"
+      },
+      {
+        "command": "markawesome.wrapInCard",
+        "title": "Markawesome: Wrap in Card"
+      },
+      {
+        "command": "markawesome.wrapInTag",
+        "title": "Markawesome: Wrap in Tag"
+      },
+      {
+        "command": "markawesome.wrapInDetails",
+        "title": "Markawesome: Wrap in Details"
+      },
+      {
+        "command": "markawesome.wrapInBadge",
+        "title": "Markawesome: Wrap in Badge"
+      },
+      {
+        "command": "markawesome.wrapInButton",
+        "title": "Markawesome: Wrap in Button"
+      },
+      {
+        "command": "markawesome.wrapInCopyButton",
+        "title": "Markawesome: Wrap in Copy Button"
+      },
+      {
+        "command": "markawesome.wrapInDialog",
+        "title": "Markawesome: Wrap in Dialog"
+      },
+      {
+        "command": "markawesome.wrapInTabGroup",
+        "title": "Markawesome: Wrap in Tab Group"
+      },
+      {
+        "command": "markawesome.imagesToComparison",
+        "title": "Markawesome: Convert Images to Comparison"
+      },
+      {
+        "command": "markawesome.imagesToCarousel",
+        "title": "Markawesome: Convert Images to Carousel"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "markawesome.insertComponent",
+        "key": "ctrl+shift+w",
+        "mac": "cmd+shift+w",
+        "when": "editorTextFocus && editorLangId == markdown"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "markawesome",
+          "group": "1_modification",
+          "when": "editorLangId == markdown"
+        }
+      ],
+      "markawesome": [
+        {
+          "command": "markawesome.insertComponent",
+          "group": "1_insert"
+        },
+        {
+          "command": "markawesome.wrapInCallout",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInCard",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInTag",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInDetails",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInBadge",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInButton",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInCopyButton",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInDialog",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInTabGroup",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.imagesToComparison",
+          "group": "3_transform",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.imagesToCarousel",
+          "group": "3_transform",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "markawesome",
+        "label": "Markawesome"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.40.0",
+    "typescript": "^5.1.0"
+  }
+}
