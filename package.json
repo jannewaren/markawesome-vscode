@@ -1,7 +1,7 @@
 {
   "name": "markawesome-vscode",
   "displayName": "Markawesome (Markdown to Web Awesome)",
-  "description": "Syntax highlighting, snippets, and IntelliSense for Markawesome custom Markdown components",
+  "description": "Snippets, IntelliSense, and component commands for Markawesome custom Markdown components",
   "version": "0.1.0",
   "publisher": "jannewaren",
   "engines": {
@@ -9,7 +9,6 @@
   },
   "categories": [
     "Snippets",
-    "Programming Languages",
     "Formatters"
   ],
   "keywords": [
@@ -30,25 +29,6 @@
   },
   "license": "MIT",
   "contributes": {
-    "languages": [
-      {
-        "id": "markdown",
-        "extensions": [
-          ".md",
-          ".markdown"
-        ]
-      }
-    ],
-    "grammars": [
-      {
-        "language": "markdown",
-        "scopeName": "text.html.markdown.markawesome",
-        "path": "./syntaxes/markawesome.tmLanguage.json",
-        "injectTo": [
-          "text.html.markdown"
-        ]
-      }
-    ],
     "snippets": [
       {
         "language": "markdown",
