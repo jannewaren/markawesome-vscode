@@ -2,6 +2,12 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.2.0] - 2025-10-28
+
+### Removed
+
+- Removed syntax highlighting, as it interfered with other Markdown extensions
+
 ## [0.1.0] - 2025-10-27
 
 ### Added
