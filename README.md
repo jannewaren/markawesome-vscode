@@ -7,45 +7,28 @@ Syntax highlighting, snippets, and IntelliSense for [Markawesome](https://github
 
 ## Features
 
-### 🎨 Syntax Highlighting
-
-All Markawesome component syntax patterns are beautifully highlighted in your Markdown files:
-
-- **Callouts**: `:::info`, `:::success`, `:::warning`, `:::danger`, `:::neutral`
-- **Cards**: `===`, `===filled`, `===plain`, `===accent`
-- **Comparison**: `|||`, `|||25`
-- **Carousel**: `~~~~~~` with parameters like `navigation pagination loop`
-- **Details**: `^^^`, `^^^filled start`, `^^^plain end`
-- **Dialog**: `???`, `???light-dismiss`, `???600px`
-- **Tab Groups**: `++++++` and `+++` for individual tabs
-- **Tags**: `@@@`, `@@@brand`, `@@@success`
-- **Copy Buttons**: `<<<`
-- **Badges**: `!!!`, `!!!brand`
-- **Buttons**: `%%%`, `%%%primary`
-- **Alternative Syntax**: `:::wa-component` format
-
-### ⚡ Code Snippets
+### Code Snippets
 
 Quick insertion of component templates with tab stops:
 
-| Prefix | Description |
-|--------|-------------|
-| `wa-callout-info` | Info callout |
-| `wa-callout-warning` | Warning callout |
-| `wa-card` | Basic card |
-| `wa-card-full` | Card with header, image, and footer |
-| `wa-carousel` | Basic carousel |
-| `wa-carousel-nav` | Carousel with navigation |
-| `wa-comparison` | Image comparison |
-| `wa-dialog` | Modal dialog |
-| `wa-details` | Collapsible details |
-| `wa-tabs` | Tab group with 3 tabs |
-| `wa-tag` | Tag component |
-| `wa-copy` | Copy button |
-| `wa-badge` | Badge component |
-| `wa-button` | Button with link |
+| Prefix               | Description                         |
+|----------------------|-------------------------------------|
+| `wa-callout-info`    | Info callout                        |
+| `wa-callout-warning` | Warning callout                     |
+| `wa-card`            | Basic card                          |
+| `wa-card-full`       | Card with header, image, and footer |
+| `wa-carousel`        | Basic carousel                      |
+| `wa-carousel-nav`    | Carousel with navigation            |
+| `wa-comparison`      | Image comparison                    |
+| `wa-dialog`          | Modal dialog                        |
+| `wa-details`         | Collapsible details                 |
+| `wa-tabs`            | Tab group with 3 tabs               |
+| `wa-tag`             | Tag component                       |
+| `wa-copy`            | Copy button                         |
+| `wa-badge`           | Badge component                     |
+| `wa-button`          | Button with link                    |
 
-### 🧠 IntelliSense
+### IntelliSense
 
 Intelligent autocomplete suggestions as you type:
 
@@ -58,7 +41,7 @@ Intelligent autocomplete suggestions as you type:
 - Type `%%%` → Suggests button variants
 - Type `~~~~~~` → Suggests carousel parameters
 
-### 📖 Hover Documentation
+### Hover Documentation
 
 Hover over any component syntax to see:
 
@@ -67,49 +50,21 @@ Hover over any component syntax to see:
 - Usage examples
 - Link to full documentation
 
-### 🎯 Command Palette
+### Command Palette
 
 Access powerful commands via Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`):
 
-#### Insert Component
-
-**Command**: `Markawesome: Insert Component`  
-**Shortcut**: `Cmd+Shift+W` (Mac) / `Ctrl+Shift+W` (Windows/Linux)
-
-Quick pick menu to insert any component with guided parameter selection.
-
-#### Wrap Selection Commands
-
+- `Markawesome: Insert Component` - Insert a new component with guided parameter selection
 - `Markawesome: Wrap in Callout` - Wrap selected text in a callout (choose variant)
 - `Markawesome: Wrap in Card` - Wrap selected text in a card
 - `Markawesome: Wrap in Tag` - Wrap selected text in a tag
 - `Markawesome: Wrap in Details` - Wrap selected text in collapsible details
-
-#### Transform Selection Commands
-
 - `Markawesome: Convert Images to Comparison` - Convert 2 selected images to a comparison component
 - `Markawesome: Convert Images to Carousel` - Convert multiple selected images to a carousel
 
-### 🖱️ Context Menu
+### Context Menu
 
 Right-click in a Markdown file to access all commands via the **Markawesome** submenu.
-
-## Installation
-
-### From VS Code Marketplace
-
-1. Open VS Code
-2. Go to Extensions (`Cmd+Shift+X` / `Ctrl+Shift+X`)
-3. Search for "Markawesome"
-4. Click Install
-
-### From VSIX building it yourself
-
-```bash
-npm install -g vsce
-vsce package
-code --install-extension markawesome-vscode-0.1.0.vsix
-```
 
 ## Usage Examples
 
@@ -302,24 +257,6 @@ npm install markawesome
 
 This extension works out of the box with no configuration needed.
 
-## Known Issues
-
-- None currently. Please [report issues](https://github.com/jannewaren/markawesome-vscode/issues) on GitHub.
-
-## Release Notes
-
-### 0.1.0
-
-Initial release:
-
-- ✨ Syntax highlighting for all component patterns
-- ✨ 20+ code snippets for quick insertion
-- ✨ IntelliSense/autocomplete for component parameters
-- ✨ Hover documentation with examples
-- ✨ Command palette commands for inserting and wrapping
-- ✨ Transform commands for images to comparison/carousel
-- ✨ Context menu integration
-
 ## Related Projects
 
 - [Markawesome](https://github.com/jannewaren/markawesome) - The gem that transforms Markdown to Web Awesome components
@@ -332,7 +269,3 @@ Contributions are welcome! Please see the [GitHub repository](https://github.com
 ## License
 
 This extension is available under the [MIT License](LICENSE).
-
----
-
-**Enjoy creating beautiful content with Markawesome!** 🚀

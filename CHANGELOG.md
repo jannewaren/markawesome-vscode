@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
+
+## [0.3.0] - 2025-11-07
+
+### Removed
+
+- Removed keyboard shortcut for "Insert Component" command to avoid conflicts with other extensions
+- Cleaned up the README of AI-generated slop
 
 ## [0.2.0] - 2025-10-28
 
