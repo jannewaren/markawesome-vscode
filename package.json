@@ -2,7 +2,7 @@
   "name": "markawesome-vscode",
   "displayName": "Markawesome (Markdown to Web Awesome)",
   "description": "Snippets, IntelliSense, and component commands for Markawesome custom Markdown components",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "jannewaren",
   "engines": {
     "vscode": "^1.80.0"
