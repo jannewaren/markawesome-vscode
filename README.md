@@ -1,8 +1,5 @@
 # Markawesome Syntax Support
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
 Syntax highlighting, snippets, and IntelliSense for [Markawesome](https://github.com/jannewaren/markawesome) custom Markdown components. Write beautiful, interactive content using simple Markdown-like syntax that transforms into [Web Awesome](https://webawesome.com/) components.
 
 ## Features
