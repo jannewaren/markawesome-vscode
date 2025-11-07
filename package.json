@@ -85,14 +85,6 @@
         "title": "Markawesome: Convert Images to Carousel"
       }
     ],
-    "keybindings": [
-      {
-        "command": "markawesome.insertComponent",
-        "key": "ctrl+shift+w",
-        "mac": "cmd+shift+w",
-        "when": "editorTextFocus && editorLangId == markdown"
-      }
-    ],
     "menus": {
       "editor/context": [
         {
