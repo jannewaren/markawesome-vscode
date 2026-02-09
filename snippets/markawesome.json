@@ -44,6 +44,33 @@
     ],
     "description": "Insert neutral callout"
   },
+  "Callout with Icon": {
+    "prefix": "wa-callout-icon",
+    "body": [
+      ":::${1|info,success,warning,danger,neutral|} icon:${2:icon-name}",
+      "${3:Callout content with custom icon.}",
+      ":::"
+    ],
+    "description": "Insert callout with custom icon override"
+  },
+  "Callout Small": {
+    "prefix": "wa-callout-small",
+    "body": [
+      ":::${1|info,success,warning,danger,neutral|} small",
+      "${2:This is a small callout.}",
+      ":::"
+    ],
+    "description": "Insert small callout"
+  },
+  "Callout Filled": {
+    "prefix": "wa-callout-filled",
+    "body": [
+      ":::${1|info,success,warning,danger,neutral|} filled",
+      "${2:This is a filled callout.}",
+      ":::"
+    ],
+    "description": "Insert filled callout"
+  },
   "Card Basic": {
     "prefix": "wa-card",
     "body": [
@@ -130,6 +157,45 @@
     ],
     "description": "Insert collapsible details"
   },
+  "Details with Icons": {
+    "prefix": "wa-details-icons",
+    "body": [
+      "^^^icon:expand:${1:plus} icon:collapse:${2:minus}",
+      "${3:Click to expand}",
+      ">>>",
+      "${4:Hidden content here.}",
+      "^^^"
+    ],
+    "description": "Insert details with custom expand/collapse icons"
+  },
+  "Details Open": {
+    "prefix": "wa-details-open",
+    "body": [
+      "^^^open",
+      "${1:Initially expanded}",
+      ">>>",
+      "${2:Visible content here.}",
+      "^^^"
+    ],
+    "description": "Insert initially expanded details"
+  },
+  "Details Accordion": {
+    "prefix": "wa-details-accordion",
+    "body": [
+      "^^^name:${1:group1}",
+      "${2:First item}",
+      ">>>",
+      "${3:Content 1}",
+      "^^^",
+      "",
+      "^^^name:${1:group1}",
+      "${4:Second item}",
+      ">>>",
+      "${5:Content 2}",
+      "^^^"
+    ],
+    "description": "Insert accordion group (only one open at a time)"
+  },
   "Dialog": {
     "prefix": "wa-dialog",
     "body": [
@@ -158,6 +224,20 @@
     ],
     "description": "Insert tab group with 3 tabs"
   },
+  "Tab Group Manual": {
+    "prefix": "wa-tabs-manual",
+    "body": [
+      "++++++manual",
+      "+++ ${1:Tab 1}",
+      "${2:Content 1}",
+      "+++",
+      "+++ ${3:Tab 2}",
+      "${4:Content 2}",
+      "+++",
+      "++++++"
+    ],
+    "description": "Insert tab group with manual activation (click only)"
+  },
   "Tag": {
     "prefix": "wa-tag",
     "body": [
@@ -166,6 +246,42 @@
       "@@@"
     ],
     "description": "Insert tag"
+  },
+  "Tag with Icon": {
+    "prefix": "wa-tag-icon",
+    "body": [
+      "@@@${1|brand,success,neutral,warning,danger|} icon:${2:icon-name}",
+      "${3:Tag text}",
+      "@@@"
+    ],
+    "description": "Insert tag with icon"
+  },
+  "Tag Removable": {
+    "prefix": "wa-tag-removable",
+    "body": [
+      "@@@${1|brand,success,neutral,warning,danger|} with-remove",
+      "${2:Tag text}",
+      "@@@"
+    ],
+    "description": "Insert removable tag"
+  },
+  "Tag Small Pill": {
+    "prefix": "wa-tag-small-pill",
+    "body": [
+      "@@@${1|brand,success,neutral,warning,danger|} small pill",
+      "${2:Tag text}",
+      "@@@"
+    ],
+    "description": "Insert small pill tag"
+  },
+  "Tag Large": {
+    "prefix": "wa-tag-large",
+    "body": [
+      "@@@${1|brand,success,neutral,warning,danger|} large",
+      "${2:Tag text}",
+      "@@@"
+    ],
+    "description": "Insert large tag"
   },
   "Copy Button": {
     "prefix": "wa-copy",
@@ -185,6 +301,33 @@
     ],
     "description": "Insert badge"
   },
+  "Badge Pulse": {
+    "prefix": "wa-badge-pulse",
+    "body": [
+      "!!!${1|brand,success,neutral,warning,danger|} pulse",
+      "${2:Badge text}",
+      "!!!"
+    ],
+    "description": "Insert badge with pulse animation"
+  },
+  "Badge Pill": {
+    "prefix": "wa-badge-pill",
+    "body": [
+      "!!!${1|brand,success,neutral,warning,danger|} pill",
+      "${2:Badge text}",
+      "!!!"
+    ],
+    "description": "Insert pill badge"
+  },
+  "Badge Filled": {
+    "prefix": "wa-badge-filled",
+    "body": [
+      "!!!${1|brand,success,neutral,warning,danger|} filled",
+      "${2:Badge text}",
+      "!!!"
+    ],
+    "description": "Insert filled badge"
+  },
   "Button": {
     "prefix": "wa-button",
     "body": [
@@ -193,6 +336,60 @@
       "%%%"
     ],
     "description": "Insert button with link"
+  },
+  "Button with Icon": {
+    "prefix": "wa-button-icon",
+    "body": [
+      "%%%${1|brand,success,neutral,warning,danger|} icon:${2:icon-name}",
+      "[${3:Button Text}](${4:https://example.com})",
+      "%%%"
+    ],
+    "description": "Insert button with start icon"
+  },
+  "Button with Start and End Icons": {
+    "prefix": "wa-button-icons",
+    "body": [
+      "%%%${1|brand,success,neutral,warning,danger|} icon:start:${2:gear} icon:end:${3:arrow-right}",
+      "[${4:Button Text}](${5:https://example.com})",
+      "%%%"
+    ],
+    "description": "Insert button with start and end icons"
+  },
+  "Button Filled": {
+    "prefix": "wa-button-filled",
+    "body": [
+      "%%%${1|brand,success,neutral,warning,danger|} filled",
+      "[${2:Button Text}](${3:https://example.com})",
+      "%%%"
+    ],
+    "description": "Insert filled button"
+  },
+  "Button Large Pill": {
+    "prefix": "wa-button-large-pill",
+    "body": [
+      "%%%${1|brand,success,neutral,warning,danger|} large pill",
+      "[${2:Button Text}](${3:https://example.com})",
+      "%%%"
+    ],
+    "description": "Insert large pill button"
+  },
+  "Button Loading": {
+    "prefix": "wa-button-loading",
+    "body": [
+      "%%%${1|brand,success,neutral,warning,danger|} loading",
+      "[${2:Button Text}](${3:https://example.com})",
+      "%%%"
+    ],
+    "description": "Insert button with loading state"
+  },
+  "Button Caret": {
+    "prefix": "wa-button-caret",
+    "body": [
+      "%%%${1|brand,success,neutral,warning,danger|} caret",
+      "[${2:Dropdown}](${3:#})",
+      "%%%"
+    ],
+    "description": "Insert button with dropdown caret"
   },
   "Alternative Callout": {
     "prefix": "wa-alt-callout",

@@ -2,12 +2,14 @@
   "components": [
     {
       "name": "Callout",
-      "primarySyntax": ":::type",
-      "altSyntax": ":::wa-callout type",
-      "types": ["info", "success", "warning", "danger", "neutral"],
+      "primarySyntax": ":::type size? appearance? icon:name?",
+      "altSyntax": ":::wa-callout type size? appearance? icon:name?",
+      "types": ["info", "brand", "success", "warning", "danger", "neutral"],
+      "sizes": ["small", "medium", "large"],
+      "appearances": ["accent", "filled", "outlined", "plain", "filled-outlined"],
       "description": "Highlight important information with icons and colored styling",
-      "example": ":::info\nThis is an important note.\n:::",
-      "documentation": "Callouts draw attention to important information. Each type has a different color and icon:\n- **info**: Blue with info icon\n- **success**: Green with checkmark\n- **warning**: Yellow with warning icon\n- **danger**: Red with exclamation\n- **neutral**: Gray with gear icon"
+      "example": ":::warning icon:shield\nSecurity notice with custom icon.\n:::",
+      "documentation": "Callouts draw attention to important information. Each type has a different color and icon:\n- **info/brand**: Blue with info icon (info is alias for brand)\n- **success**: Green with checkmark\n- **warning**: Yellow with warning icon\n- **danger**: Red with exclamation\n- **neutral**: Gray with gear icon\n\nSizes: small, medium, large\nAppearances: accent, filled, outlined, plain, filled-outlined\n\n**Icons:** Use `icon:name` to override the default variant icon (e.g., `icon:shield`, `icon:rocket`)"
     },
     {
       "name": "Card",
@@ -49,13 +51,14 @@
     },
     {
       "name": "Details",
-      "primarySyntax": "^^^appearance? icon-placement?",
-      "altSyntax": ":::wa-details appearance? icon-placement?",
+      "primarySyntax": "^^^appearance? icon-placement? disabled? open? name:value? icon:expand:name? icon:collapse:name?",
+      "altSyntax": ":::wa-details appearance? icon-placement? disabled? open? name:value? icon:expand:name? icon:collapse:name?",
       "appearances": ["outlined", "filled", "filled-outlined", "plain"],
       "placements": ["start", "end"],
-      "description": "Collapsible details/summary component",
-      "example": "^^^\nClick to expand\n>>>\nHidden content here.\n^^^",
-      "documentation": "Collapsible content section. Use >>> to separate summary from details.\n\nAppearances: outlined (default), filled, filled-outlined, plain\nIcon placement: end (default), start"
+      "flags": ["disabled", "open"],
+      "description": "Collapsible details/summary component with accordion support",
+      "example": "^^^icon:expand:plus icon:collapse:minus\nClick to expand\n>>>\nHidden content here.\n^^^",
+      "documentation": "Collapsible content section. Use >>> to separate summary from details.\n\nAppearances: outlined (default), filled, filled-outlined, plain\nIcon placement: end (default), start\nFlags:\n- **disabled**: Prevents toggling\n- **open**: Initially expanded\n- **name:value**: Group name for accordion behavior (e.g., name:accordion-1)\n\n**Icons:** Use `icon:expand:name` and `icon:collapse:name` for custom toggle icons (e.g., `icon:expand:plus icon:collapse:minus`)"
     },
     {
       "name": "Dialog",
@@ -68,21 +71,25 @@
     },
     {
       "name": "Tab Group",
-      "primarySyntax": "++++++placement?",
-      "altSyntax": ":::wa-tabs placement?",
+      "primarySyntax": "++++++placement? activation? active? no-scroll-controls?",
+      "altSyntax": ":::wa-tabs placement? activation? active? no-scroll-controls?",
       "placements": ["top", "bottom", "start", "end"],
-      "description": "Tabbed content interface",
-      "example": "++++++\n+++ Tab 1\nContent 1\n+++\n+++ Tab 2\nContent 2\n+++\n++++++",
-      "documentation": "Create tabbed content sections. Use +++ with tab title to define each tab.\n\nPlacements: top (default), bottom, start, end"
+      "activations": ["auto", "manual"],
+      "description": "Tabbed content interface with configurable behavior",
+      "example": "++++++top manual\n+++ Tab 1\nContent 1\n+++\n+++ Tab 2\nContent 2\n+++\n++++++",
+      "documentation": "Create tabbed content sections. Use +++ with tab title to define each tab.\n\nPlacements: top (default), bottom, start, end\nActivation: auto (default, switch on hover), manual (switch on click)\nActive: Specify active panel name (e.g., 'tab-1', 'tab-2')\nFlags:\n- **no-scroll-controls**: Disable scroll arrows for overflowing tabs"
     },
     {
       "name": "Tag",
-      "primarySyntax": "@@@variant?",
-      "altSyntax": ":::wa-tag variant?",
+      "primarySyntax": "@@@variant? appearance? size? pill? with-remove? icon:name?",
+      "altSyntax": ":::wa-tag variant? appearance? size? pill? with-remove? icon:name?",
       "variants": ["brand", "success", "neutral", "warning", "danger"],
-      "description": "Colored label or tag",
-      "example": "@@@brand\nNew Feature\n@@@",
-      "documentation": "Small colored labels for categorization or status.\n\nVariants: brand, success, neutral, warning, danger"
+      "appearances": ["accent", "filled", "outlined", "filled-outlined"],
+      "sizes": ["small", "medium", "large"],
+      "flags": ["pill", "with-remove"],
+      "description": "Colored label or tag with multiple styles and sizes",
+      "example": "@@@success icon:check\nApproved\n@@@",
+      "documentation": "Small colored labels for categorization or status.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **with-remove**: Removable tag with remove button\n\n**Icons:** Use `icon:name` to add an icon inside the tag (e.g., `icon:check`, `icon:star`)\n\nAll parameters are optional and can be combined in any order."
     },
     {
       "name": "Copy Button",
@@ -94,21 +101,27 @@
     },
     {
       "name": "Badge",
-      "primarySyntax": "!!!variant?",
-      "altSyntax": ":::wa-badge variant?",
+      "primarySyntax": "!!!variant? appearance? attention? pill?",
+      "altSyntax": ":::wa-badge variant? appearance? attention? pill?",
       "variants": ["brand", "success", "neutral", "warning", "danger"],
-      "description": "Small badge component",
-      "example": "!!!brand\nNew\n!!!",
-      "documentation": "Small badge indicators for status or counts.\n\nVariants: brand, success, neutral, warning, danger"
+      "appearances": ["accent", "filled", "outlined", "filled-outlined"],
+      "attentions": ["none", "pulse", "bounce"],
+      "flags": ["pill"],
+      "description": "Small badge component with variants, appearances, and animations",
+      "example": "!!!brand pulse\nNew\n!!!",
+      "documentation": "Small badge indicators for status or counts.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined\nAttention: none, pulse, bounce\nFlags: pill (rounded edges)\n\nAll parameters are optional and can be combined in any order."
     },
     {
       "name": "Button",
-      "primarySyntax": "%%%variant?",
-      "altSyntax": ":::wa-button variant?",
+      "primarySyntax": "%%%variant? appearance? size? pill? caret? loading? disabled? icon:name? icon:end:name?",
+      "altSyntax": ":::wa-button variant? appearance? size? pill? caret? loading? disabled? icon:name? icon:end:name?",
       "variants": ["brand", "success", "neutral", "warning", "danger"],
-      "description": "Button component with optional link",
-      "example": "%%%brand\n[Click Me](https://example.com)\n%%%",
-      "documentation": "Styled button component. Include a markdown link to make it clickable.\n\nVariants: brand, success, neutral, warning, danger"
+      "appearances": ["accent", "filled", "outlined", "filled-outlined", "plain"],
+      "sizes": ["small", "medium", "large"],
+      "flags": ["pill", "caret", "loading", "disabled"],
+      "description": "Button component with optional link, multiple styles and states",
+      "example": "%%%brand icon:download\n[Download](https://example.com/file.zip)\n%%%",
+      "documentation": "Styled button component. Include a markdown link to make it clickable, or use plain text for a non-link button.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined, plain\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **caret**: Dropdown indicator\n- **loading**: Loading state\n- **disabled**: Disabled state\n\n**Icons:** Use `icon:name` for start icon, `icon:end:name` for end icon, or both (e.g., `icon:start:gear icon:end:arrow-right`)\n\nAll parameters are optional and can be combined in any order."
     }
   ]
 }
