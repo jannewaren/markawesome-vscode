@@ -46,7 +46,7 @@
     "callouts": {
       "patterns": [
         {
-          "begin": "^(:::)(info|success|warning|danger|neutral)\\s*$",
+          "begin": "^(:::)(info|brand|success|warning|danger|neutral)((?:\\s+(?:icon:\\S+|\\S+))*)\\s*$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {
@@ -54,6 +54,9 @@
             },
             "2": {
               "name": "entity.name.tag.callout.type.markawesome"
+            },
+            "3": {
+              "name": "entity.name.tag.callout.params.markawesome"
             }
           },
           "endCaptures": {
@@ -158,17 +161,14 @@
     "details": {
       "patterns": [
         {
-          "begin": "^(\\^\\^\\^)(outlined|filled|filled-outlined|plain)?\\s*(start|end)?\\s*$",
+          "begin": "^(\\^\\^\\^)((?:\\s*(?:icon:\\S+|outlined|filled-outlined|filled|plain|start|end|disabled|open|name:\\S+))*)\\s*$",
           "end": "^(\\^\\^\\^)\\s*$",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.details.markawesome"
             },
             "2": {
-              "name": "entity.name.tag.details.appearance.markawesome"
-            },
-            "3": {
-              "name": "entity.name.tag.details.placement.markawesome"
+              "name": "entity.name.tag.details.params.markawesome"
             }
           },
           "endCaptures": {
@@ -270,14 +270,14 @@
     "tags": {
       "patterns": [
         {
-          "begin": "^(@@@)(brand|success|neutral|warning|danger)?\\s*$",
+          "begin": "^(@@@)((?:\\s*(?:icon:\\S+|brand|success|neutral|warning|danger|accent|filled-outlined|filled|outlined|small|medium|large|pill|with-remove))*)\\s*$",
           "end": "^(@@@)\\s*$",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.tag.markawesome"
             },
             "2": {
-              "name": "entity.name.tag.tag.variant.markawesome"
+              "name": "entity.name.tag.tag.params.markawesome"
             }
           },
           "endCaptures": {
@@ -348,14 +348,14 @@
     "button": {
       "patterns": [
         {
-          "begin": "^(%%%)(brand|success|neutral|warning|danger)?\\s*$",
+          "begin": "^(%%%)((?:\\s*(?:icon:\\S+|brand|success|neutral|warning|danger|accent|filled-outlined|filled|outlined|plain|small|medium|large|pill|caret|loading|disabled))*)\\s*$",
           "end": "^(%%%)\\s*$",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.button.markawesome"
             },
             "2": {
-              "name": "entity.name.tag.button.variant.markawesome"
+              "name": "entity.name.tag.button.params.markawesome"
             }
           },
           "endCaptures": {
