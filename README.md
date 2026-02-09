@@ -2,6 +2,8 @@
 
 Syntax highlighting, snippets, and IntelliSense for [Markawesome](https://github.com/jannewaren/markawesome) custom Markdown components. Write beautiful, interactive content using simple Markdown-like syntax that transforms into [Web Awesome](https://webawesome.com/) components.
 
+Get it from the [VSCode Marketplace: markawesome-vscode](https://marketplace.visualstudio.com/items?itemName=jannewaren.markawesome-vscode)
+
 ## Features
 
 ### Code Snippets
