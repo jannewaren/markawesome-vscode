@@ -2,6 +2,36 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.6.0] - 2026-02-10
+
+### Added
+
+- **Layout syntax support** for CSS layout utilities:
+  - **Grid** (`::::grid`): Auto-adaptive responsive grid with `gap`, `min` (column size), `align`, `justify` attributes
+  - **Stack** (`::::stack`): Vertical spacing with `gap`, `align`, `justify` attributes
+  - **Cluster** (`::::cluster`): Inline wrapping items with `gap`, `align`, `justify` attributes
+  - **Split** (`::::split`): Distribute items to opposite ends (header/footer pattern) with `row`/`column` direction
+  - **Flank** (`::::flank`): Sidebar + main content layout with `start`/`end` position, `size`, `content:PCT`, `gap`, `align` attributes
+  - **Frame** (`::::frame`): Aspect-ratio containers (landscape/portrait/square) with `radius` (s, m, l, pill, circle, square) support
+- Alternative `::::wa-*` syntax for all layouts (e.g., `::::wa-grid`, `::::wa-flank`)
+- **8 new code snippets** for layouts:
+  - `wa-grid` - Basic responsive grid
+  - `wa-grid-cards` - Grid with 3 cards
+  - `wa-stack` - Vertical stack
+  - `wa-cluster` - Inline cluster
+  - `wa-cluster-buttons` - Centered button row
+  - `wa-split` - Header/footer split
+  - `wa-flank` - Sidebar layout
+  - `wa-frame` - Aspect-ratio container
+- **IntelliSense completions** for layout types and context-aware attributes (gap sizes, alignment options, layout-specific parameters)
+- **Hover documentation** for all 6 layout types with attribute reference and examples
+- **TextMate grammar** support for layout syntax highlighting
+
+### Enhanced
+
+- Component metadata (`components.json`) includes all 6 layout types with full documentation and examples
+- Completion provider updated with `::::` trigger character detection and layout parameter suggestions
+
 ## [0.5.0] - 2026-02-09
 
 ### Added

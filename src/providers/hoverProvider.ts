@@ -112,6 +112,34 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       }
     }
 
+    // Check for layout syntax (::::type or ::::wa-type)
+    if (line.match(/^::::(grid|stack|cluster|split|flank|frame)/)) {
+      const match = line.match(/^::::(grid|stack|cluster|split|flank|frame)/);
+      if (match) {
+        const componentName = this.mapLayoutToName(match[1]);
+        const component = components.find(c => c.name === componentName);
+        if (component) {
+          return this.createHover(component);
+        }
+      }
+    }
+
+    if (line.match(/^::::wa-(grid|stack|cluster|split|flank|frame)/)) {
+      const match = line.match(/^::::wa-(grid|stack|cluster|split|flank|frame)/);
+      if (match) {
+        const componentName = this.mapLayoutToName(match[1]);
+        const component = components.find(c => c.name === componentName);
+        if (component) {
+          return this.createHover(component);
+        }
+      }
+    }
+
+    // Check for layout closing syntax
+    if (line.match(/^::::$/)) {
+      return new vscode.Hover(new vscode.MarkdownString('**Layout closing delimiter** — closes a `::::layout` block'));
+    }
+
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
       const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|dialog|tabs|tag|copy-button|badge|button)/);
@@ -142,6 +170,18 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'button': 'Button'
     };
     return mapping[altName] || altName;
+  }
+
+  private mapLayoutToName(layoutType: string): string {
+    const mapping: { [key: string]: string } = {
+      'grid': 'Grid Layout',
+      'stack': 'Stack Layout',
+      'cluster': 'Cluster Layout',
+      'split': 'Split Layout',
+      'flank': 'Flank Layout',
+      'frame': 'Frame Layout'
+    };
+    return mapping[layoutType] || layoutType;
   }
 
   private createHover(component: Component): vscode.Hover {

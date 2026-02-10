@@ -122,6 +122,60 @@
       "description": "Button component with optional link, multiple styles and states",
       "example": "%%%brand icon:download\n[Download](https://example.com/file.zip)\n%%%",
       "documentation": "Styled button component. Include a markdown link to make it clickable, or use plain text for a non-link button.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined, plain\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **caret**: Dropdown indicator\n- **loading**: Loading state\n- **disabled**: Disabled state\n\n**Icons:** Use `icon:name` for start icon, `icon:end:name` for end icon, or both (e.g., `icon:start:gear icon:end:arrow-right`)\n\nAll parameters are optional and can be combined in any order."
+    },
+    {
+      "name": "Grid Layout",
+      "primarySyntax": "::::grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",
+      "altSyntax": "::::wa-grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",
+      "parameters": ["gap:SIZE", "min:CSS", "align:VALUE", "justify:VALUE"],
+      "description": "Auto-adaptive responsive grid layout. Each child becomes a grid item that wraps responsively.",
+      "example": "::::grid gap:l min:300px\n===accent\n# Card 1\nContent\n===\n\n===accent\n# Card 2\nContent\n===\n::::",
+      "documentation": "Responsive grid that auto-wraps children based on minimum column size. No media queries needed.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **min:CSS**: Minimum column size (e.g., `min:300px`, `min:20ch`, `min:15rem`)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-grid\">` with CSS utility classes."
+    },
+    {
+      "name": "Stack Layout",
+      "primarySyntax": "::::stack gap:SIZE? align:VALUE? justify:VALUE?",
+      "altSyntax": "::::wa-stack gap:SIZE? align:VALUE? justify:VALUE?",
+      "parameters": ["gap:SIZE", "align:VALUE", "justify:VALUE"],
+      "description": "Vertical spacing between blocks for consistent content rhythm.",
+      "example": "::::stack gap:l\n:::info\nFirst item\n:::\n\n:::success\nSecond item\n:::\n::::",
+      "documentation": "Vertical stack with consistent spacing between child elements.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-stack\">` with CSS utility classes."
+    },
+    {
+      "name": "Cluster Layout",
+      "primarySyntax": "::::cluster gap:SIZE? align:VALUE? justify:VALUE?",
+      "altSyntax": "::::wa-cluster gap:SIZE? align:VALUE? justify:VALUE?",
+      "parameters": ["gap:SIZE", "align:VALUE", "justify:VALUE"],
+      "description": "Inline wrapping items. Great for tag clouds, button rows, icon lists.",
+      "example": "::::cluster gap:xs\n@@@brand Ruby @@@ @@@success Jekyll @@@ @@@neutral Markdown @@@\n::::",
+      "documentation": "Horizontal cluster that wraps items inline. Perfect for tag clouds, button groups, and icon rows.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-cluster\">` with CSS utility classes."
+    },
+    {
+      "name": "Split Layout",
+      "primarySyntax": "::::split row|column? gap:SIZE? align:VALUE? justify:VALUE?",
+      "altSyntax": "::::wa-split row|column? gap:SIZE? align:VALUE? justify:VALUE?",
+      "parameters": ["row", "column", "gap:SIZE", "align:VALUE", "justify:VALUE"],
+      "description": "Distribute items to opposite ends. Classic header/footer pattern.",
+      "example": "::::split\n**Copyright 2026 My Company**\n\n[Privacy Policy](/privacy) | [Terms](/terms)\n::::",
+      "documentation": "Splits children to opposite ends of a row (or column). Perfect for headers, footers, and navigation bars.\n\n**Attributes:**\n- **row**: Horizontal split (default)\n- **column**: Vertical split\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-split\">` with CSS utility classes."
+    },
+    {
+      "name": "Flank Layout",
+      "primarySyntax": "::::flank start|end? size:CSS? content:PCT? gap:SIZE? align:VALUE?",
+      "altSyntax": "::::wa-flank start|end? size:CSS? content:PCT? gap:SIZE? align:VALUE?",
+      "parameters": ["start", "end", "size:CSS", "content:PCT", "gap:SIZE", "align:VALUE", "justify:VALUE"],
+      "description": "Sidebar + main content. One item flanks the other, wrapping on small screens.",
+      "example": "::::flank start size:200px gap:l\n![Photo](photo.jpg)\n\n## Main Content\nContent here.\n::::",
+      "documentation": "Sidebar layout where one item flanks the main content, wrapping responsively on small screens.\n\n**Attributes:**\n- **start**: Flanking item on the start side (default)\n- **end**: Flanking item on the end side\n- **size:CSS**: Flanking item size (e.g., `size:200px`, `size:15rem`)\n- **content:PCT**: Minimum content percentage (e.g., `content:70%`)\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-flank\">` with CSS utility classes."
+    },
+    {
+      "name": "Frame Layout",
+      "primarySyntax": "::::frame landscape|portrait|square? radius:SIZE?",
+      "altSyntax": "::::wa-frame landscape|portrait|square? radius:SIZE?",
+      "parameters": ["landscape", "portrait", "square", "radius:SIZE", "gap:SIZE", "align:VALUE", "justify:VALUE"],
+      "description": "Aspect-ratio container for images and media.",
+      "example": "::::frame landscape radius:l\n<img src=\"hero.jpg\" alt=\"Hero image\">\n::::",
+      "documentation": "Constrains content to a specific aspect ratio. Ideal for images, videos, and media containers.\n\n**Attributes:**\n- **landscape**: 16:9 aspect ratio\n- **portrait**: 9:16 aspect ratio\n- **square**: 1:1 aspect ratio\n- **radius:SIZE**: Border radius (s, m, l, pill, circle, square)\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-frame\">` with CSS utility classes.\n\n**Note:** Use `<img>` HTML tags directly inside frames, as Markdown image syntax may not be processed inside layout containers."
     }
   ]
 }

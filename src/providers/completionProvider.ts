@@ -269,6 +269,118 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       });
     }
 
+    // Layout type completions after ::::
+    if (linePrefix.match(/::::$/)) {
+      const layoutTypes = [
+        { name: 'grid', doc: 'Auto-adaptive responsive grid' },
+        { name: 'stack', doc: 'Vertical spacing between blocks' },
+        { name: 'cluster', doc: 'Inline wrapping items (tag clouds, button rows)' },
+        { name: 'split', doc: 'Distribute items to opposite ends' },
+        { name: 'flank', doc: 'Sidebar + main content layout' },
+        { name: 'frame', doc: 'Aspect-ratio container for media' }
+      ];
+      layoutTypes.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Module);
+        item.detail = 'Layout';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+
+      // Also offer wa- alternative syntax
+      layoutTypes.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(`wa-${name}`, vscode.CompletionItemKind.Module);
+        item.detail = 'Layout (alternative syntax)';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+    }
+
+    // Layout attribute completions after ::::type
+    if (linePrefix.match(/::::(grid|stack|cluster|split|flank|frame|wa-grid|wa-stack|wa-cluster|wa-split|wa-flank|wa-frame)\s+\S*$/)) {
+      const gaps = ['0', '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
+      gaps.forEach(gap => {
+        const item = new vscode.CompletionItem(`gap:${gap}`, vscode.CompletionItemKind.Property);
+        item.detail = 'Layout Gap';
+        item.documentation = new vscode.MarkdownString(`Set gap to ${gap}`);
+        completions.push(item);
+      });
+
+      const aligns = ['start', 'end', 'center', 'stretch', 'baseline'];
+      aligns.forEach(align => {
+        const item = new vscode.CompletionItem(`align:${align}`, vscode.CompletionItemKind.Property);
+        item.detail = 'Align Items';
+        item.documentation = new vscode.MarkdownString(`Align items to ${align}`);
+        completions.push(item);
+      });
+
+      const justifies = ['start', 'end', 'center', 'space-between', 'space-around', 'space-evenly'];
+      justifies.forEach(justify => {
+        const item = new vscode.CompletionItem(`justify:${justify}`, vscode.CompletionItemKind.Property);
+        item.detail = 'Justify Content';
+        item.documentation = new vscode.MarkdownString(`Justify content to ${justify}`);
+        completions.push(item);
+      });
+    }
+
+    // Grid-specific: min attribute
+    if (linePrefix.match(/::::(grid|wa-grid)\s+\S*$/)) {
+      const minItem = new vscode.CompletionItem('min:', vscode.CompletionItemKind.Property);
+      minItem.detail = 'Grid Min Column Size';
+      minItem.documentation = new vscode.MarkdownString('Minimum column size (e.g., `min:300px`, `min:20ch`)');
+      minItem.insertText = new vscode.SnippetString('min:${1:300px}');
+      completions.push(minItem);
+    }
+
+    // Split-specific: row/column
+    if (linePrefix.match(/::::(split|wa-split)\s*\S*$/)) {
+      ['row', 'column'].forEach(dir => {
+        const item = new vscode.CompletionItem(dir, vscode.CompletionItemKind.Keyword);
+        item.detail = 'Split Direction';
+        item.documentation = new vscode.MarkdownString(`${dir === 'row' ? 'Horizontal' : 'Vertical'} split`);
+        completions.push(item);
+      });
+    }
+
+    // Flank-specific: start/end, size, content
+    if (linePrefix.match(/::::(flank|wa-flank)\s*\S*$/)) {
+      ['start', 'end'].forEach(pos => {
+        const item = new vscode.CompletionItem(pos, vscode.CompletionItemKind.Keyword);
+        item.detail = 'Flank Position';
+        item.documentation = new vscode.MarkdownString(`Flanking item on the ${pos} side`);
+        completions.push(item);
+      });
+
+      const sizeItem = new vscode.CompletionItem('size:', vscode.CompletionItemKind.Property);
+      sizeItem.detail = 'Flank Size';
+      sizeItem.documentation = new vscode.MarkdownString('Flanking item size (e.g., `size:200px`)');
+      sizeItem.insertText = new vscode.SnippetString('size:${1:200px}');
+      completions.push(sizeItem);
+
+      const contentItem = new vscode.CompletionItem('content:', vscode.CompletionItemKind.Property);
+      contentItem.detail = 'Content Percentage';
+      contentItem.documentation = new vscode.MarkdownString('Minimum content percentage (e.g., `content:70%`)');
+      contentItem.insertText = new vscode.SnippetString('content:${1:70%}');
+      completions.push(contentItem);
+    }
+
+    // Frame-specific: aspect ratio, radius
+    if (linePrefix.match(/::::(frame|wa-frame)\s*\S*$/)) {
+      ['landscape', 'portrait', 'square'].forEach(ratio => {
+        const item = new vscode.CompletionItem(ratio, vscode.CompletionItemKind.Keyword);
+        item.detail = 'Frame Aspect Ratio';
+        item.documentation = new vscode.MarkdownString(`${ratio} aspect ratio`);
+        completions.push(item);
+      });
+
+      const radii = ['s', 'm', 'l', 'pill', 'circle', 'square'];
+      radii.forEach(r => {
+        const item = new vscode.CompletionItem(`radius:${r}`, vscode.CompletionItemKind.Property);
+        item.detail = 'Frame Border Radius';
+        item.documentation = new vscode.MarkdownString(`Border radius: ${r}`);
+        completions.push(item);
+      });
+    }
+
     // Carousel parameter completions after ~~~~~~
     if (linePrefix.match(/~~~~~~/)) {
       const parameters = [
