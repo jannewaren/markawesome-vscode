@@ -36,6 +36,9 @@
       "include": "#button"
     },
     {
+      "include": "#layouts"
+    },
+    {
       "include": "#alternative-syntax"
     },
     {
@@ -364,6 +367,62 @@
             }
           },
           "contentName": "markup.quote.button.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "layouts": {
+      "patterns": [
+        {
+          "begin": "^(::::)(grid|stack|cluster|split|flank|frame)((?:\\s+\\S+)*)\\s*$",
+          "end": "^(::::)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.layout.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.layout.type.markawesome"
+            },
+            "3": {
+              "name": "entity.name.tag.layout.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.layout.markawesome"
+            }
+          },
+          "contentName": "markup.quote.layout.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        },
+        {
+          "begin": "^(::::)(wa-grid|wa-stack|wa-cluster|wa-split|wa-flank|wa-frame)((?:\\s+\\S+)*)\\s*$",
+          "end": "^(::::)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.layout.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.layout.type.markawesome"
+            },
+            "3": {
+              "name": "entity.name.tag.layout.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.layout.markawesome"
+            }
+          },
+          "contentName": "markup.quote.layout.markawesome",
           "patterns": [
             {
               "include": "text.html.markdown"

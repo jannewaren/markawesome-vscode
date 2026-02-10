@@ -391,6 +391,101 @@
     ],
     "description": "Insert button with dropdown caret"
   },
+  "Grid Layout": {
+    "prefix": "wa-grid",
+    "body": [
+      "::::grid gap:${1:l} min:${2:300px}",
+      "${3:Content here}",
+      "::::"
+    ],
+    "description": "Insert responsive grid layout"
+  },
+  "Grid Layout with Cards": {
+    "prefix": "wa-grid-cards",
+    "body": [
+      "::::grid gap:${1:l} min:${2:300px}",
+      "===${3:accent}",
+      "# ${4:Card 1}",
+      "${5:Content}",
+      "===",
+      "",
+      "===${3:accent}",
+      "# ${6:Card 2}",
+      "${7:Content}",
+      "===",
+      "",
+      "===${3:accent}",
+      "# ${8:Card 3}",
+      "${9:Content}",
+      "===",
+      "::::"
+    ],
+    "description": "Insert grid layout with 3 cards"
+  },
+  "Stack Layout": {
+    "prefix": "wa-stack",
+    "body": [
+      "::::stack gap:${1:l}",
+      "${2:Content here}",
+      "::::"
+    ],
+    "description": "Insert vertical stack layout"
+  },
+  "Cluster Layout": {
+    "prefix": "wa-cluster",
+    "body": [
+      "::::cluster gap:${1:s}",
+      "${2:Content here}",
+      "::::"
+    ],
+    "description": "Insert inline cluster layout"
+  },
+  "Cluster Layout with Buttons": {
+    "prefix": "wa-cluster-buttons",
+    "body": [
+      "::::cluster gap:${1:s} justify:${2:center}",
+      "%%%brand",
+      "[${3:Primary Action}](${4:https://example.com})",
+      "%%%",
+      "",
+      "%%%neutral outlined",
+      "[${5:Secondary Action}](${6:https://example.com})",
+      "%%%",
+      "::::"
+    ],
+    "description": "Insert cluster layout with button row"
+  },
+  "Split Layout": {
+    "prefix": "wa-split",
+    "body": [
+      "::::split",
+      "${1:Left content}",
+      "",
+      "${2:Right content}",
+      "::::"
+    ],
+    "description": "Insert split layout (items at opposite ends)"
+  },
+  "Flank Layout": {
+    "prefix": "wa-flank",
+    "body": [
+      "::::flank ${1:start} size:${2:200px} gap:${3:l}",
+      "${4:Sidebar content}",
+      "",
+      "${5:Main content}",
+      "::::"
+    ],
+    "description": "Insert flank layout (sidebar + main content)"
+  },
+  "Frame Layout": {
+    "prefix": "wa-frame",
+    "body": [
+      "::::frame ${1|landscape,portrait,square|} radius:${2:l}",
+      "<img src=\"${3:image.jpg}\" alt=\"${4:Description}\">",
+      "::::"
+    ],
+    "description": "Insert frame layout (aspect-ratio container)"
+  },
   "Alternative Callout": {
     "prefix": "wa-alt-callout",
     "body": [
