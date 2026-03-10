@@ -73,6 +73,10 @@
         "title": "Markawesome: Wrap in Dialog"
       },
       {
+        "command": "markawesome.wrapInPopover",
+        "title": "Markawesome: Wrap in Popover"
+      },
+      {
         "command": "markawesome.wrapInTabGroup",
         "title": "Markawesome: Wrap in Tab Group"
       },
@@ -135,6 +139,11 @@
         },
         {
           "command": "markawesome.wrapInDialog",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInPopover",
           "group": "2_wrap",
           "when": "editorHasSelection"
         },
