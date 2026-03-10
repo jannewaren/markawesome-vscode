@@ -21,6 +21,9 @@
       "include": "#dialog"
     },
     {
+      "include": "#popover"
+    },
+    {
       "include": "#tabs"
     },
     {
@@ -215,6 +218,37 @@
             {
               "match": "^(>>>)\\s*$",
               "name": "punctuation.definition.dialog.separator.markawesome"
+            },
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "popover": {
+      "patterns": [
+        {
+          "begin": "^(&&&)(.*)$",
+          "end": "^(&&&)\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.popover.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.popover.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.popover.markawesome"
+            }
+          },
+          "contentName": "markup.quote.popover.markawesome",
+          "patterns": [
+            {
+              "match": "^(>>>)\\s*$",
+              "name": "punctuation.definition.popover.separator.markawesome"
             },
             {
               "include": "text.html.markdown"
@@ -434,7 +468,7 @@
     "alternative-syntax": {
       "patterns": [
         {
-          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-dialog|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button)\\s+(.*)$",
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-dialog|wa-popover|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button)\\s+(.*)$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {

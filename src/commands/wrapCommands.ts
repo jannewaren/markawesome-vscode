@@ -223,6 +223,33 @@ export async function wrapInDialog() {
   });
 }
 
+export async function wrapInPopover() {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor || editor.selection.isEmpty) {
+    vscode.window.showErrorMessage('Please select text to wrap');
+    return;
+  }
+
+  const placements = ['top', 'bottom', 'left', 'right', 'none'];
+  const placement = await vscode.window.showQuickPick(placements, {
+    placeHolder: 'Select popover placement (optional)'
+  });
+
+  if (placement === undefined) {
+    return;
+  }
+
+  const selection = editor.selection;
+  const text = editor.document.getText(selection);
+
+  const placementStr = placement === 'none' ? '' : placement;
+  const wrapped = `&&&${placementStr}\nHover for info\n>>>\n${text}\n&&&`;
+
+  editor.edit(editBuilder => {
+    editBuilder.replace(selection, wrapped);
+  });
+}
+
 export async function wrapInTabGroup() {
   const editor = vscode.window.activeTextEditor;
   if (!editor || editor.selection.isEmpty) {
