@@ -26,6 +26,9 @@ Quick insertion of component templates with tab stops:
 | `wa-copy`            | Copy button                         |
 | `wa-badge`           | Badge component                     |
 | `wa-button`          | Button with link                    |
+| `wa-popover`         | Popover with trigger and content    |
+| `wa-popover-placement` | Popover with placement option     |
+| `wa-popover-link`    | Popover with link-style trigger     |
 
 ### IntelliSense
 
@@ -39,6 +42,7 @@ Intelligent autocomplete suggestions as you type:
 - Type `!!!` → Suggests badge variants
 - Type `%%%` → Suggests button variants
 - Type `~~~~~~` → Suggests carousel parameters
+- Type `&&&` → Suggests popover placement and options
 
 ### Hover Documentation
 
@@ -60,6 +64,7 @@ Access powerful commands via Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`):
 - `Markawesome: Wrap in Details` - Wrap selected text in collapsible details
 - `Markawesome: Convert Images to Comparison` - Convert 2 selected images to a comparison component
 - `Markawesome: Convert Images to Carousel` - Convert multiple selected images to a carousel
+- `Markawesome: Wrap in Popover` - Wrap selected text in a popover with placement selection
 
 ### Context Menu
 
@@ -141,6 +146,22 @@ This is the content inside the modal dialog.
 
 [Close](#)
 ???
+```
+
+### Popover
+
+```markdown
+&&&top
+Hover for info
+>>>
+This is the popover content with **markdown** support.
+&&&
+
+&&&bottom link
+Learn more
+>>>
+Detailed explanation with [links](https://example.com) and **formatting**.
+&&&
 ```
 
 ### Tabs
@@ -231,6 +252,16 @@ npm install markawesome
 - `default` - Default button style
 - `text` - Text-only button
 - `danger` - Danger/destructive action
+
+### Popover Options
+
+- `top` - Popover appears above trigger (default)
+- `bottom` - Popover appears below trigger
+- `left` - Popover appears to the left
+- `right` - Popover appears to the right
+- `link` - Renders trigger as underlined text instead of button
+- `without-arrow` - Hides the popover arrow
+- `distance:N` - Custom distance in pixels (e.g., `distance:10`)
 
 ### Carousel Parameters
 
