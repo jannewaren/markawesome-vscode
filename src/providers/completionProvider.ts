@@ -279,6 +279,11 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
+      const linkItem = new vscode.CompletionItem('link', vscode.CompletionItemKind.Property);
+      linkItem.detail = 'Popover Flag';
+      linkItem.documentation = new vscode.MarkdownString('Render trigger as a link-styled element instead of a button');
+      completions.push(linkItem);
+
       const withoutArrow = new vscode.CompletionItem('without-arrow', vscode.CompletionItemKind.Property);
       withoutArrow.detail = 'Popover Flag';
       withoutArrow.documentation = new vscode.MarkdownString('Hide the popover arrow');
