@@ -486,6 +486,39 @@
     ],
     "description": "Insert frame layout (aspect-ratio container)"
   },
+  "Popover": {
+    "prefix": "wa-popover",
+    "body": [
+      "&&&${1:top}",
+      "${2:Hover for info}",
+      ">>>",
+      "${3:Popover content here.}",
+      "&&&"
+    ],
+    "description": "Insert popover"
+  },
+  "Popover with Placement": {
+    "prefix": "wa-popover-placement",
+    "body": [
+      "&&&${1|top,bottom,left,right|}",
+      "${2:Hover for info}",
+      ">>>",
+      "${3:Popover content here.}",
+      "&&&"
+    ],
+    "description": "Insert popover with placement selection"
+  },
+  "Popover Link": {
+    "prefix": "wa-popover-link",
+    "body": [
+      "&&&${1:top} link",
+      "${2:Learn more}",
+      ">>>",
+      "${3:Popover content here.}",
+      "&&&"
+    ],
+    "description": "Insert popover with link-styled trigger"
+  },
   "Alternative Callout": {
     "prefix": "wa-alt-callout",
     "body": [

@@ -112,6 +112,14 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       }
     }
 
+    // Check for popover syntax
+    if (line.match(/^&&&/)) {
+      const component = components.find(c => c.name === 'Popover');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
     // Check for layout syntax (::::type or ::::wa-type)
     if (line.match(/^::::(grid|stack|cluster|split|flank|frame)/)) {
       const match = line.match(/^::::(grid|stack|cluster|split|flank|frame)/);
@@ -142,7 +150,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|dialog|tabs|tag|copy-button|badge|button)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|dialog|popover|tabs|tag|copy-button|badge|button)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -163,6 +171,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'carousel': 'Carousel',
       'details': 'Details',
       'dialog': 'Dialog',
+      'popover': 'Popover',
       'tabs': 'Tab Group',
       'tag': 'Tag',
       'copy-button': 'Copy Button',
