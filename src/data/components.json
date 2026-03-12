@@ -124,6 +124,16 @@
       "documentation": "Styled button component. Include a markdown link to make it clickable, or use plain text for a non-link button.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined, plain\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **caret**: Dropdown indicator\n- **loading**: Loading state\n- **disabled**: Disabled state\n\n**Icons:** Use `icon:name` for start icon, `icon:end:name` for end icon, or both (e.g., `icon:start:gear icon:end:arrow-right`)\n\nAll parameters are optional and can be combined in any order."
     },
     {
+      "name": "Popover",
+      "primarySyntax": "&&&placement? link? without-arrow? distance:N?",
+      "altSyntax": ":::wa-popover placement? link? without-arrow? distance:N?",
+      "placements": ["top", "bottom", "left", "right"],
+      "parameters": ["link", "without-arrow", "distance:N"],
+      "description": "Floating popover content attached to a trigger element",
+      "example": "&&&bottom\nHover for info\n>>>\nPopover content with **markdown** support.\n&&&",
+      "documentation": "Floating popover attached to a trigger element. Use >>> to separate trigger text from popover content.\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **link**: Render trigger as a link-styled element instead of a button\n- **without-arrow**: Hide the popover arrow\n- **distance:N**: Custom distance from trigger in px (e.g., distance:10)\n\nAll parameters are optional and can be combined in any order."
+    },
+    {
       "name": "Grid Layout",
       "primarySyntax": "::::grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",
       "altSyntax": "::::wa-grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",

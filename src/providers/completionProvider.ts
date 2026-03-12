@@ -38,7 +38,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
-                         'wa-details', 'wa-dialog', 'wa-tabs', 'wa-tag',
+                         'wa-details', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button'];
       components.forEach(comp => {
         const item = new vscode.CompletionItem(comp, vscode.CompletionItemKind.Class);
@@ -267,6 +267,33 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         item.insertText = new vscode.SnippetString(`${name}\${1:icon-name}`);
         completions.push(item);
       });
+    }
+
+    // Popover completions after &&&
+    if (linePrefix.match(/&&&/)) {
+      const placements = ['top', 'bottom', 'left', 'right'];
+      placements.forEach(placement => {
+        const item = new vscode.CompletionItem(placement, vscode.CompletionItemKind.Property);
+        item.detail = 'Popover Placement';
+        item.documentation = new vscode.MarkdownString(`Popover positioned at ${placement}`);
+        completions.push(item);
+      });
+
+      const linkItem = new vscode.CompletionItem('link', vscode.CompletionItemKind.Property);
+      linkItem.detail = 'Popover Flag';
+      linkItem.documentation = new vscode.MarkdownString('Render trigger as a link-styled element instead of a button');
+      completions.push(linkItem);
+
+      const withoutArrow = new vscode.CompletionItem('without-arrow', vscode.CompletionItemKind.Property);
+      withoutArrow.detail = 'Popover Flag';
+      withoutArrow.documentation = new vscode.MarkdownString('Hide the popover arrow');
+      completions.push(withoutArrow);
+
+      const distanceItem = new vscode.CompletionItem('distance:', vscode.CompletionItemKind.Property);
+      distanceItem.detail = 'Popover Distance';
+      distanceItem.documentation = new vscode.MarkdownString('Custom distance from trigger in px (e.g., `distance:10`)');
+      distanceItem.insertText = new vscode.SnippetString('distance:${1:10}');
+      completions.push(distanceItem);
     }
 
     // Layout type completions after ::::
