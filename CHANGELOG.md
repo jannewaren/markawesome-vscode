@@ -2,6 +2,19 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.7.0] - 2026-03-12
+
+### Added
+
+- **Popover component** (`&&&` or `:::wa-popover`) support:
+  - IntelliSense completions for placement (`top`, `bottom`, `left`, `right`), `link`, `without-arrow`, and `distance:N`
+  - Hover documentation with syntax reference and examples
+  - `wa-popover`, `wa-popover-placement`, and `wa-popover-link` code snippets
+  - "Wrap in Popover" command with placement and trigger style (button/link) selection
+  - TextMate grammar for `&&&` syntax highlighting with `>>>` separator
+  - Context menu integration for popover wrapping
+  - Component metadata in `components.json`
+
 ## [0.6.0] - 2026-02-10
 
 ### Added
