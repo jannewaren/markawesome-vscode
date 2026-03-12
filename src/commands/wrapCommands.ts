@@ -239,11 +239,22 @@ export async function wrapInPopover() {
     return;
   }
 
+  const triggerStyle = await vscode.window.showQuickPick(['button', 'link'], {
+    placeHolder: 'Select trigger style'
+  });
+
+  if (triggerStyle === undefined) {
+    return;
+  }
+
   const selection = editor.selection;
   const text = editor.document.getText(selection);
 
-  const placementStr = placement === 'none' ? '' : placement;
-  const wrapped = `&&&${placementStr}\nHover for info\n>>>\n${text}\n&&&`;
+  const params = [
+    placement !== 'none' ? placement : '',
+    triggerStyle === 'link' ? 'link' : ''
+  ].filter(p => p).join(' ');
+  const wrapped = `&&&${params}\nHover for info\n>>>\n${text}\n&&&`;
 
   editor.edit(editBuilder => {
     editBuilder.replace(selection, wrapped);

@@ -508,6 +508,17 @@
     ],
     "description": "Insert popover with placement selection"
   },
+  "Popover Link": {
+    "prefix": "wa-popover-link",
+    "body": [
+      "&&&${1:top} link",
+      "${2:Learn more}",
+      ">>>",
+      "${3:Popover content here.}",
+      "&&&"
+    ],
+    "description": "Insert popover with link-styled trigger"
+  },
   "Alternative Callout": {
     "prefix": "wa-alt-callout",
     "body": [
