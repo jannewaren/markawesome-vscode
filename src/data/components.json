@@ -64,10 +64,10 @@
       "name": "Dialog",
       "primarySyntax": "???params?",
       "altSyntax": ":::wa-dialog params?",
-      "parameters": ["light-dismiss", "width (e.g., 600px, 50vw)"],
+      "parameters": ["light-dismiss", "without-header", "width (e.g., 600px, 50vw)"],
       "description": "Modal dialog with trigger button",
       "example": "???\nOpen Dialog\n>>>\nDialog content here.\n???",
-      "documentation": "Modal dialog component. Use >>> to separate trigger button text from dialog content.\n\nParameters:\n- **light-dismiss**: Close when clicking outside\n- **width**: Custom width (e.g., 600px, 50vw)"
+      "documentation": "Modal dialog component. Use >>> to separate trigger button text from dialog content.\n\nParameters:\n- **light-dismiss**: Close when clicking outside\n- **without-header**: Hide the dialog header (removes label and close button)\n- **width**: Custom width (e.g., 600px, 50vw)"
     },
     {
       "name": "Tab Group",
@@ -113,15 +113,15 @@
     },
     {
       "name": "Button",
-      "primarySyntax": "%%%variant? appearance? size? pill? caret? loading? disabled? icon:name? icon:end:name?",
-      "altSyntax": ":::wa-button variant? appearance? size? pill? caret? loading? disabled? icon:name? icon:end:name?",
+      "primarySyntax": "%%%variant? appearance? size? pill? caret? loading? disabled? target? icon:name? icon:end:name?",
+      "altSyntax": ":::wa-button variant? appearance? size? pill? caret? loading? disabled? target? icon:name? icon:end:name?",
       "variants": ["brand", "success", "neutral", "warning", "danger"],
       "appearances": ["accent", "filled", "outlined", "filled-outlined", "plain"],
       "sizes": ["small", "medium", "large"],
-      "flags": ["pill", "caret", "loading", "disabled"],
+      "flags": ["pill", "caret", "loading", "disabled", "target"],
       "description": "Button component with optional link, multiple styles and states",
       "example": "%%%brand icon:download\n[Download](https://example.com/file.zip)\n%%%",
-      "documentation": "Styled button component. Include a markdown link to make it clickable, or use plain text for a non-link button.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined, plain\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **caret**: Dropdown indicator\n- **loading**: Loading state\n- **disabled**: Disabled state\n\n**Icons:** Use `icon:name` for start icon, `icon:end:name` for end icon, or both (e.g., `icon:start:gear icon:end:arrow-right`)\n\nAll parameters are optional and can be combined in any order."
+      "documentation": "Styled button component. Include a markdown link to make it clickable, or use plain text for a non-link button.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined, plain\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **caret**: Dropdown indicator\n- **loading**: Loading state\n- **disabled**: Disabled state\n- **target**: Open link in new tab (adds target=\"_blank\", link buttons only)\n\n**Icons:** Use `icon:name` for start icon, `icon:end:name` for end icon, or both (e.g., `icon:start:gear icon:end:arrow-right`)\n\nAll parameters are optional and can be combined in any order."
     },
     {
       "name": "Popover",
@@ -132,6 +132,19 @@
       "description": "Floating popover content attached to a trigger element",
       "example": "&&&bottom\nHover for info\n>>>\nPopover content with **markdown** support.\n&&&",
       "documentation": "Floating popover attached to a trigger element. Use >>> to separate trigger text from popover content.\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **link**: Render trigger as a link-styled element instead of a button\n- **without-arrow**: Hide the popover arrow\n- **distance:N**: Custom distance from trigger in px (e.g., distance:10)\n\nAll parameters are optional and can be combined in any order."
+    },
+    {
+      "name": "Icon",
+      "primarySyntax": "$$$icon-name or $$$icon-name[params]",
+      "altSyntax": ":::wa-icon icon-name params?",
+      "families": ["classic", "brands", "sharp", "duotone", "sharp-duotone"],
+      "variants": ["thin", "light", "regular", "solid"],
+      "rotations": ["90", "180", "270"],
+      "flips": ["x", "y", "both"],
+      "animations": ["beat", "flip", "bounce", "shake", "spin", "spin-pulse", "spin-reverse"],
+      "description": "Inline icon from Font Awesome with optional styling attributes",
+      "example": "$$$spinner[animation:spin variant:solid]",
+      "documentation": "Inline icon component using Font Awesome icons.\n\n**Primary syntax:** `$$$icon-name` for simple icons, `$$$icon-name[params]` for extended attributes\n**Block syntax:** `:::wa-icon icon-name params\\n:::`\n\n**Attributes (use key:value format):**\n- **family**: Icon family (classic, brands, sharp, duotone, sharp-duotone)\n- **variant**: Icon variant (thin, light, regular, solid)\n- **rotate**: Rotation (90, 180, 270)\n- **flip**: Flip direction (x, y, both)\n- **animation**: Animation type (beat, flip, bounce, shake, spin, spin-pulse, spin-reverse)\n- **label**: Accessible label (label:\"text\")\n\nExamples:\n- `$$$home` — simple icon\n- `$$$spinner[animation:spin]` — spinning icon\n- `$$$twitter[family:brands]` — brand icon\n- `$$$arrow-right[rotate:90 flip:x]` — rotated and flipped\n- `$$$star[variant:solid animation:beat label:\"Favorite\"]` — all attributes"
     },
     {
       "name": "Grid Layout",

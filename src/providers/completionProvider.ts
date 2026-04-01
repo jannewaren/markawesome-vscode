@@ -38,7 +38,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
-                         'wa-details', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
+                         'wa-details', 'wa-dialog', 'wa-icon', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button'];
       components.forEach(comp => {
         const item = new vscode.CompletionItem(comp, vscode.CompletionItemKind.Class);
@@ -138,6 +138,11 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       item2.detail = 'Dialog Width';
       item2.documentation = new vscode.MarkdownString('Set custom dialog width');
       completions.push(item2);
+
+      const item3 = new vscode.CompletionItem('without-header', vscode.CompletionItemKind.Property);
+      item3.detail = 'Dialog Parameter';
+      item3.documentation = new vscode.MarkdownString('Hide the dialog header (removes label and close button)');
+      completions.push(item3);
     }
 
     // Tag completions after @@@
@@ -246,7 +251,8 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         { name: 'pill', doc: 'Rounded edges' },
         { name: 'caret', doc: 'Dropdown indicator' },
         { name: 'loading', doc: 'Loading state' },
-        { name: 'disabled', doc: 'Disabled state' }
+        { name: 'disabled', doc: 'Disabled state' },
+        { name: 'target', doc: 'Open link in new tab (adds target="_blank", link buttons only)' }
       ];
       flags.forEach(({ name, doc }) => {
         const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Property);

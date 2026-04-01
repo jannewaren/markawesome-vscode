@@ -391,6 +391,68 @@
     ],
     "description": "Insert button with dropdown caret"
   },
+  "Button External Link": {
+    "prefix": "wa-button-external",
+    "body": [
+      "%%%${1|brand,success,neutral,warning,danger|} target",
+      "[${2:External Link}](${3:https://example.com})",
+      "%%%"
+    ],
+    "description": "Insert button that opens link in new tab"
+  },
+  "Icon": {
+    "prefix": "wa-icon",
+    "body": [
+      "\\$\\$\\$${1:icon-name}"
+    ],
+    "description": "Insert inline icon"
+  },
+  "Icon with Animation": {
+    "prefix": "wa-icon-animated",
+    "body": [
+      "\\$\\$\\$${1:spinner}[animation:${2|spin,beat,bounce,shake,flip,spin-pulse,spin-reverse|}]"
+    ],
+    "description": "Insert icon with animation"
+  },
+  "Icon with Attributes": {
+    "prefix": "wa-icon-attrs",
+    "body": [
+      "\\$\\$\\$${1:icon-name}[${2:family:classic} ${3:variant:solid}]"
+    ],
+    "description": "Insert icon with family and variant attributes"
+  },
+  "Icon Rotated": {
+    "prefix": "wa-icon-rotated",
+    "body": [
+      "\\$\\$\\$${1:icon-name}[rotate:${2|90,180,270|}]"
+    ],
+    "description": "Insert rotated icon"
+  },
+  "Icon Flipped": {
+    "prefix": "wa-icon-flipped",
+    "body": [
+      "\\$\\$\\$${1:icon-name}[flip:${2|x,y,both|}]"
+    ],
+    "description": "Insert flipped icon"
+  },
+  "Icon Brand": {
+    "prefix": "wa-icon-brand",
+    "body": [
+      "\\$\\$\\$${1:twitter}[family:brands]"
+    ],
+    "description": "Insert brand icon (e.g., Twitter, GitHub)"
+  },
+  "Dialog Without Header": {
+    "prefix": "wa-dialog-headerless",
+    "body": [
+      "???without-header",
+      "${1:Open Dialog}",
+      ">>>",
+      "${2:Dialog content here.}",
+      "???"
+    ],
+    "description": "Insert modal dialog without header"
+  },
   "Grid Layout": {
     "prefix": "wa-grid",
     "body": [
