@@ -16,6 +16,13 @@ A VS Code extension providing snippets, IntelliSense, hover docs, and commands f
 
 There are no tests configured — `npm test` exists in package.json but there is no test infrastructure set up.
 
+## Branching & Commits
+
+This repo works directly on `main` — there is no feature-branch convention. Commit
+changes, including version bumps, straight to `main`; do not create a branch when
+asked to commit. A release is simply a `main` commit that bumps `version` in
+`package.json` and adds a matching `CHANGELOG.md` entry.
+
 ## Architecture
 
 The extension entry point is `src/extension.ts`, which registers all providers and commands with VS Code.
