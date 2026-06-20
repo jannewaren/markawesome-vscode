@@ -126,12 +126,14 @@
     {
       "name": "Popover",
       "primarySyntax": "&&&placement? link? without-arrow? distance:N?",
+      "inlineSyntax": "&&&trigger text >>> popover content&&&",
       "altSyntax": ":::wa-popover placement? link? without-arrow? distance:N?",
       "placements": ["top", "bottom", "left", "right"],
       "parameters": ["link", "without-arrow", "distance:N"],
       "description": "Floating popover content attached to a trigger element",
       "example": "&&&bottom\nHover for info\n>>>\nPopover content with **markdown** support.\n&&&",
-      "documentation": "Floating popover attached to a trigger element. Use >>> to separate trigger text from popover content.\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **link**: Render trigger as a link-styled element instead of a button\n- **without-arrow**: Hide the popover arrow\n- **distance:N**: Custom distance from trigger in px (e.g., distance:10)\n\nAll parameters are optional and can be combined in any order."
+      "inlineExample": "Click &&&here >>> This is a popover!&&& to learn more.",
+      "documentation": "Floating popover attached to a trigger element. Use >>> to separate trigger text from popover content.\n\n**Block syntax** (multi-line):\n```\n&&&bottom\nTrigger text\n>>>\nPopover content\n&&&\n```\n\n**Inline syntax** (within a sentence):\n```\nClick &&&here >>> popover content&&& to continue.\n```\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **link**: Render trigger as a link-styled element instead of a button\n- **without-arrow**: Hide the popover arrow\n- **distance:N**: Custom distance from trigger in px (e.g., distance:10)\n\n**Inline features:**\n- Inline code in trigger text: `&&&\\`code\\` trigger >>> content&&&`\n- Line breaks in popover content using `\\n`: `&&&trigger >>> line 1\\nline 2&&&`\n\nAll parameters are optional and can be combined in any order."
     },
     {
       "name": "Grid Layout",

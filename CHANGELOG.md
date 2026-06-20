@@ -2,6 +2,16 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.8.0] - 2026-03-13
+
+### Added
+
+- **Inline popover syntax** (`&&&trigger >>> content&&&`) support:
+  - Hover documentation with inline syntax reference and examples
+  - `wa-popover-inline` code snippet for inserting inline popovers
+  - Documentation for `\n` line breaks in popover content
+  - Documentation for inline code in trigger text
+
 ## [0.7.0] - 2026-03-12
 
 ### Added

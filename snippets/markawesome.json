@@ -519,6 +519,11 @@
     ],
     "description": "Insert popover with link-styled trigger"
   },
+  "Popover Inline": {
+    "prefix": "wa-popover-inline",
+    "body": "&&&${1:trigger text} >>> ${2:popover content}&&&",
+    "description": "Insert inline popover (for use within sentences)"
+  },
   "Alternative Callout": {
     "prefix": "wa-alt-callout",
     "body": [
