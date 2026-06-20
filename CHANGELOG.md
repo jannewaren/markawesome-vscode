@@ -2,6 +2,33 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.9.0] - 2026-06-20
+
+Brings the extension to full parity with markawesome 0.13 / jekyll-webawesome 0.19.
+
+### Added
+
+- **Icon component** (`$$$name` inline, `:::wa-icon name family? variant? animation?` block):
+  - Inline `$$$name` decorative icons and block `:::wa-icon` icons with `family`/`variant`/`animation` attributes and an accessible label body
+  - Syntax highlighting for inline `$$$name` and the `:::wa-icon` block
+  - Hover documentation (works on both the inline form and the block)
+  - IntelliSense for `family`/`variant`/`animation` after `:::wa-icon <name>`, plus a `$$$` inline hint
+  - `wa-icon` (block), `wa-icon-animation`, and `wa-icon-inline` snippets
+  - `$` registered as a completion trigger character
+- **Web Awesome 3.x size scale** (`xs`, `s`, `m`, `l`, `xl`) for **Callout**, **Tag**, and **Button**, alongside the legacy `small`/`medium`/`large` aliases — in completions, hover, and highlighting
+- **Callout icon attributes**: `family` (classic, sharp, duotone, sharp-duotone, brands), `variant` (thin, light, regular, solid), and `animation` (beat, fade, beat-fade, bounce, flip, shake, spin, spin-pulse, spin-reverse), e.g. `:::warning shake`. Added a `wa-callout-animation` snippet.
+- **Button link `target`/`download`**: `_blank`, `_self`, `_parent`, `_top` (with auto `rel="noopener noreferrer"` for `_blank`) and the `download` flag for link-form buttons — in completions, hover, and highlighting
+- **Copy Button parameters**: tooltip `placement` (top/right/bottom/left), numeric feedback duration, `disabled`, `copy-label="…"`, `success-label="…"`, `error-label="…"`, and `from="…"` — in completions, hover, and highlighting. Added `wa-copy-placement`, `wa-copy-labels`, and `wa-copy-from` snippets, and `<` as a completion trigger character.
+- **Card `orientation`** (`horizontal`/`vertical`) in completions, hover, and highlighting
+- **Carousel `autoplay-interval`** parameter in completions and metadata
+- **Layout gap scale `4xl`/`5xl`** for all layouts (Grid, Stack, Cluster, Split, Flank, Frame)
+
+### Changed
+
+- Hover now renders `sizes`, icon `families`/`animations`, and `flags` metadata
+- Badge, Card, and Copy Button highlighting now capture their full parameter lists (previously only the first variant/appearance token, or nothing, was scoped)
+- Alternative `:::wa-*` syntax highlighting now matches parameterless forms (e.g. `:::wa-copy-button`)
+
 ## [0.8.0] - 2026-03-13
 
 ### Added

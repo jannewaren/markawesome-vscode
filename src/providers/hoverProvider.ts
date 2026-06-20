@@ -9,6 +9,10 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  sizes?: string[];
+  families?: string[];
+  animations?: string[];
+  flags?: string[];
   parameters?: string[];
   description: string;
   example: string;
@@ -23,6 +27,20 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
   ): vscode.Hover | undefined {
     const line = document.lineAt(position).text;
     const components = componentsData.components as Component[];
+
+    // Check for inline icon syntax ($$$name) — only when the cursor is on the token
+    const inlineIconRegex = /\$\$\$[\w-]+/g;
+    let inlineMatch: RegExpExecArray | null;
+    while ((inlineMatch = inlineIconRegex.exec(line)) !== null) {
+      const start = inlineMatch.index;
+      const end = start + inlineMatch[0].length;
+      if (position.character >= start && position.character <= end) {
+        const component = components.find(c => c.name === 'Icon');
+        if (component) {
+          return this.createHover(component);
+        }
+      }
+    }
 
     // Check for callout syntax
     if (line.match(/^:::(info|success|warning|danger|neutral)/)) {
@@ -150,7 +168,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|dialog|popover|tabs|tag|copy-button|badge|button)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|dialog|popover|tabs|tag|copy-button|badge|button|icon)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -176,7 +194,8 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'tag': 'Tag',
       'copy-button': 'Copy Button',
       'badge': 'Badge',
-      'button': 'Button'
+      'button': 'Button',
+      'icon': 'Icon'
     };
     return mapping[altName] || altName;
   }
@@ -219,8 +238,20 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
     if (component.appearances && component.appearances.length > 0) {
       md.appendMarkdown(`**Appearances:** ${component.appearances.map(a => `\`${a}\``).join(', ')}\n\n`);
     }
+    if (component.sizes && component.sizes.length > 0) {
+      md.appendMarkdown(`**Sizes:** ${component.sizes.map(s => `\`${s}\``).join(', ')}\n\n`);
+    }
     if (component.placements && component.placements.length > 0) {
       md.appendMarkdown(`**Placements:** ${component.placements.map(p => `\`${p}\``).join(', ')}\n\n`);
+    }
+    if (component.families && component.families.length > 0) {
+      md.appendMarkdown(`**Icon Families:** ${component.families.map(f => `\`${f}\``).join(', ')}\n\n`);
+    }
+    if (component.animations && component.animations.length > 0) {
+      md.appendMarkdown(`**Icon Animations:** ${component.animations.map(a => `\`${a}\``).join(', ')}\n\n`);
+    }
+    if (component.flags && component.flags.length > 0) {
+      md.appendMarkdown(`**Flags:** ${component.flags.map(f => `\`${f}\``).join(', ')}\n\n`);
     }
     if (component.parameters && component.parameters.length > 0) {
       md.appendMarkdown(`**Parameters:** ${component.parameters.map(p => `\`${p}\``).join(', ')}\n\n`);

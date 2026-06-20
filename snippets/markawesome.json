@@ -71,6 +71,39 @@
     ],
     "description": "Insert filled callout"
   },
+  "Callout Animated Icon": {
+    "prefix": "wa-callout-animation",
+    "body": [
+      ":::${1|info,success,warning,danger,neutral|} ${2|beat,fade,beat-fade,bounce,flip,shake,spin,spin-pulse,spin-reverse|}",
+      "${3:This callout's icon animates.}",
+      ":::"
+    ],
+    "description": "Insert callout with an animated icon (no Pro kit required)"
+  },
+  "Icon Block": {
+    "prefix": "wa-icon",
+    "body": [
+      ":::wa-icon ${1:bell}",
+      "${2:Accessible label}",
+      ":::"
+    ],
+    "description": "Insert icon block with an accessible label"
+  },
+  "Icon Animated": {
+    "prefix": "wa-icon-animation",
+    "body": [
+      ":::wa-icon ${1:bell} ${2|beat,fade,beat-fade,bounce,flip,shake,spin,spin-pulse,spin-reverse|}",
+      ":::"
+    ],
+    "description": "Insert an animated icon block (no Pro kit required)"
+  },
+  "Icon Inline": {
+    "prefix": "wa-icon-inline",
+    "body": [
+      "\\$\\$\\$${1:gear}"
+    ],
+    "description": "Insert an inline (decorative) icon"
+  },
   "Card Basic": {
     "prefix": "wa-card",
     "body": [
@@ -291,6 +324,33 @@
       "<<<"
     ],
     "description": "Insert copy button"
+  },
+  "Copy Button with Placement": {
+    "prefix": "wa-copy-placement",
+    "body": [
+      "<<<${1|top,right,bottom,left|}",
+      "${2:Text to copy}",
+      "<<<"
+    ],
+    "description": "Insert copy button with tooltip placement"
+  },
+  "Copy Button with Labels": {
+    "prefix": "wa-copy-labels",
+    "body": [
+      "<<<copy-label=\"${1:Copy}\" success-label=\"${2:Copied!}\"",
+      "${3:Text to copy}",
+      "<<<"
+    ],
+    "description": "Insert copy button with custom tooltip labels"
+  },
+  "Copy Button from Element": {
+    "prefix": "wa-copy-from",
+    "body": [
+      "<<<from=\"${1:element-id}\"",
+      "${2:Fallback text}",
+      "<<<"
+    ],
+    "description": "Insert copy button that copies from another element by ID"
   },
   "Badge": {
     "prefix": "wa-badge",

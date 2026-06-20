@@ -14,6 +14,10 @@ Quick insertion of component templates with tab stops:
 |----------------------|-------------------------------------|
 | `wa-callout-info`    | Info callout                        |
 | `wa-callout-warning` | Warning callout                     |
+| `wa-callout-animation` | Callout with an animated icon     |
+| `wa-icon`            | Icon block with accessible label    |
+| `wa-icon-animation`  | Animated icon block                 |
+| `wa-icon-inline`     | Inline (decorative) icon            |
 | `wa-card`            | Basic card                          |
 | `wa-card-full`       | Card with header, image, and footer |
 | `wa-carousel`        | Basic carousel                      |
@@ -24,6 +28,9 @@ Quick insertion of component templates with tab stops:
 | `wa-tabs`            | Tab group with 3 tabs               |
 | `wa-tag`             | Tag component                       |
 | `wa-copy`            | Copy button                         |
+| `wa-copy-placement`  | Copy button with tooltip placement  |
+| `wa-copy-labels`     | Copy button with custom labels      |
+| `wa-copy-from`       | Copy button reading another element |
 | `wa-badge`           | Badge component                     |
 | `wa-button`          | Button with link                    |
 | `wa-popover`         | Popover with trigger and content    |
@@ -34,15 +41,18 @@ Quick insertion of component templates with tab stops:
 
 Intelligent autocomplete suggestions as you type:
 
-- Type `:::` → Get list of component types and callout variants
-- Type `===` → Suggests card appearance options
+- Type `:::` → Get list of component types and callout variants (and `:::wa-icon`)
+- Type `:::warning ` → Suggests callout size, appearance, and icon family/variant/animation
+- Type `===` → Suggests card appearance and orientation options
 - Type `^^^` → Suggests details appearance and icon placement
 - Type `???` → Suggests dialog parameters
-- Type `@@@` → Suggests tag variants
+- Type `@@@` → Suggests tag variants and the `xs`–`xl` size scale
 - Type `!!!` → Suggests badge variants
-- Type `%%%` → Suggests button variants
-- Type `~~~~~~` → Suggests carousel parameters
+- Type `%%%` → Suggests button variants, the `xs`–`xl` size scale, and link `target`/`download`
+- Type `<<<` → Suggests copy-button placement, labels, duration, and `from`
+- Type `~~~~~~` → Suggests carousel parameters (including `autoplay-interval`)
 - Type `&&&` → Suggests popover placement and options
+- Type `$$$` → Inline icon hint; `:::wa-icon <name> ` suggests family/variant/animation
 
 ### Hover Documentation
 
@@ -82,7 +92,25 @@ This is an important information callout with **bold text** and [links](https://
 :::warning
 Be careful when performing this action!
 :::
+
+:::warning shake
+This callout's icon animates (no Pro kit required).
+:::
 ```
+
+### Icons
+
+```markdown
+Inline, decorative icons sit mid-prose like the $$$gear icon here.
+
+:::wa-icon bell shake
+Notifications
+:::
+```
+
+Inline `$$$name` icons are name-only and decorative. The `:::wa-icon` block takes the
+name first, then optional `family`/`variant`/`animation` attributes, and an optional
+body that becomes the icon's accessible label.
 
 ### Cards
 
@@ -203,8 +231,12 @@ npm install markawesome
 ### Button
 
 ```markdown
-%%%primary
+%%%brand
 [Get Started](https://example.com)
+%%%
+
+%%%brand _blank
+[Open in a new tab](https://webawesome.com)
 %%%
 ```
 
@@ -218,6 +250,18 @@ npm install markawesome
 - `danger` - Red with exclamation
 - `neutral` - Gray with gear icon
 
+**Sizes**: `xs`, `s`, `m`, `l`, `xl` (Web Awesome 3.x scale) plus legacy `small`, `medium`, `large`
+
+**Icon attributes**: override the callout icon's `family` (`classic`, `sharp`, `duotone`, `sharp-duotone`, `brands`), `variant` weight (`thin`, `light`, `regular`, `solid`), and `animation` (`beat`, `fade`, `beat-fade`, `bounce`, `flip`, `shake`, `spin`, `spin-pulse`, `spin-reverse`). Animation needs no Pro kit.
+
+### Icon
+
+- **Inline**: `$$$name` — name-only, decorative
+- **Block**: `:::wa-icon name family? variant? animation?` with an optional body that becomes the accessible label
+- **Families**: `classic`, `sharp`, `duotone`, `sharp-duotone`, `brands`
+- **Variants** (Font Awesome weight): `thin`, `light`, `regular`, `solid`
+- **Animations**: `beat`, `fade`, `beat-fade`, `bounce`, `flip`, `shake`, `spin`, `spin-pulse`, `spin-reverse`
+
 ### Card Appearances
 
 - `outlined` - Default outlined appearance (default)
@@ -225,6 +269,8 @@ npm install markawesome
 - `plain` - Minimal appearance
 - `filled-outlined` - Combination style
 - `accent` - Emphasis appearance
+
+**Orientation**: `vertical` (default) or `horizontal` (media and content side-by-side)
 
 ### Details Options
 
@@ -246,12 +292,15 @@ npm install markawesome
 - `danger` - Error/critical state
 - `neutral` - Neutral/informational state
 
-### Button Variants
+**Tag sizes**: `xs`, `s`, `m`, `l`, `xl` (Web Awesome 3.x scale) plus legacy `small`, `medium`, `large`
 
-- `primary` - Primary button style
-- `default` - Default button style
-- `text` - Text-only button
-- `danger` - Danger/destructive action
+### Button Variants and Options
+
+- **Variants**: `brand`, `success`, `neutral`, `warning`, `danger`
+- **Appearances**: `accent`, `filled`, `outlined`, `filled-outlined`, `plain`
+- **Sizes**: `xs`, `s`, `m`, `l`, `xl` (Web Awesome 3.x scale) plus legacy `small`, `medium`, `large`
+- **Flags**: `pill`, `caret`, `loading`, `disabled`
+- **Link target/download** (link-form buttons only): `_blank`, `_self`, `_parent`, `_top` set the anchor target (`_blank` auto-adds `rel="noopener noreferrer"`); `download` downloads the linked file
 
 ### Popover Options
 
@@ -269,6 +318,7 @@ npm install markawesome
 - `pagination` - Show dot indicators
 - `loop` - Enable infinite loop
 - `autoplay` - Auto-advance slides
+- `autoplay-interval:value` - Milliseconds between auto-advances (e.g., `5000`; default 3000)
 - `mouse-dragging` - Enable drag to slide
 - `vertical` - Vertical orientation
 - `scroll-hint:value` - Show scroll hint
@@ -276,6 +326,20 @@ npm install markawesome
 - `slide-gap:value` - Gap between slides
 - `slides-per-page:n` - Slides visible at once
 - `slides-per-move:n` - Slides to move at once
+
+### Copy Button Parameters
+
+- `top` / `right` / `bottom` / `left` - Tooltip placement (default `top`)
+- `2000` - A bare number sets the success-feedback duration in milliseconds
+- `disabled` - Disable the copy button
+- `copy-label="…"` - Tooltip text before copying
+- `success-label="…"` - Tooltip text after a successful copy
+- `error-label="…"` - Tooltip text when copying fails
+- `from="…"` - Copy from another element by ID (also `from="input.value"`, `from="link[href]"`)
+
+### Layout Gap Scale
+
+`0`, `3xs`, `2xs`, `xs`, `s`, `m`, `l`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`
 
 ## Requirements
 

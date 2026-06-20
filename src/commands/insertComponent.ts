@@ -8,6 +8,10 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  sizes?: string[];
+  families?: string[];
+  animations?: string[];
+  flags?: string[];
   parameters?: string[];
   example: string;
 }
@@ -41,7 +45,7 @@ export async function insertComponent() {
     if (type) {
       snippet = snippet.replace(/:::(info|success|warning|danger|neutral)/, `:::${type}`);
     }
-  } else if (component.variants) {
+  } else if (component.variants && /(@@@|!!!|%%%)/.test(component.example)) {
     const variant = await vscode.window.showQuickPick(component.variants, {
       placeHolder: `Select ${component.name} variant (optional)`,
       canPickMany: false

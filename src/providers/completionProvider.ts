@@ -9,6 +9,10 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  sizes?: string[];
+  families?: string[];
+  animations?: string[];
+  flags?: string[];
   parameters?: string[];
   description: string;
   example: string;
@@ -39,7 +43,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
                          'wa-details', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
-                         'wa-copy-button', 'wa-badge', 'wa-button'];
+                         'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon'];
       components.forEach(comp => {
         const item = new vscode.CompletionItem(comp, vscode.CompletionItemKind.Class);
         item.detail = 'Web Awesome Component';
@@ -50,7 +54,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
     // Callout size/appearance/icon completions after :::variant
     if (linePrefix.match(/:::(info|brand|success|warning|danger|neutral)\s+\S*$/)) {
-      const sizes = ['small', 'medium', 'large'];
+      const sizes = ['xs', 's', 'm', 'l', 'xl', 'small', 'medium', 'large'];
       sizes.forEach(size => {
         const item = new vscode.CompletionItem(size, vscode.CompletionItemKind.Property);
         item.detail = 'Callout Size';
@@ -66,6 +70,30 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
+      const families = ['classic', 'sharp', 'duotone', 'sharp-duotone', 'brands'];
+      families.forEach(family => {
+        const item = new vscode.CompletionItem(family, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Callout Icon Family';
+        item.documentation = new vscode.MarkdownString(`Override the callout icon's font family (${family})`);
+        completions.push(item);
+      });
+
+      const iconVariants = ['thin', 'light', 'regular', 'solid'];
+      iconVariants.forEach(variant => {
+        const item = new vscode.CompletionItem(variant, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Callout Icon Variant';
+        item.documentation = new vscode.MarkdownString(`Override the callout icon's font weight (${variant})`);
+        completions.push(item);
+      });
+
+      const animations = ['beat', 'fade', 'beat-fade', 'bounce', 'flip', 'shake', 'spin', 'spin-pulse', 'spin-reverse'];
+      animations.forEach(animation => {
+        const item = new vscode.CompletionItem(animation, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Callout Icon Animation';
+        item.documentation = new vscode.MarkdownString(`Animate the callout icon (${animation}) — no Pro kit required`);
+        completions.push(item);
+      });
+
       const iconItem = new vscode.CompletionItem('icon:', vscode.CompletionItemKind.Property);
       iconItem.detail = 'Custom Icon';
       iconItem.documentation = new vscode.MarkdownString('Override default variant icon (e.g., `icon:shield`, `icon:rocket`)');
@@ -73,7 +101,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       completions.push(iconItem);
     }
 
-    // Card appearance completions after ===
+    // Card appearance/orientation completions after ===
     if (linePrefix.match(/===$/)) {
       const appearances = ['outlined', 'filled', 'filled-outlined', 'plain', 'accent'];
       appearances.forEach(appearance => {
@@ -82,6 +110,54 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         item.documentation = new vscode.MarkdownString(`Card with ${appearance} appearance`);
         completions.push(item);
       });
+
+      const orientations = ['horizontal', 'vertical'];
+      orientations.forEach(orientation => {
+        const item = new vscode.CompletionItem(orientation, vscode.CompletionItemKind.Property);
+        item.detail = 'Card Orientation';
+        item.documentation = new vscode.MarkdownString(
+          orientation === 'horizontal'
+            ? 'Media and content sit side-by-side'
+            : 'Default — media stacked above content'
+        );
+        completions.push(item);
+      });
+    }
+
+    // Icon attribute completions after :::wa-icon <name>
+    if (linePrefix.match(/:::wa-icon\s+\S+\s/)) {
+      const families = ['classic', 'sharp', 'duotone', 'sharp-duotone', 'brands'];
+      families.forEach(family => {
+        const item = new vscode.CompletionItem(family, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Icon Family';
+        item.documentation = new vscode.MarkdownString(`Icon font family (${family})`);
+        completions.push(item);
+      });
+
+      const iconVariants = ['thin', 'light', 'regular', 'solid'];
+      iconVariants.forEach(variant => {
+        const item = new vscode.CompletionItem(variant, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Icon Variant';
+        item.documentation = new vscode.MarkdownString(`Icon font weight (${variant})`);
+        completions.push(item);
+      });
+
+      const animations = ['beat', 'fade', 'beat-fade', 'bounce', 'flip', 'shake', 'spin', 'spin-pulse', 'spin-reverse'];
+      animations.forEach(animation => {
+        const item = new vscode.CompletionItem(animation, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Icon Animation';
+        item.documentation = new vscode.MarkdownString(`Animate the icon (${animation}) — no Pro kit required`);
+        completions.push(item);
+      });
+    }
+
+    // Inline icon hint after $$$
+    if (linePrefix.match(/\$\$\$$/)) {
+      const item = new vscode.CompletionItem('icon-name', vscode.CompletionItemKind.Snippet);
+      item.detail = 'Inline Icon (decorative)';
+      item.documentation = new vscode.MarkdownString('Inline `$$$name` icons are name-only and decorative. Use the block `:::wa-icon` form for attributes and an accessible label.');
+      item.insertText = new vscode.SnippetString('${1:gear}');
+      completions.push(item);
     }
 
     // Details completions after ^^^
@@ -158,7 +234,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
-      const sizes = ['small', 'medium', 'large'];
+      const sizes = ['xs', 's', 'm', 'l', 'xl', 'small', 'medium', 'large'];
       sizes.forEach(size => {
         const item = new vscode.CompletionItem(size, vscode.CompletionItemKind.Property);
         item.detail = 'Tag Size';
@@ -234,7 +310,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
-      const sizes = ['small', 'medium', 'large'];
+      const sizes = ['xs', 's', 'm', 'l', 'xl', 'small', 'medium', 'large'];
       sizes.forEach(size => {
         const item = new vscode.CompletionItem(size, vscode.CompletionItemKind.Property);
         item.detail = 'Button Size';
@@ -254,6 +330,24 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         item.documentation = new vscode.MarkdownString(doc);
         completions.push(item);
       });
+
+      // Link-form only: target + download (apply when the button body is a markdown link)
+      const targets = ['_blank', '_self', '_parent', '_top'];
+      targets.forEach(target => {
+        const item = new vscode.CompletionItem(target, vscode.CompletionItemKind.Value);
+        item.detail = 'Button Link Target';
+        item.documentation = new vscode.MarkdownString(
+          target === '_blank'
+            ? 'Open the link in a new tab (auto-adds `rel="noopener noreferrer"`). Applies only when the button body is a markdown link.'
+            : `Anchor target ${target}. Applies only when the button body is a markdown link.`
+        );
+        completions.push(item);
+      });
+
+      const downloadItem = new vscode.CompletionItem('download', vscode.CompletionItemKind.Property);
+      downloadItem.detail = 'Button Link Flag';
+      downloadItem.documentation = new vscode.MarkdownString('Download the linked file instead of navigating to it. Applies only when the button body is a markdown link.');
+      completions.push(downloadItem);
 
       const iconItems = [
         { name: 'icon:', detail: 'Start Icon', doc: 'Add start icon (e.g., `icon:download`, `icon:gear`)' },
@@ -324,7 +418,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
     // Layout attribute completions after ::::type
     if (linePrefix.match(/::::(grid|stack|cluster|split|flank|frame|wa-grid|wa-stack|wa-cluster|wa-split|wa-flank|wa-frame)\s+\S*$/)) {
-      const gaps = ['0', '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
+      const gaps = ['0', '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'];
       gaps.forEach(gap => {
         const item = new vscode.CompletionItem(`gap:${gap}`, vscode.CompletionItemKind.Property);
         item.detail = 'Layout Gap';
@@ -411,14 +505,21 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
     // Carousel parameter completions after ~~~~~~
     if (linePrefix.match(/~~~~~~/)) {
       const parameters = [
-        'navigation', 'pagination', 'loop', 'autoplay', 
-        'mouse-dragging', 'vertical', 'scroll-hint', 
+        'navigation', 'pagination', 'loop', 'autoplay', 'autoplay-interval',
+        'mouse-dragging', 'vertical', 'scroll-hint',
         'aspect-ratio', 'slide-gap', 'slides-per-page', 'slides-per-move'
       ];
       parameters.forEach(param => {
         const item = new vscode.CompletionItem(param, vscode.CompletionItemKind.Property);
         item.detail = 'Carousel Parameter';
-        item.documentation = new vscode.MarkdownString(`Enable/set ${param}`);
+        item.documentation = new vscode.MarkdownString(
+          param === 'autoplay-interval'
+            ? 'Milliseconds between auto-advances (e.g., `autoplay-interval:5000`; default 3000)'
+            : `Enable/set ${param}`
+        );
+        if (param === 'autoplay-interval') {
+          item.insertText = new vscode.SnippetString('autoplay-interval:${1:5000}');
+        }
         completions.push(item);
       });
     }
@@ -445,6 +546,47 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       noScrollItem.detail = 'Tab Flag';
       noScrollItem.documentation = new vscode.MarkdownString('Disable scroll arrows for overflowing tabs');
       completions.push(noScrollItem);
+    }
+
+    // Copy button parameter completions on the opening <<< line
+    if (linePrefix.match(/^<<</)) {
+      const placements = ['top', 'right', 'bottom', 'left'];
+      placements.forEach(placement => {
+        const item = new vscode.CompletionItem(placement, vscode.CompletionItemKind.Property);
+        item.detail = 'Copy Button Tooltip Placement';
+        item.documentation = new vscode.MarkdownString(`Tooltip appears on the ${placement}`);
+        completions.push(item);
+      });
+
+      const disabledItem = new vscode.CompletionItem('disabled', vscode.CompletionItemKind.Property);
+      disabledItem.detail = 'Copy Button Flag';
+      disabledItem.documentation = new vscode.MarkdownString('Disable the copy button (cannot be clicked)');
+      completions.push(disabledItem);
+
+      const labelItems = [
+        { name: 'copy-label', detail: 'Copy Label', doc: 'Tooltip text before copying (e.g., `copy-label="Copy"`)', def: 'Copy' },
+        { name: 'success-label', detail: 'Success Label', doc: 'Tooltip text after a successful copy (e.g., `success-label="Copied!"`)', def: 'Copied!' },
+        { name: 'error-label', detail: 'Error Label', doc: 'Tooltip text when copying fails (e.g., `error-label="Copy failed"`)', def: 'Copy failed' }
+      ];
+      labelItems.forEach(({ name, detail, doc, def }) => {
+        const item = new vscode.CompletionItem(`${name}=`, vscode.CompletionItemKind.Property);
+        item.detail = `Copy Button ${detail}`;
+        item.documentation = new vscode.MarkdownString(doc);
+        item.insertText = new vscode.SnippetString(`${name}="\${1:${def}}"`);
+        completions.push(item);
+      });
+
+      const fromItem = new vscode.CompletionItem('from=', vscode.CompletionItemKind.Property);
+      fromItem.detail = 'Copy From Element';
+      fromItem.documentation = new vscode.MarkdownString('Copy content from another element by ID (e.g., `from="my-id"`, `from="input.value"`, `from="link[href]"`)');
+      fromItem.insertText = new vscode.SnippetString('from="${1:element-id}"');
+      completions.push(fromItem);
+
+      const durationItem = new vscode.CompletionItem('feedback-duration', vscode.CompletionItemKind.Value);
+      durationItem.detail = 'Copy Button Feedback Duration';
+      durationItem.documentation = new vscode.MarkdownString('A bare number sets how long the success message shows, in milliseconds (e.g., `2000`)');
+      durationItem.insertText = new vscode.SnippetString('${1:2000}');
+      completions.push(durationItem);
     }
 
     return completions.length > 0 ? completions : undefined;

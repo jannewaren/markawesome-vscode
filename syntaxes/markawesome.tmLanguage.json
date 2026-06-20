@@ -45,6 +45,9 @@
       "include": "#alternative-syntax"
     },
     {
+      "include": "#icon"
+    },
+    {
       "include": "#separator"
     }
   ],
@@ -82,14 +85,14 @@
     "cards": {
       "patterns": [
         {
-          "begin": "^(===)(outlined|filled|filled-outlined|plain|accent)?\\s*$",
+          "begin": "^(===)((?:\\s*(?:outlined|filled-outlined|filled|plain|accent|horizontal|vertical))*)\\s*$",
           "end": "^(===)\\s*$",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.card.markawesome"
             },
             "2": {
-              "name": "entity.name.tag.card.appearance.markawesome"
+              "name": "entity.name.tag.card.params.markawesome"
             }
           },
           "endCaptures": {
@@ -307,7 +310,7 @@
     "tags": {
       "patterns": [
         {
-          "begin": "^(@@@)((?:\\s*(?:icon:\\S+|brand|success|neutral|warning|danger|accent|filled-outlined|filled|outlined|small|medium|large|pill|with-remove))*)\\s*$",
+          "begin": "^(@@@)((?:\\s*(?:icon:\\S+|brand|success|neutral|warning|danger|accent|filled-outlined|filled|outlined|small|medium|large|pill|with-remove|xs|xl|s|m|l))*)\\s*$",
           "end": "^(@@@)\\s*$",
           "beginCaptures": {
             "1": {
@@ -334,11 +337,14 @@
     "copy-button": {
       "patterns": [
         {
-          "begin": "^(<<<)\\s*$",
+          "begin": "^(<<<)(.*)$",
           "end": "^(<<<)\\s*$",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.copy-button.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.copy-button.params.markawesome"
             }
           },
           "endCaptures": {
@@ -358,14 +364,14 @@
     "badge": {
       "patterns": [
         {
-          "begin": "^(!!!)(brand|success|neutral|warning|danger)?\\s*$",
+          "begin": "^(!!!)((?:\\s*(?:brand|success|neutral|warning|danger|accent|filled-outlined|filled|outlined|pulse|bounce|none|pill))*)\\s*$",
           "end": "^(!!!)\\s*$",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.badge.markawesome"
             },
             "2": {
-              "name": "entity.name.tag.badge.variant.markawesome"
+              "name": "entity.name.tag.badge.params.markawesome"
             }
           },
           "endCaptures": {
@@ -385,7 +391,7 @@
     "button": {
       "patterns": [
         {
-          "begin": "^(%%%)((?:\\s*(?:icon:\\S+|brand|success|neutral|warning|danger|accent|filled-outlined|filled|outlined|plain|small|medium|large|pill|caret|loading|disabled))*)\\s*$",
+          "begin": "^(%%%)((?:\\s*(?:icon:\\S+|brand|success|neutral|warning|danger|accent|filled-outlined|filled|outlined|plain|small|medium|large|pill|caret|loading|disabled|_blank|_self|_parent|_top|download|xs|xl|s|m|l))*)\\s*$",
           "end": "^(%%%)\\s*$",
           "beginCaptures": {
             "1": {
@@ -468,7 +474,7 @@
     "alternative-syntax": {
       "patterns": [
         {
-          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-dialog|wa-popover|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button)\\s+(.*)$",
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-dialog|wa-popover|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {
@@ -504,6 +510,21 @@
         {
           "match": "^(~~~)\\s*$",
           "name": "punctuation.definition.separator.markawesome"
+        }
+      ]
+    },
+    "icon": {
+      "patterns": [
+        {
+          "match": "(\\$\\$\\$)([\\w-]+)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.icon.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.icon.markawesome"
+            }
+          }
         }
       ]
     }

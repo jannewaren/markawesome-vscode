@@ -2,23 +2,36 @@
   "components": [
     {
       "name": "Callout",
-      "primarySyntax": ":::type size? appearance? icon:name?",
-      "altSyntax": ":::wa-callout type size? appearance? icon:name?",
+      "primarySyntax": ":::type size? appearance? family? variant? animation? icon:name?",
+      "altSyntax": ":::wa-callout type size? appearance? family? variant? animation? icon:name?",
       "types": ["info", "brand", "success", "warning", "danger", "neutral"],
-      "sizes": ["small", "medium", "large"],
+      "sizes": ["xs", "s", "m", "l", "xl", "small", "medium", "large"],
       "appearances": ["accent", "filled", "outlined", "plain", "filled-outlined"],
+      "families": ["classic", "sharp", "duotone", "sharp-duotone", "brands"],
+      "animations": ["beat", "fade", "beat-fade", "bounce", "flip", "shake", "spin", "spin-pulse", "spin-reverse"],
       "description": "Highlight important information with icons and colored styling",
-      "example": ":::warning icon:shield\nSecurity notice with custom icon.\n:::",
-      "documentation": "Callouts draw attention to important information. Each type has a different color and icon:\n- **info/brand**: Blue with info icon (info is alias for brand)\n- **success**: Green with checkmark\n- **warning**: Yellow with warning icon\n- **danger**: Red with exclamation\n- **neutral**: Gray with gear icon\n\nSizes: small, medium, large\nAppearances: accent, filled, outlined, plain, filled-outlined\n\n**Icons:** Use `icon:name` to override the default variant icon (e.g., `icon:shield`, `icon:rocket`)"
+      "example": ":::warning shake\nThis warning's icon animates.\n:::",
+      "documentation": "Callouts draw attention to important information. Each type has a different color and icon:\n- **info/brand**: Blue with info icon (info is alias for brand)\n- **success**: Green with checkmark\n- **warning**: Yellow with warning icon\n- **danger**: Red with exclamation\n- **neutral**: Gray with gear icon\n\n**Sizes:** `xs`, `s`, `m`, `l`, `xl` (Web Awesome 3.x five-step scale) plus the legacy `small`/`medium`/`large` aliases\n**Appearances:** accent, filled, outlined, plain, filled-outlined\n\n**Icon appearance:** override the callout icon's `family` (classic, sharp, duotone, sharp-duotone, brands), `variant` font weight (thin, light, regular, solid), and `animation` (beat, fade, beat-fade, bounce, flip, shake, spin, spin-pulse, spin-reverse). Animation needs no Pro kit — e.g. `:::warning shake`.\n\n**Icons:** Use `icon:name` to override the default variant icon (e.g., `icon:shield`, `icon:rocket`)"
+    },
+    {
+      "name": "Icon",
+      "primarySyntax": "$$$name",
+      "altSyntax": ":::wa-icon name family? variant? animation?",
+      "families": ["classic", "sharp", "duotone", "sharp-duotone", "brands"],
+      "variants": ["thin", "light", "regular", "solid"],
+      "animations": ["beat", "fade", "beat-fade", "bounce", "flip", "shake", "spin", "spin-pulse", "spin-reverse"],
+      "description": "Standalone Web Awesome icon — inline and decorative, or a block with attributes and an accessible label",
+      "example": ":::wa-icon bell shake\nNotifications\n:::",
+      "documentation": "Insert a Web Awesome `<wa-icon>`.\n\n**Inline `$$$name`:** name-only and decorative — use mid-prose (e.g., `the $$$gear icon`). No attributes.\n\n**Block `:::wa-icon name family? variant? animation?`:** the first token is the icon name, followed by optional, order-independent icon attributes. A non-empty block body becomes the icon's accessible `label`; an empty body leaves the icon presentational.\n\n**Icon attributes:**\n- **family**: classic, sharp, duotone, sharp-duotone, brands\n- **variant** (Font Awesome weight): thin, light, regular, solid\n- **animation**: beat, fade, beat-fade, bounce, flip, shake, spin, spin-pulse, spin-reverse\n\nAnimation works with any kit; family/variant glyph changes depend on the kit's Font Awesome tier."
     },
     {
       "name": "Card",
-      "primarySyntax": "===appearance?",
-      "altSyntax": ":::wa-card appearance?",
+      "primarySyntax": "===appearance? orientation?",
+      "altSyntax": ":::wa-card appearance? orientation?",
       "types": ["outlined", "filled", "filled-outlined", "plain", "accent"],
       "description": "Container for content with optional header, media, and footer",
-      "example": "===\n# Card Title\nCard content here.\n===",
-      "documentation": "Cards are flexible containers that can include:\n- **Media**: First image becomes card media\n- **Header**: First # heading becomes header\n- **Content**: Main text content\n- **Footer**: Trailing links become footer buttons\n\nAppearances: outlined (default), filled, filled-outlined, plain, accent"
+      "example": "===horizontal\n![Feature](image.png)\n**Horizontal Card**\nMedia and content side-by-side.\n===",
+      "documentation": "Cards are flexible containers that can include:\n- **Media**: First image becomes card media\n- **Header**: First # heading becomes header\n- **Content**: Main text content\n- **Footer**: Trailing links become footer buttons\n\nAppearances: outlined (default), filled, filled-outlined, plain, accent\nOrientation: vertical (default), horizontal (media and content sit side-by-side)"
     },
     {
       "name": "Comparison",
@@ -37,6 +50,7 @@
         "pagination",
         "loop",
         "autoplay",
+        "autoplay-interval:value",
         "mouse-dragging",
         "vertical",
         "scroll-hint:value",
@@ -46,8 +60,8 @@
         "slides-per-move:value"
       ],
       "description": "Image slider or content rotator with navigation",
-      "example": "~~~~~~navigation pagination\n~~~\nSlide 1\n~~~\n~~~\nSlide 2\n~~~\n~~~~~~",
-      "documentation": "Carousel for sliding content. Use ~~~ to separate slides.\n\nParameters:\n- **navigation**: Show prev/next arrows\n- **pagination**: Show dot indicators\n- **loop**: Enable infinite loop\n- **autoplay**: Auto-advance slides\n- **mouse-dragging**: Enable drag to slide\n- **vertical**: Vertical orientation\n- **scroll-hint:value**: Show scroll hint\n- **aspect-ratio:value**: e.g., 16/9, 4/3\n- **slide-gap:value**: Gap between slides\n- **slides-per-page:n**: Slides visible at once\n- **slides-per-move:n**: Slides to move at once"
+      "example": "~~~~~~autoplay autoplay-interval:5000 loop pagination\n~~~\nSlide 1\n~~~\n~~~\nSlide 2\n~~~\n~~~~~~",
+      "documentation": "Carousel for sliding content. Use ~~~ to separate slides.\n\nParameters:\n- **navigation**: Show prev/next arrows\n- **pagination**: Show dot indicators\n- **loop**: Enable infinite loop\n- **autoplay**: Auto-advance slides\n- **autoplay-interval:value**: Milliseconds between auto-advances (e.g., 5000; default 3000)\n- **mouse-dragging**: Enable drag to slide\n- **vertical**: Vertical orientation\n- **scroll-hint:value**: Show scroll hint\n- **aspect-ratio:value**: e.g., 16/9, 4/3\n- **slide-gap:value**: Gap between slides\n- **slides-per-page:n**: Slides visible at once\n- **slides-per-move:n**: Slides to move at once"
     },
     {
       "name": "Details",
@@ -85,19 +99,22 @@
       "altSyntax": ":::wa-tag variant? appearance? size? pill? with-remove? icon:name?",
       "variants": ["brand", "success", "neutral", "warning", "danger"],
       "appearances": ["accent", "filled", "outlined", "filled-outlined"],
-      "sizes": ["small", "medium", "large"],
+      "sizes": ["xs", "s", "m", "l", "xl", "small", "medium", "large"],
       "flags": ["pill", "with-remove"],
       "description": "Colored label or tag with multiple styles and sizes",
       "example": "@@@success icon:check\nApproved\n@@@",
-      "documentation": "Small colored labels for categorization or status.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **with-remove**: Removable tag with remove button\n\n**Icons:** Use `icon:name` to add an icon inside the tag (e.g., `icon:check`, `icon:star`)\n\nAll parameters are optional and can be combined in any order."
+      "documentation": "Small colored labels for categorization or status.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined\nSizes: `xs`, `s`, `m`, `l`, `xl` (Web Awesome 3.x scale) plus legacy `small`, `medium`, `large`\nFlags:\n- **pill**: Rounded edges\n- **with-remove**: Removable tag with remove button\n\n**Icons:** Use `icon:name` to add an icon inside the tag (e.g., `icon:check`, `icon:star`)\n\nAll parameters are optional and can be combined in any order."
     },
     {
       "name": "Copy Button",
-      "primarySyntax": "<<<",
-      "altSyntax": ":::wa-copy-button",
+      "primarySyntax": "<<<placement? duration? disabled? copy-label? success-label? error-label? from?",
+      "altSyntax": ":::wa-copy-button placement? duration? disabled? copy-label? success-label? error-label? from?",
+      "placements": ["top", "right", "bottom", "left"],
+      "flags": ["disabled"],
+      "parameters": ["placement (top/right/bottom/left)", "duration (ms, e.g. 2000)", "copy-label=\"…\"", "success-label=\"…\"", "error-label=\"…\"", "from=\"element-id\"", "disabled"],
       "description": "Button that copies content to clipboard",
-      "example": "<<<\nnpm install markawesome\n<<<",
-      "documentation": "Creates a button that copies the content to clipboard when clicked. Supports markdown formatting in display while preserving raw text for copying."
+      "example": "<<<top copy-label=\"Copy\"\nnpm install markawesome\n<<<",
+      "documentation": "Creates a button that copies the content to clipboard when clicked. Supports markdown formatting in display while preserving raw text for copying.\n\n**Tooltip placement:** top (default), right, bottom, left\n**Feedback duration:** a bare number sets the success-message duration in milliseconds (e.g., `2000`)\n**Custom labels:** `copy-label=\"…\"`, `success-label=\"…\"`, `error-label=\"…\"`\n**Copy from another element:** `from=\"element-id\"` (also supports `from=\"input.value\"`, `from=\"link[href]\"`)\n**Flags:** `disabled`\n\nAll parameters are optional and combine in any order."
     },
     {
       "name": "Badge",
@@ -113,15 +130,16 @@
     },
     {
       "name": "Button",
-      "primarySyntax": "%%%variant? appearance? size? pill? caret? loading? disabled? icon:name? icon:end:name?",
-      "altSyntax": ":::wa-button variant? appearance? size? pill? caret? loading? disabled? icon:name? icon:end:name?",
+      "primarySyntax": "%%%variant? appearance? size? pill? caret? loading? disabled? target? download? icon:name? icon:end:name?",
+      "altSyntax": ":::wa-button variant? appearance? size? pill? caret? loading? disabled? target? download? icon:name? icon:end:name?",
       "variants": ["brand", "success", "neutral", "warning", "danger"],
       "appearances": ["accent", "filled", "outlined", "filled-outlined", "plain"],
-      "sizes": ["small", "medium", "large"],
-      "flags": ["pill", "caret", "loading", "disabled"],
+      "sizes": ["xs", "s", "m", "l", "xl", "small", "medium", "large"],
+      "flags": ["pill", "caret", "loading", "disabled", "download"],
+      "parameters": ["target=_blank|_self|_parent|_top", "download"],
       "description": "Button component with optional link, multiple styles and states",
       "example": "%%%brand icon:download\n[Download](https://example.com/file.zip)\n%%%",
-      "documentation": "Styled button component. Include a markdown link to make it clickable, or use plain text for a non-link button.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined, plain\nSizes: small, medium, large\nFlags:\n- **pill**: Rounded edges\n- **caret**: Dropdown indicator\n- **loading**: Loading state\n- **disabled**: Disabled state\n\n**Icons:** Use `icon:name` for start icon, `icon:end:name` for end icon, or both (e.g., `icon:start:gear icon:end:arrow-right`)\n\nAll parameters are optional and can be combined in any order."
+      "documentation": "Styled button component. Include a markdown link to make it clickable, or use plain text for a non-link button.\n\nVariants: brand, success, neutral, warning, danger\nAppearances: accent, filled, outlined, filled-outlined, plain\nSizes: `xs`, `s`, `m`, `l`, `xl` (Web Awesome 3.x scale) plus legacy `small`, `medium`, `large`\nFlags:\n- **pill**: Rounded edges\n- **caret**: Dropdown indicator\n- **loading**: Loading state\n- **disabled**: Disabled state\n\n**Link targets (link-form buttons only):** `_blank`, `_self`, `_parent`, `_top` set the anchor target; `_blank` also auto-adds `rel=\"noopener noreferrer\"`. `download` makes the link download its target instead of navigating (e.g., `%%%neutral download\\n[Get file](/files/sample.txt)\\n%%%`).\n\n**Icons:** Use `icon:name` for start icon, `icon:end:name` for end icon, or both (e.g., `icon:start:gear icon:end:arrow-right`)\n\nAll parameters are optional and can be combined in any order."
     },
     {
       "name": "Popover",
@@ -142,7 +160,7 @@
       "parameters": ["gap:SIZE", "min:CSS", "align:VALUE", "justify:VALUE"],
       "description": "Auto-adaptive responsive grid layout. Each child becomes a grid item that wraps responsively.",
       "example": "::::grid gap:l min:300px\n===accent\n# Card 1\nContent\n===\n\n===accent\n# Card 2\nContent\n===\n::::",
-      "documentation": "Responsive grid that auto-wraps children based on minimum column size. No media queries needed.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **min:CSS**: Minimum column size (e.g., `min:300px`, `min:20ch`, `min:15rem`)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-grid\">` with CSS utility classes."
+      "documentation": "Responsive grid that auto-wraps children based on minimum column size. No media queries needed.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl)\n- **min:CSS**: Minimum column size (e.g., `min:300px`, `min:20ch`, `min:15rem`)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-grid\">` with CSS utility classes."
     },
     {
       "name": "Stack Layout",
@@ -151,7 +169,7 @@
       "parameters": ["gap:SIZE", "align:VALUE", "justify:VALUE"],
       "description": "Vertical spacing between blocks for consistent content rhythm.",
       "example": "::::stack gap:l\n:::info\nFirst item\n:::\n\n:::success\nSecond item\n:::\n::::",
-      "documentation": "Vertical stack with consistent spacing between child elements.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-stack\">` with CSS utility classes."
+      "documentation": "Vertical stack with consistent spacing between child elements.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-stack\">` with CSS utility classes."
     },
     {
       "name": "Cluster Layout",
@@ -160,7 +178,7 @@
       "parameters": ["gap:SIZE", "align:VALUE", "justify:VALUE"],
       "description": "Inline wrapping items. Great for tag clouds, button rows, icon lists.",
       "example": "::::cluster gap:xs\n@@@brand Ruby @@@ @@@success Jekyll @@@ @@@neutral Markdown @@@\n::::",
-      "documentation": "Horizontal cluster that wraps items inline. Perfect for tag clouds, button groups, and icon rows.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-cluster\">` with CSS utility classes."
+      "documentation": "Horizontal cluster that wraps items inline. Perfect for tag clouds, button groups, and icon rows.\n\n**Attributes:**\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-cluster\">` with CSS utility classes."
     },
     {
       "name": "Split Layout",
@@ -169,7 +187,7 @@
       "parameters": ["row", "column", "gap:SIZE", "align:VALUE", "justify:VALUE"],
       "description": "Distribute items to opposite ends. Classic header/footer pattern.",
       "example": "::::split\n**Copyright 2026 My Company**\n\n[Privacy Policy](/privacy) | [Terms](/terms)\n::::",
-      "documentation": "Splits children to opposite ends of a row (or column). Perfect for headers, footers, and navigation bars.\n\n**Attributes:**\n- **row**: Horizontal split (default)\n- **column**: Vertical split\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-split\">` with CSS utility classes."
+      "documentation": "Splits children to opposite ends of a row (or column). Perfect for headers, footers, and navigation bars.\n\n**Attributes:**\n- **row**: Horizontal split (default)\n- **column**: Vertical split\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-split\">` with CSS utility classes."
     },
     {
       "name": "Flank Layout",
@@ -178,7 +196,7 @@
       "parameters": ["start", "end", "size:CSS", "content:PCT", "gap:SIZE", "align:VALUE", "justify:VALUE"],
       "description": "Sidebar + main content. One item flanks the other, wrapping on small screens.",
       "example": "::::flank start size:200px gap:l\n![Photo](photo.jpg)\n\n## Main Content\nContent here.\n::::",
-      "documentation": "Sidebar layout where one item flanks the main content, wrapping responsively on small screens.\n\n**Attributes:**\n- **start**: Flanking item on the start side (default)\n- **end**: Flanking item on the end side\n- **size:CSS**: Flanking item size (e.g., `size:200px`, `size:15rem`)\n- **content:PCT**: Minimum content percentage (e.g., `content:70%`)\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-flank\">` with CSS utility classes."
+      "documentation": "Sidebar layout where one item flanks the main content, wrapping responsively on small screens.\n\n**Attributes:**\n- **start**: Flanking item on the start side (default)\n- **end**: Flanking item on the end side\n- **size:CSS**: Flanking item size (e.g., `size:200px`, `size:15rem`)\n- **content:PCT**: Minimum content percentage (e.g., `content:70%`)\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-flank\">` with CSS utility classes."
     },
     {
       "name": "Frame Layout",
@@ -187,7 +205,7 @@
       "parameters": ["landscape", "portrait", "square", "radius:SIZE", "gap:SIZE", "align:VALUE", "justify:VALUE"],
       "description": "Aspect-ratio container for images and media.",
       "example": "::::frame landscape radius:l\n<img src=\"hero.jpg\" alt=\"Hero image\">\n::::",
-      "documentation": "Constrains content to a specific aspect ratio. Ideal for images, videos, and media containers.\n\n**Attributes:**\n- **landscape**: 16:9 aspect ratio\n- **portrait**: 9:16 aspect ratio\n- **square**: 1:1 aspect ratio\n- **radius:SIZE**: Border radius (s, m, l, pill, circle, square)\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-frame\">` with CSS utility classes.\n\n**Note:** Use `<img>` HTML tags directly inside frames, as Markdown image syntax may not be processed inside layout containers."
+      "documentation": "Constrains content to a specific aspect ratio. Ideal for images, videos, and media containers.\n\n**Attributes:**\n- **landscape**: 16:9 aspect ratio\n- **portrait**: 9:16 aspect ratio\n- **square**: 1:1 aspect ratio\n- **radius:SIZE**: Border radius (s, m, l, pill, circle, square)\n- **gap:SIZE**: Gap between items (0, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl)\n- **align:VALUE**: Align items (start, end, center, stretch, baseline)\n- **justify:VALUE**: Justify content (start, end, center, space-between, space-around, space-evenly)\n\nMaps to `<div class=\"wa-frame\">` with CSS utility classes.\n\n**Note:** Use `<img>` HTML tags directly inside frames, as Markdown image syntax may not be processed inside layout containers."
     }
   ]
 }
