@@ -2,6 +2,20 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.11.0] - 2026-06-25
+
+Brings the extension to parity with markawesome 0.15 / jekyll-webawesome 0.21 by adding the **Tooltip** component.
+
+### Added
+
+- **Tooltip component** (inline `(((anchor >>> tip)))` primary form, or the `:::wa-tooltip placement? distance:N?` block alternative). Inline contextual help shown on hover or focus — ideal for glossary terms and inline definitions.
+  - **Syntax highlighting** for the inline `(((` … `>>>` … `)))` form (anchor, separator, and tip each scoped); `wa-tooltip` added to the alternative-syntax highlighting.
+  - **IntelliSense**: typing `(((` suggests the four placements (`top`/`bottom`/`left`/`right`) and `distance:`. Added `(` as a completion trigger character.
+  - **Hover documentation** on inline `(((…>>>…)))` lines and the `:::wa-tooltip` form.
+  - **Snippets**: `wa-tooltip` (block alternative) and `wa-tooltip-inline` (`(((${1:term} >>> ${2:tip})))`).
+  - **Command / context menu**: `Markawesome: Wrap in Tooltip` wraps the selection as a tooltip anchor after a quick-pick of placement.
+  - **Component reference** entry in `components.json` (inline + alt syntax, placements, `distance:N`), surfaced in README and `examples/demo.md`.
+
 ## [0.10.0] - 2026-06-24
 
 Brings the extension to parity with markawesome 0.14 / jekyll-webawesome 0.20 by adding the **Accordion** component.

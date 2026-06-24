@@ -167,6 +167,18 @@
       "documentation": "Floating popover attached to a trigger element. Use >>> to separate trigger text from popover content.\n\n**Block syntax** (multi-line):\n```\n&&&bottom\nTrigger text\n>>>\nPopover content\n&&&\n```\n\n**Inline syntax** (within a sentence):\n```\nClick &&&here >>> popover content&&& to continue.\n```\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **link**: Render trigger as a link-styled element instead of a button\n- **without-arrow**: Hide the popover arrow\n- **distance:N**: Custom distance from trigger in px (e.g., distance:10)\n\n**Inline features:**\n- Inline code in trigger text: `&&&\\`code\\` trigger >>> content&&&`\n- Line breaks in popover content using `\\n`: `&&&trigger >>> line 1\\nline 2&&&`\n\nAll parameters are optional and can be combined in any order."
     },
     {
+      "name": "Tooltip",
+      "primarySyntax": "(((placement? distance:N? anchor >>> tip)))",
+      "inlineSyntax": "(((anchor term >>> tip text)))",
+      "altSyntax": ":::wa-tooltip placement? distance:N?",
+      "placements": ["top", "bottom", "left", "right"],
+      "parameters": ["placement (top/bottom/left/right)", "distance:N"],
+      "description": "Inline contextual help shown on hover or focus — ideal for glossary terms and inline definitions",
+      "example": ":::wa-tooltip bottom\nCSS\n>>>\nCascading Style Sheets\n:::",
+      "inlineExample": "Styled with (((CSS >>> Cascading Style Sheets))) on the web.",
+      "documentation": "Inline contextual help shown on hover or focus. The anchor term is rendered as a focusable, dotted-underlined span; the tip appears in a `<wa-tooltip>` wired to it automatically via a generated `for`/`id` pair. Declarative and zero-JavaScript.\n\n**Inline syntax** (primary, within a sentence):\n```\nStyling is handled by (((CSS >>> Cascading Style Sheets))) on the web.\n```\n\n**Block syntax** (alternative):\n```\n:::wa-tooltip bottom\nCSS\n>>>\nCascading Style Sheets\n:::\n```\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **distance:N**: Custom distance from the anchor in px (e.g., distance:10)\n\n**Tip content** is plain text (HTML-escaped). Use `\\n` for line breaks (rendered as `<br>`): `(((Org number >>> NO: 9 digits\\nSE: 10 digits)))`.\n\nLeading `placement`/`distance:N` tokens go before the anchor term. Unlike popover, there is no `link` or `without-arrow` (Web Awesome `<wa-tooltip>` has no `without-arrow`). All parameters are optional and can be combined in any order."
+    },
+    {
       "name": "Grid Layout",
       "primarySyntax": "::::grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",
       "altSyntax": "::::wa-grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",

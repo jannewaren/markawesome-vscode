@@ -448,6 +448,23 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       completions.push(distanceItem);
     }
 
+    // Tooltip completions after ((( — leading placement/distance tokens
+    if (linePrefix.match(/\(\(\(/)) {
+      const placements = ['top', 'bottom', 'left', 'right'];
+      placements.forEach(placement => {
+        const item = new vscode.CompletionItem(placement, vscode.CompletionItemKind.Property);
+        item.detail = 'Tooltip Placement';
+        item.documentation = new vscode.MarkdownString(`Tooltip positioned at ${placement}`);
+        completions.push(item);
+      });
+
+      const distanceItem = new vscode.CompletionItem('distance:', vscode.CompletionItemKind.Property);
+      distanceItem.detail = 'Tooltip Distance';
+      distanceItem.documentation = new vscode.MarkdownString('Custom distance from the anchor in px (e.g., `distance:10`)');
+      distanceItem.insertText = new vscode.SnippetString('distance:${1:10}');
+      completions.push(distanceItem);
+    }
+
     // Layout type completions after ::::
     if (linePrefix.match(/::::$/)) {
       const layoutTypes = [

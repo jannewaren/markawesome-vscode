@@ -2,7 +2,7 @@
   "name": "markawesome-vscode",
   "displayName": "Markawesome (Markdown to Web Awesome)",
   "description": "Snippets, IntelliSense, and component commands for Markawesome custom Markdown components",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "publisher": "jannewaren",
   "engines": {
     "vscode": "^1.80.0"
@@ -77,6 +77,10 @@
         "title": "Markawesome: Wrap in Popover"
       },
       {
+        "command": "markawesome.wrapInTooltip",
+        "title": "Markawesome: Wrap in Tooltip"
+      },
+      {
         "command": "markawesome.wrapInTabGroup",
         "title": "Markawesome: Wrap in Tab Group"
       },
@@ -148,6 +152,11 @@
         },
         {
           "command": "markawesome.wrapInPopover",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInTooltip",
           "group": "2_wrap",
           "when": "editorHasSelection"
         },

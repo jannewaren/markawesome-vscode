@@ -261,6 +261,34 @@ export async function wrapInPopover() {
   });
 }
 
+export async function wrapInTooltip() {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor || editor.selection.isEmpty) {
+    vscode.window.showErrorMessage('Please select text to wrap');
+    return;
+  }
+
+  const placements = ['top', 'bottom', 'left', 'right', 'none'];
+  const placement = await vscode.window.showQuickPick(placements, {
+    placeHolder: 'Select tooltip placement (optional)'
+  });
+
+  if (placement === undefined) {
+    return;
+  }
+
+  const selection = editor.selection;
+  const text = editor.document.getText(selection);
+
+  // The selected text becomes the anchor term; leading params go before it.
+  const prefix = placement !== 'none' ? `${placement} ` : '';
+  const wrapped = `(((${prefix}${text} >>> Tooltip text)))`;
+
+  editor.edit(editBuilder => {
+    editBuilder.replace(selection, wrapped);
+  });
+}
+
 export async function wrapInAccordion() {
   const editor = vscode.window.activeTextEditor;
   if (!editor || editor.selection.isEmpty) {

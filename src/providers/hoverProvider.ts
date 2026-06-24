@@ -147,6 +147,14 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       }
     }
 
+    // Check for inline tooltip syntax ((( ... >>> ... ))) anywhere on the line
+    if (line.match(/\(\(\(.*>>>/)) {
+      const component = components.find(c => c.name === 'Tooltip');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
     // Check for layout syntax (::::type or ::::wa-type)
     if (line.match(/^::::(grid|stack|cluster|split|flank|frame)/)) {
       const match = line.match(/^::::(grid|stack|cluster|split|flank|frame)/);
@@ -177,7 +185,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|accordion|dialog|popover|tabs|tag|copy-button|badge|button|icon)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|accordion|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -200,6 +208,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'accordion': 'Accordion',
       'dialog': 'Dialog',
       'popover': 'Popover',
+      'tooltip': 'Tooltip',
       'tabs': 'Tab Group',
       'tag': 'Tag',
       'copy-button': 'Copy Button',

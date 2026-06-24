@@ -12,6 +12,7 @@ import {
   wrapInCopyButton,
   wrapInDialog,
   wrapInPopover,
+  wrapInTooltip,
   wrapInTabGroup,
   wrapInAccordion
 } from './commands/wrapCommands';
@@ -24,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
   const completionProvider = vscode.languages.registerCompletionItemProvider(
     { language: 'markdown', scheme: 'file' },
     new WebAwesomeCompletionProvider(),
-    ':', '=', '|', '^', '?', '@', '!', '%', '~', '+', '&', '$', '<', '/'
+    ':', '=', '|', '^', '?', '@', '!', '%', '~', '+', '&', '$', '<', '/', '('
   );
 
   // Register hover provider
@@ -84,6 +85,11 @@ export function activate(context: vscode.ExtensionContext) {
     wrapInPopover
   );
 
+  const wrapTooltipCmd = vscode.commands.registerCommand(
+    'markawesome.wrapInTooltip',
+    wrapInTooltip
+  );
+
   const wrapTabGroupCmd = vscode.commands.registerCommand(
     'markawesome.wrapInTabGroup',
     wrapInTabGroup
@@ -118,6 +124,7 @@ export function activate(context: vscode.ExtensionContext) {
     wrapCopyButtonCmd,
     wrapDialogCmd,
     wrapPopoverCmd,
+    wrapTooltipCmd,
     wrapTabGroupCmd,
     wrapAccordionCmd,
     imagesToComparisonCmd,

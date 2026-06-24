@@ -162,6 +162,20 @@ Critical
 [Delete Account](https://example.com)
 %%%
 
+## Tooltips
+
+Styling is handled by (((CSS >>> Cascading Style Sheets))) and structure by (((HTML >>> HyperText Markup Language))).
+
+Each invoice is routed over (((bottom Peppol >>> A standardized pan-European e-invoicing network))) to the recipient.
+
+The order of leading tokens doesn't matter: (((right distance:8 API >>> Application Programming Interface))).
+
+:::wa-tooltip bottom
+SFTP
+>>>
+SSH File Transfer Protocol — encrypted file transfer over a single connection.
+:::
+
 ## Alternative Syntax
 
 :::wa-callout info

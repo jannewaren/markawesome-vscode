@@ -27,6 +27,9 @@
       "include": "#popover"
     },
     {
+      "include": "#tooltip"
+    },
+    {
       "include": "#tabs"
     },
     {
@@ -310,6 +313,30 @@
         }
       ]
     },
+    "tooltip": {
+      "patterns": [
+        {
+          "match": "(\\(\\(\\()([^\\r\\n]*?)(>>>)([^\\r\\n]+?)(\\)\\)\\))",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.tooltip.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.tooltip.anchor.markawesome"
+            },
+            "3": {
+              "name": "punctuation.definition.tooltip.separator.markawesome"
+            },
+            "4": {
+              "name": "markup.quote.tooltip.markawesome"
+            },
+            "5": {
+              "name": "punctuation.definition.tooltip.markawesome"
+            }
+          }
+        }
+      ]
+    },
     "tabs": {
       "patterns": [
         {
@@ -524,7 +551,7 @@
     "alternative-syntax": {
       "patterns": [
         {
-          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-dialog|wa-popover|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-dialog|wa-popover|wa-tooltip|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {

@@ -38,6 +38,8 @@ Quick insertion of component templates with tab stops:
 | `wa-popover`         | Popover with trigger and content    |
 | `wa-popover-placement` | Popover with placement option     |
 | `wa-popover-link`    | Popover with link-style trigger     |
+| `wa-tooltip`         | Tooltip (block alternative syntax)  |
+| `wa-tooltip-inline`  | Inline tooltip for use in sentences |
 
 ### IntelliSense
 
@@ -55,6 +57,7 @@ Intelligent autocomplete suggestions as you type:
 - Type `<<<` → Suggests copy-button placement, labels, duration, and `from`
 - Type `~~~~~~` → Suggests carousel parameters (including `autoplay-interval`)
 - Type `&&&` → Suggests popover placement and options
+- Type `(((` → Suggests tooltip placement and `distance:`
 - Type `$$$` → Inline icon hint; `:::wa-icon <name> ` suggests family/variant/animation
 
 ### Hover Documentation
@@ -79,6 +82,7 @@ Access powerful commands via Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`):
 - `Markawesome: Convert Images to Comparison` - Convert 2 selected images to a comparison component
 - `Markawesome: Convert Images to Carousel` - Convert multiple selected images to a carousel
 - `Markawesome: Wrap in Popover` - Wrap selected text in a popover with placement selection
+- `Markawesome: Wrap in Tooltip` - Wrap selected text as a tooltip anchor with placement selection
 
 ### Context Menu
 
@@ -212,6 +216,20 @@ Learn more
 >>>
 Detailed explanation with [links](https://example.com) and **formatting**.
 &&&
+```
+
+### Tooltip
+
+```markdown
+Styling is handled by (((CSS >>> Cascading Style Sheets))) on the web.
+
+The order of leading tokens doesn't matter: (((bottom distance:8 API >>> Application Programming Interface))).
+
+:::wa-tooltip right
+SFTP
+>>>
+SSH File Transfer Protocol
+:::
 ```
 
 ### Tabs
@@ -350,6 +368,16 @@ npm install markawesome
 - `link` - Renders trigger as underlined text instead of button
 - `without-arrow` - Hides the popover arrow
 - `distance:N` - Custom distance in pixels (e.g., `distance:10`)
+
+### Tooltip Options
+
+- `top` - Tooltip appears above the anchor (default)
+- `bottom` - Tooltip appears below the anchor
+- `left` - Tooltip appears to the left
+- `right` - Tooltip appears to the right
+- `distance:N` - Custom distance from the anchor in pixels (e.g., `distance:10`)
+
+Leading `placement`/`distance:N` tokens go before the anchor term. Tip text is plain text (HTML-escaped); use `\n` for line breaks. There is no `link`/`without-arrow` (Web Awesome `<wa-tooltip>` has no `without-arrow`).
 
 ### Carousel Parameters
 
