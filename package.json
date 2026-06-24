@@ -2,7 +2,7 @@
   "name": "markawesome-vscode",
   "displayName": "Markawesome (Markdown to Web Awesome)",
   "description": "Snippets, IntelliSense, and component commands for Markawesome custom Markdown components",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "publisher": "jannewaren",
   "engines": {
     "vscode": "^1.80.0"
@@ -81,6 +81,10 @@
         "title": "Markawesome: Wrap in Tab Group"
       },
       {
+        "command": "markawesome.wrapInAccordion",
+        "title": "Markawesome: Wrap in Accordion"
+      },
+      {
         "command": "markawesome.imagesToComparison",
         "title": "Markawesome: Convert Images to Comparison"
       },
@@ -149,6 +153,11 @@
         },
         {
           "command": "markawesome.wrapInTabGroup",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInAccordion",
           "group": "2_wrap",
           "when": "editorHasSelection"
         },

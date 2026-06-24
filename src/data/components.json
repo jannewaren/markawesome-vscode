@@ -75,6 +75,19 @@
       "documentation": "Collapsible content section. Use >>> to separate summary from details.\n\nAppearances: outlined (default), filled, filled-outlined, plain\nIcon placement: end (default), start\nFlags:\n- **disabled**: Prevents toggling\n- **open**: Initially expanded\n- **name:value**: Group name for accordion behavior (e.g., name:accordion-1)\n\n**Icons:** Use `icon:expand:name` and `icon:collapse:name` for custom toggle icons (e.g., `icon:expand:plus icon:collapse:minus`)"
     },
     {
+      "name": "Accordion",
+      "primarySyntax": "//////appearance? mode? icon-placement? heading:N?",
+      "altSyntax": ":::wa-accordion appearance? mode? icon-placement? heading:N?",
+      "appearances": ["outlined", "filled", "filled-outlined", "plain"],
+      "modes": ["multiple", "single", "single-collapsible"],
+      "placements": ["start", "end"],
+      "flags": ["expanded", "disabled"],
+      "parameters": ["heading:N (1-6 or none)", "icon:name (per item)"],
+      "description": "Multi-section collapsible container — the grouped sibling of Details, ideal for FAQs and docs sections",
+      "example": "//////filled single\n/// What is Web Awesome?\nA library of web components.\n///\n/// Is it free?\nThe core library is free and open source.\n///\n//////",
+      "documentation": "A multi-section collapsible container. The container fence is `//////` (6 slashes); each item is a `///` block (3 slashes) with an explicit `///` close. Item bodies are full Markdown and may contain other components. Use the `:::wa-accordion … :::` alternative form if you prefer.\n\n**Container tokens** (bare, order-independent, rightmost-wins):\n- **appearance**: outlined (default), filled, filled-outlined, plain\n- **mode**: multiple (default — several open at once), single (one open at a time, one always stays open), single-collapsible (one open at a time, all can be closed)\n- **icon-placement**: end (default), start\n- **heading:N**: semantic heading level for item headers — `1`–`6` or `none` (e.g., `heading:2`)\n\n**Item tokens** (leading, on the `///` header line):\n- **expanded**: this section starts open on load\n- **disabled**: this section renders but cannot be toggled\n- **icon:name**: custom expand icon for this item, inserted as its first child (e.g., `icon:star`)\n- The rest of the header line becomes the item label (plain text)\n\n`wa-accordion` is experimental in Web Awesome, but everything here is declarative and static-site-safe."
+    },
+    {
       "name": "Dialog",
       "primarySyntax": "???params?",
       "altSyntax": ":::wa-dialog params?",

@@ -25,6 +25,8 @@ Quick insertion of component templates with tab stops:
 | `wa-comparison`      | Image comparison                    |
 | `wa-dialog`          | Modal dialog                        |
 | `wa-details`         | Collapsible details                 |
+| `wa-accordion`       | Multi-section accordion (3 items)   |
+| `wa-accordion-single` | Single-open accordion (mode single) |
 | `wa-tabs`            | Tab group with 3 tabs               |
 | `wa-tag`             | Tag component                       |
 | `wa-copy`            | Copy button                         |
@@ -45,6 +47,7 @@ Intelligent autocomplete suggestions as you type:
 - Type `:::warning ` → Suggests callout size, appearance, and icon family/variant/animation
 - Type `===` → Suggests card appearance and orientation options
 - Type `^^^` → Suggests details appearance and icon placement
+- Type `//////` → Suggests accordion appearance, mode, icon placement, and `heading:`; `/// ` suggests item `expanded`/`disabled`/`icon:`
 - Type `???` → Suggests dialog parameters
 - Type `@@@` → Suggests tag variants and the `xs`–`xl` size scale
 - Type `!!!` → Suggests badge variants
@@ -72,6 +75,7 @@ Access powerful commands via Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`):
 - `Markawesome: Wrap in Card` - Wrap selected text in a card
 - `Markawesome: Wrap in Tag` - Wrap selected text in a tag
 - `Markawesome: Wrap in Details` - Wrap selected text in collapsible details
+- `Markawesome: Wrap in Accordion` - Wrap selected text in a multi-section accordion (choose appearance and mode)
 - `Markawesome: Convert Images to Comparison` - Convert 2 selected images to a comparison component
 - `Markawesome: Convert Images to Carousel` - Convert multiple selected images to a carousel
 - `Markawesome: Wrap in Popover` - Wrap selected text in a popover with placement selection
@@ -161,6 +165,24 @@ This is the hidden content that can be collapsed and expanded.
 - And [links](https://example.com)
 ^^^
 ```
+
+### Accordion
+
+```markdown
+//////filled single
+/// What is Web Awesome?
+A library of framework-agnostic web components.
+///
+/// expanded Is it free?
+The core library is free and open source.
+///
+/// icon:star Featured
+This item uses a custom expand icon and may contain **markdown** and other components.
+///
+//////
+```
+
+The container fence is `//////` (6 slashes); each item is a `///` block (3 slashes) with an explicit `///` close. Container tokens: `appearance` (outlined/filled/filled-outlined/plain), `mode` (multiple/single/single-collapsible), icon placement (start/end), and `heading:N` (1–6 or none). Item tokens (leading): `expanded`, `disabled`, and `icon:name`; the rest of the header line is the label.
 
 ### Dialog
 
@@ -276,6 +298,23 @@ npm install markawesome
 
 **Appearances**: `outlined`, `filled`, `plain`, `filled-outlined`  
 **Icon Placement**: `start`, `end`
+
+### Accordion Options
+
+**Container** (`//////` … `//////`, or `:::wa-accordion` … `:::`):
+
+- **Appearances**: `outlined` (default), `filled`, `filled-outlined`, `plain`
+- **Modes**: `multiple` (default — several open at once), `single` (one open at a time, one always stays open), `single-collapsible` (one open at a time, all can be closed)
+- **Icon Placement**: `start`, `end` (default)
+- **Heading level**: `heading:N` where N is `1`–`6` or `none`
+
+**Items** (`///` header line, with an explicit `///` close):
+
+- **Flags** (leading): `expanded` (open on load), `disabled` (cannot be toggled)
+- **Icon**: `icon:name` adds a custom expand icon as the item's first child
+- The rest of the header line is the item label (plain text)
+
+`wa-accordion` is experimental in Web Awesome, but everything here is declarative and static-site-safe.
 
 ### Tab Placements
 

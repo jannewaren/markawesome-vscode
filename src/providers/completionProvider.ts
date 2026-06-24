@@ -9,6 +9,7 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  modes?: string[];
   sizes?: string[];
   families?: string[];
   animations?: string[];
@@ -42,7 +43,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
-                         'wa-details', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
+                         'wa-details', 'wa-accordion', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon'];
       components.forEach(comp => {
         const item = new vscode.CompletionItem(comp, vscode.CompletionItemKind.Class);
@@ -201,6 +202,63 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         item.insertText = new vscode.SnippetString(`${name}\${1:icon-name}`);
         completions.push(item);
       });
+    }
+
+    // Accordion container completions on the //////  line (and :::wa-accordion)
+    if (linePrefix.match(/^\/{6}/) || linePrefix.match(/^:::wa-accordion/)) {
+      const appearances = ['outlined', 'filled', 'filled-outlined', 'plain'];
+      appearances.forEach(appearance => {
+        const item = new vscode.CompletionItem(appearance, vscode.CompletionItemKind.Property);
+        item.detail = 'Accordion Appearance';
+        item.documentation = new vscode.MarkdownString(`Accordion with ${appearance} appearance`);
+        completions.push(item);
+      });
+
+      const modes = [
+        { name: 'multiple', doc: 'Several sections can be open at once (default)' },
+        { name: 'single', doc: 'Only one section open at a time (one always stays open)' },
+        { name: 'single-collapsible', doc: 'Only one section open at a time, and all can be closed' }
+      ];
+      modes.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Property);
+        item.detail = 'Accordion Mode';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+
+      const placements = ['start', 'end'];
+      placements.forEach(placement => {
+        const item = new vscode.CompletionItem(placement, vscode.CompletionItemKind.Property);
+        item.detail = 'Accordion Icon Placement';
+        item.documentation = new vscode.MarkdownString(`Expand icon on the ${placement}`);
+        completions.push(item);
+      });
+
+      const headingItem = new vscode.CompletionItem('heading:', vscode.CompletionItemKind.Property);
+      headingItem.detail = 'Accordion Heading Level';
+      headingItem.documentation = new vscode.MarkdownString('Semantic heading level for item headers: `1`–`6` or `none` (e.g., `heading:2`)');
+      headingItem.insertText = new vscode.SnippetString('heading:${1:2}');
+      completions.push(headingItem);
+    }
+
+    // Accordion item completions on the /// item header line
+    if (linePrefix.match(/^\/{3} /)) {
+      const flags = [
+        { name: 'expanded', doc: 'This section starts expanded on load' },
+        { name: 'disabled', doc: 'This section renders but cannot be toggled' }
+      ];
+      flags.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Property);
+        item.detail = 'Accordion Item Flag';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+
+      const iconItem = new vscode.CompletionItem('icon:', vscode.CompletionItemKind.Property);
+      iconItem.detail = 'Accordion Item Icon';
+      iconItem.documentation = new vscode.MarkdownString('Custom expand icon for this item, inserted as its first child (e.g., `icon:star`)');
+      iconItem.insertText = new vscode.SnippetString('icon:${1:icon-name}');
+      completions.push(iconItem);
     }
 
     // Dialog completions after ???

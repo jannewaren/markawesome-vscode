@@ -18,6 +18,9 @@
       "include": "#details"
     },
     {
+      "include": "#accordion"
+    },
+    {
       "include": "#dialog"
     },
     {
@@ -193,6 +196,53 @@
             },
             {
               "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "accordion": {
+      "patterns": [
+        {
+          "begin": "^(/{6})((?:\\s*(?:outlined|filled-outlined|filled|plain|multiple|single-collapsible|single|start|end|heading:\\S+))*)\\s*$",
+          "end": "^(/{6})\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.accordion.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.accordion.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.accordion.markawesome"
+            }
+          },
+          "contentName": "markup.quote.accordion.markawesome",
+          "patterns": [
+            {
+              "begin": "^(/{3})\\s+(.+)$",
+              "end": "^(/{3})\\s*$",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.definition.accordion-item.markawesome"
+                },
+                "2": {
+                  "name": "entity.name.tag.accordion-item.label.markawesome"
+                }
+              },
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.definition.accordion-item.markawesome"
+                }
+              },
+              "contentName": "markup.quote.accordion-item.markawesome",
+              "patterns": [
+                {
+                  "include": "text.html.markdown"
+                }
+              ]
             }
           ]
         }
@@ -474,7 +524,7 @@
     "alternative-syntax": {
       "patterns": [
         {
-          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-dialog|wa-popover|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-dialog|wa-popover|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {

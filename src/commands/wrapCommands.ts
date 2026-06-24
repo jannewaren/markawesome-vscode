@@ -261,6 +261,45 @@ export async function wrapInPopover() {
   });
 }
 
+export async function wrapInAccordion() {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor || editor.selection.isEmpty) {
+    vscode.window.showErrorMessage('Please select text to wrap');
+    return;
+  }
+
+  const appearances = ['outlined', 'filled', 'filled-outlined', 'plain', 'none'];
+  const appearance = await vscode.window.showQuickPick(appearances, {
+    placeHolder: 'Select accordion appearance (optional)'
+  });
+
+  if (appearance === undefined) {
+    return;
+  }
+
+  const modes = ['multiple', 'single', 'single-collapsible', 'none'];
+  const mode = await vscode.window.showQuickPick(modes, {
+    placeHolder: 'Select accordion mode (optional)'
+  });
+
+  if (mode === undefined) {
+    return;
+  }
+
+  const selection = editor.selection;
+  const text = editor.document.getText(selection);
+
+  const params = [
+    appearance === 'none' ? '' : appearance,
+    mode === 'none' ? '' : mode
+  ].filter(p => p).join(' ');
+  const wrapped = `//////${params}\n/// Section 1\n${text}\n///\n/// Section 2\nMore content\n///\n//////`;
+
+  editor.edit(editBuilder => {
+    editBuilder.replace(selection, wrapped);
+  });
+}
+
 export async function wrapInTabGroup() {
   const editor = vscode.window.activeTextEditor;
   if (!editor || editor.selection.isEmpty) {

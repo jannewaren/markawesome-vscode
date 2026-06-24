@@ -2,6 +2,20 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.10.0] - 2026-06-24
+
+Brings the extension to parity with markawesome 0.14 / jekyll-webawesome 0.20 by adding the **Accordion** component.
+
+### Added
+
+- **Accordion component** (`//////appearance? mode? icon-placement? heading:N?` container with `///` items, or the `:::wa-accordion` alternative). A multi-section collapsible container — the grouped sibling of Details.
+  - **Syntax highlighting** for the `//////` container fence, its container tokens, the `///` item header/close, and Markdown item bodies; `wa-accordion` added to the alternative-syntax highlighting.
+  - **IntelliSense**: on the `//////` line (and `:::wa-accordion`) suggests `appearance` (outlined/filled/filled-outlined/plain), `mode` (multiple/single/single-collapsible), icon placement (start/end), and `heading:`; on a `/// ` item header line suggests `expanded`/`disabled`/`icon:`. Added `/` as a completion trigger character, and `wa-accordion` to the `:::` component list.
+  - **Hover documentation** on the `//////` container line and the `:::wa-accordion` form. Hover now also renders a component's `modes` metadata.
+  - **Snippets**: `wa-accordion` (3-item container) and `wa-accordion-single` (`mode: single` variant).
+  - **Command / context menu**: `Markawesome: Wrap in Accordion` wraps the selection into an accordion after a quick-pick of appearance and mode.
+  - **Component reference** entry in `components.json` (appearances, modes, placements, item flags `[expanded, disabled]`, and `heading:`/`icon:` parameters), surfaced in README.
+
 ## [0.9.0] - 2026-06-20
 
 Brings the extension to full parity with markawesome 0.13 / jekyll-webawesome 0.19.

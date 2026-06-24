@@ -9,6 +9,7 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  modes?: string[];
   sizes?: string[];
   families?: string[];
   animations?: string[];
@@ -77,6 +78,14 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
     // Check for details syntax
     if (line.match(/^\^\^\^/)) {
       const component = components.find(c => c.name === 'Details');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
+    // Check for accordion syntax (container //////  line)
+    if (line.match(/^\/{6}/)) {
+      const component = components.find(c => c.name === 'Accordion');
       if (component) {
         return this.createHover(component);
       }
@@ -168,7 +177,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|dialog|popover|tabs|tag|copy-button|badge|button|icon)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|accordion|dialog|popover|tabs|tag|copy-button|badge|button|icon)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -188,6 +197,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'comparison': 'Comparison',
       'carousel': 'Carousel',
       'details': 'Details',
+      'accordion': 'Accordion',
       'dialog': 'Dialog',
       'popover': 'Popover',
       'tabs': 'Tab Group',
@@ -237,6 +247,9 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
     }
     if (component.appearances && component.appearances.length > 0) {
       md.appendMarkdown(`**Appearances:** ${component.appearances.map(a => `\`${a}\``).join(', ')}\n\n`);
+    }
+    if (component.modes && component.modes.length > 0) {
+      md.appendMarkdown(`**Modes:** ${component.modes.map(m => `\`${m}\``).join(', ')}\n\n`);
     }
     if (component.sizes && component.sizes.length > 0) {
       md.appendMarkdown(`**Sizes:** ${component.sizes.map(s => `\`${s}\``).join(', ')}\n\n`);

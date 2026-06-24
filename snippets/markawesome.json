@@ -229,6 +229,37 @@
     ],
     "description": "Insert accordion group (only one open at a time)"
   },
+  "Accordion": {
+    "prefix": "wa-accordion",
+    "body": [
+      "//////${1:filled}",
+      "/// ${2:First section}",
+      "${3:First section content.}",
+      "///",
+      "/// ${4:Second section}",
+      "${5:Second section content.}",
+      "///",
+      "/// ${6:Third section}",
+      "${7:Third section content.}",
+      "///",
+      "//////"
+    ],
+    "description": "Insert a multi-section accordion with 3 items"
+  },
+  "Accordion Single": {
+    "prefix": "wa-accordion-single",
+    "body": [
+      "//////single",
+      "/// ${1:First section}",
+      "${2:Only one section can be open at a time.}",
+      "///",
+      "/// ${3:Second section}",
+      "${4:Opening this closes the previously open section.}",
+      "///",
+      "//////"
+    ],
+    "description": "Insert a single-open accordion (mode: single)"
+  },
   "Dialog": {
     "prefix": "wa-dialog",
     "body": [
