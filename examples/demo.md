@@ -138,6 +138,10 @@ npm install markawesome
 **Copy** this text with *markdown* formatting and `code`
 <<<
 
+<<<top tooltip:copy
+Tooltip mode: silent on hover, shown only on copy
+<<<
+
 ## Badges
 
 !!!brand

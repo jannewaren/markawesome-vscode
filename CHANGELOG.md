@@ -2,6 +2,19 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [0.12.0] - 2026-06-25
+
+Brings the extension to parity with markawesome 0.16 / jekyll-webawesome 0.22 by adding the copy-button **tooltip** attribute (`tooltip:full|copy|none`), which controls *when* the built-in tooltip appears (distinct from the existing `tooltip-placement`).
+
+### Added
+
+- **Copy-button tooltip mode** — `tooltip:full|copy|none` on the `<<<` (or `:::wa-copy-button`) line: `full` (default — tooltip on hover/focus plus copy feedback), `copy` (silent on hover/focus; tooltip only for copy feedback), `none` (no tooltip in any state).
+  - **IntelliSense**: typing `<<<` now also suggests `tooltip:full`, `tooltip:copy`, and `tooltip:none` (each with its own description).
+  - **Hover documentation**: the copy-button hover now lists the tooltip mode alongside placements.
+  - **Snippet**: `wa-copy-tooltip` (`<<<tooltip:${1|full,copy,none|}`).
+  - **Command**: `Markawesome: Wrap in Copy Button` now offers a tooltip-mode quick-pick (`none` omits the token, leaving Web Awesome's `full` default).
+  - **Component reference** entry in `components.json` gains a `tooltips` array and updated syntax/parameters/documentation, surfaced in README's "Copy Button Parameters" and a `<<<top tooltip:copy` case in `examples/demo.md`.
+
 ## [0.11.0] - 2026-06-25
 
 Brings the extension to parity with markawesome 0.15 / jekyll-webawesome 0.21 by adding the **Tooltip** component.

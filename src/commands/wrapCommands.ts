@@ -183,10 +183,21 @@ export async function wrapInCopyButton() {
     return;
   }
 
+  // 'none' here means "omit the token" (WA defaults to full), mirroring wrapInTooltip.
+  const tooltipModes = ['none', 'full', 'copy'];
+  const tooltipMode = await vscode.window.showQuickPick(tooltipModes, {
+    placeHolder: 'Select tooltip mode (optional)'
+  });
+
+  if (tooltipMode === undefined) {
+    return;
+  }
+
   const selection = editor.selection;
   const text = editor.document.getText(selection);
 
-  const wrapped = `<<<\n${text}\n<<<`;
+  const prefix = tooltipMode !== 'none' ? `tooltip:${tooltipMode}` : '';
+  const wrapped = `<<<${prefix}\n${text}\n<<<`;
 
   editor.edit(editBuilder => {
     editBuilder.replace(selection, wrapped);

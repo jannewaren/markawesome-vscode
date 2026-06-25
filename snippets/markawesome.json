@@ -365,6 +365,15 @@
     ],
     "description": "Insert copy button with tooltip placement"
   },
+  "Copy Button with Tooltip Mode": {
+    "prefix": "wa-copy-tooltip",
+    "body": [
+      "<<<tooltip:${1|full,copy,none|}",
+      "${2:Text to copy}",
+      "<<<"
+    ],
+    "description": "Insert copy button with tooltip mode (when the tooltip appears)"
+  },
   "Copy Button with Labels": {
     "prefix": "wa-copy-labels",
     "body": [

@@ -9,6 +9,7 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  tooltips?: string[];
   modes?: string[];
   sizes?: string[];
   families?: string[];
@@ -630,6 +631,18 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         const item = new vscode.CompletionItem(placement, vscode.CompletionItemKind.Property);
         item.detail = 'Copy Button Tooltip Placement';
         item.documentation = new vscode.MarkdownString(`Tooltip appears on the ${placement}`);
+        completions.push(item);
+      });
+
+      const tooltipModes = [
+        { value: 'full', doc: 'Default — tooltip on hover/focus plus the brief copy-success/error feedback' },
+        { value: 'copy', doc: 'Silent on hover/focus; the tooltip appears only to confirm a copy' },
+        { value: 'none', doc: 'No tooltip in any state' }
+      ];
+      tooltipModes.forEach(({ value, doc }) => {
+        const item = new vscode.CompletionItem(`tooltip:${value}`, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Copy Button Tooltip Mode';
+        item.documentation = new vscode.MarkdownString(doc);
         completions.push(item);
       });
 

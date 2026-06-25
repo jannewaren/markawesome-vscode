@@ -9,6 +9,7 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  tooltips?: string[];
   modes?: string[];
   sizes?: string[];
   families?: string[];
@@ -265,6 +266,9 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
     }
     if (component.placements && component.placements.length > 0) {
       md.appendMarkdown(`**Placements:** ${component.placements.map(p => `\`${p}\``).join(', ')}\n\n`);
+    }
+    if (component.tooltips && component.tooltips.length > 0) {
+      md.appendMarkdown(`**Tooltip mode:** ${component.tooltips.map(t => `\`${t}\``).join(', ')}\n\n`);
     }
     if (component.families && component.families.length > 0) {
       md.appendMarkdown(`**Icon Families:** ${component.families.map(f => `\`${f}\``).join(', ')}\n\n`);

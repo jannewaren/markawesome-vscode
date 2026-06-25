@@ -120,14 +120,15 @@
     },
     {
       "name": "Copy Button",
-      "primarySyntax": "<<<placement? duration? disabled? copy-label? success-label? error-label? from?",
-      "altSyntax": ":::wa-copy-button placement? duration? disabled? copy-label? success-label? error-label? from?",
+      "primarySyntax": "<<<placement? tooltip:full|copy|none? duration? disabled? copy-label? success-label? error-label? from?",
+      "altSyntax": ":::wa-copy-button placement? tooltip:full|copy|none? duration? disabled? copy-label? success-label? error-label? from?",
       "placements": ["top", "right", "bottom", "left"],
+      "tooltips": ["full", "copy", "none"],
       "flags": ["disabled"],
-      "parameters": ["placement (top/right/bottom/left)", "duration (ms, e.g. 2000)", "copy-label=\"…\"", "success-label=\"…\"", "error-label=\"…\"", "from=\"element-id\"", "disabled"],
+      "parameters": ["placement (top/right/bottom/left)", "tooltip:full|copy|none (hover mode)", "duration (ms, e.g. 2000)", "copy-label=\"…\"", "success-label=\"…\"", "error-label=\"…\"", "from=\"element-id\"", "disabled"],
       "description": "Button that copies content to clipboard",
       "example": "<<<top copy-label=\"Copy\"\nnpm install markawesome\n<<<",
-      "documentation": "Creates a button that copies the content to clipboard when clicked. Supports markdown formatting in display while preserving raw text for copying.\n\n**Tooltip placement:** top (default), right, bottom, left\n**Feedback duration:** a bare number sets the success-message duration in milliseconds (e.g., `2000`)\n**Custom labels:** `copy-label=\"…\"`, `success-label=\"…\"`, `error-label=\"…\"`\n**Copy from another element:** `from=\"element-id\"` (also supports `from=\"input.value\"`, `from=\"link[href]\"`)\n**Flags:** `disabled`\n\nAll parameters are optional and combine in any order."
+      "documentation": "Creates a button that copies the content to clipboard when clicked. Supports markdown formatting in display while preserving raw text for copying.\n\n**Tooltip placement:** top (default), right, bottom, left\n**Tooltip mode:** full (default — hover/focus + copy feedback) / copy (feedback only) / none (no tooltip)\n**Feedback duration:** a bare number sets the success-message duration in milliseconds (e.g., `2000`)\n**Custom labels:** `copy-label=\"…\"`, `success-label=\"…\"`, `error-label=\"…\"`\n**Copy from another element:** `from=\"element-id\"` (also supports `from=\"input.value\"`, `from=\"link[href]\"`)\n**Flags:** `disabled`\n\nAll parameters are optional and combine in any order."
     },
     {
       "name": "Badge",

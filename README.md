@@ -31,6 +31,7 @@ Quick insertion of component templates with tab stops:
 | `wa-tag`             | Tag component                       |
 | `wa-copy`            | Copy button                         |
 | `wa-copy-placement`  | Copy button with tooltip placement  |
+| `wa-copy-tooltip`    | Copy button with tooltip mode       |
 | `wa-copy-labels`     | Copy button with custom labels      |
 | `wa-copy-from`       | Copy button reading another element |
 | `wa-badge`           | Badge component                     |
@@ -54,7 +55,7 @@ Intelligent autocomplete suggestions as you type:
 - Type `@@@` → Suggests tag variants and the `xs`–`xl` size scale
 - Type `!!!` → Suggests badge variants
 - Type `%%%` → Suggests button variants, the `xs`–`xl` size scale, and link `target`/`download`
-- Type `<<<` → Suggests copy-button placement, labels, duration, and `from`
+- Type `<<<` → Suggests copy-button placement, `tooltip:full|copy|none` mode, labels, duration, and `from`
 - Type `~~~~~~` → Suggests carousel parameters (including `autoplay-interval`)
 - Type `&&&` → Suggests popover placement and options
 - Type `(((` → Suggests tooltip placement and `distance:`
@@ -397,6 +398,7 @@ Leading `placement`/`distance:N` tokens go before the anchor term. Tip text is p
 ### Copy Button Parameters
 
 - `top` / `right` / `bottom` / `left` - Tooltip placement (default `top`)
+- `tooltip:full|copy|none` - Tooltip mode: `full` (default — hover/focus + copy feedback), `copy` (feedback only), `none` (no tooltip)
 - `2000` - A bare number sets the success-feedback duration in milliseconds
 - `disabled` - Disable the copy button
 - `copy-label="…"` - Tooltip text before copying
