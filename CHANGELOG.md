@@ -10,6 +10,10 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
   - **Format Date** and **Relative Time** entries in the component reference (`components.json`), surfaced on hover. Hover matches the inline `[[[ … ]]]` form (a leading `relative` token shows the Relative Time docs) and the `:::wa-format-date` / `:::wa-relative-time` block selectors.
   - **IntelliSense**: typing `[[[` suggests the `relative` mode flag plus the formatting tokens — `style:`/`time:` presets, granular `weekday:`/`month:`/`day:`/`hour:`/… keys, `hour-format:`, `time-zone-name:`, `time-zone:`, `lang:`, and the relative `format:`/`numeric:`/`sync` tokens. The `:::wa-format-date` / `:::wa-relative-time` selector lines offer their mode-appropriate subset, and both selectors are added to the `:::` component picker. `[` is now a completion trigger character.
   - **Snippets**: `wa-format-date` (`[[[date style:…]]]`), `wa-format-date-time` (adds `time:…`), and `wa-relative-time` (`[[[relative date]]]`).
+- **Popover & tooltip aligned placements + `skidding`, and per-tab `disabled`** — tracking the engines' expanded `<wa-popover>`/`<wa-tooltip>`/`<wa-tab>` surface:
+  - **Component reference** (`components.json`): Popover and Tooltip `placements` now list all twelve Web Awesome values (the four primary plus the eight aligned variants), `skidding:N` is added to their parameters, and the syntax/example/documentation are refreshed. The Tab Group entry documents the per-tab `disabled` flag.
+  - **IntelliSense**: typing `&&&` (popover) and `(((` (tooltip) now offers the eight aligned placements and a `skidding:` token (alongside the existing `distance:`). A new completion on the `+++ ` tab item header line offers `disabled`.
+  - **Snippets**: `wa-popover-skidding` and `wa-tooltip-skidding` (aligned placement + `skidding:`), `wa-tabs-disabled` (a tab group with a disabled tab), and the existing popover/tooltip placement snippets now list all twelve placements.
 
 ## [0.12.0] - 2026-06-25
 

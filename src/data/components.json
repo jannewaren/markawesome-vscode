@@ -102,9 +102,11 @@
       "altSyntax": ":::wa-tabs placement? activation? active? no-scroll-controls?",
       "placements": ["top", "bottom", "start", "end"],
       "activations": ["auto", "manual"],
+      "flags": ["no-scroll-controls"],
+      "parameters": ["disabled (per-tab, leading token on the +++ item header)"],
       "description": "Tabbed content interface with configurable behavior",
-      "example": "++++++top manual\n+++ Tab 1\nContent 1\n+++\n+++ Tab 2\nContent 2\n+++\n++++++",
-      "documentation": "Create tabbed content sections. Use +++ with tab title to define each tab.\n\nPlacements: top (default), bottom, start, end\nActivation: auto (default, switch on hover), manual (switch on click)\nActive: Specify active panel name (e.g., 'tab-1', 'tab-2')\nFlags:\n- **no-scroll-controls**: Disable scroll arrows for overflowing tabs"
+      "example": "++++++top manual\n+++ Tab 1\nContent 1\n+++\n+++ disabled Coming soon\nNot yet available.\n+++\n++++++",
+      "documentation": "Create tabbed content sections. Use +++ with tab title to define each tab.\n\nPlacements: top (default), bottom, start, end\nActivation: auto (default, switch on hover), manual (switch on click)\nActive: Specify active panel name (e.g., 'tab-1', 'tab-2')\nFlags:\n- **no-scroll-controls**: Disable scroll arrows for overflowing tabs\n\n**Per-tab flag** (leading token on the `+++ ` item header):\n- **disabled**: the tab renders but cannot be selected (e.g., `+++ disabled Coming soon`)"
     },
     {
       "name": "Tag",
@@ -157,27 +159,27 @@
     },
     {
       "name": "Popover",
-      "primarySyntax": "&&&placement? link? without-arrow? distance:N?",
+      "primarySyntax": "&&&placement? link? without-arrow? distance:N? skidding:N?",
       "inlineSyntax": "&&&trigger text >>> popover content&&&",
-      "altSyntax": ":::wa-popover placement? link? without-arrow? distance:N?",
-      "placements": ["top", "bottom", "left", "right"],
-      "parameters": ["link", "without-arrow", "distance:N"],
+      "altSyntax": ":::wa-popover placement? link? without-arrow? distance:N? skidding:N?",
+      "placements": ["top", "top-start", "top-end", "right", "right-start", "right-end", "bottom", "bottom-start", "bottom-end", "left", "left-start", "left-end"],
+      "parameters": ["link", "without-arrow", "distance:N", "skidding:N"],
       "description": "Floating popover content attached to a trigger element",
-      "example": "&&&bottom\nHover for info\n>>>\nPopover content with **markdown** support.\n&&&",
+      "example": "&&&bottom-start\nHover for info\n>>>\nPopover content with **markdown** support.\n&&&",
       "inlineExample": "Click &&&here >>> This is a popover!&&& to learn more.",
-      "documentation": "Floating popover attached to a trigger element. Use >>> to separate trigger text from popover content.\n\n**Block syntax** (multi-line):\n```\n&&&bottom\nTrigger text\n>>>\nPopover content\n&&&\n```\n\n**Inline syntax** (within a sentence):\n```\nClick &&&here >>> popover content&&& to continue.\n```\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **link**: Render trigger as a link-styled element instead of a button\n- **without-arrow**: Hide the popover arrow\n- **distance:N**: Custom distance from trigger in px (e.g., distance:10)\n\n**Inline features:**\n- Inline code in trigger text: `&&&\\`code\\` trigger >>> content&&&`\n- Line breaks in popover content using `\\n`: `&&&trigger >>> line 1\\nline 2&&&`\n\nAll parameters are optional and can be combined in any order."
+      "documentation": "Floating popover attached to a trigger element. Use >>> to separate trigger text from popover content.\n\n**Block syntax** (multi-line):\n```\n&&&bottom-start\nTrigger text\n>>>\nPopover content\n&&&\n```\n\n**Inline syntax** (within a sentence):\n```\nClick &&&here >>> popover content&&& to continue.\n```\n\nPlacements: top (default), bottom, left, right, plus the eight aligned variants (top-start, top-end, right-start, right-end, bottom-start, bottom-end, left-start, left-end)\nParameters:\n- **link**: Render trigger as a link-styled element instead of a button\n- **without-arrow**: Hide the popover arrow\n- **distance:N**: Offset away from the trigger in px (e.g., distance:10)\n- **skidding:N**: Offset along the trigger in px; may be negative (e.g., skidding:12, skidding:-4)\n\n**Inline features:**\n- Inline code in trigger text: `&&&\\`code\\` trigger >>> content&&&`\n- Line breaks in popover content using `\\n`: `&&&trigger >>> line 1\\nline 2&&&`\n\nAll parameters are optional and can be combined in any order."
     },
     {
       "name": "Tooltip",
-      "primarySyntax": "(((placement? distance:N? anchor >>> tip)))",
+      "primarySyntax": "(((placement? distance:N? skidding:N? anchor >>> tip)))",
       "inlineSyntax": "(((anchor term >>> tip text)))",
-      "altSyntax": ":::wa-tooltip placement? distance:N?",
-      "placements": ["top", "bottom", "left", "right"],
-      "parameters": ["placement (top/bottom/left/right)", "distance:N"],
+      "altSyntax": ":::wa-tooltip placement? distance:N? skidding:N?",
+      "placements": ["top", "top-start", "top-end", "right", "right-start", "right-end", "bottom", "bottom-start", "bottom-end", "left", "left-start", "left-end"],
+      "parameters": ["placement (top/bottom/left/right + aligned variants)", "distance:N", "skidding:N"],
       "description": "Inline contextual help shown on hover or focus — ideal for glossary terms and inline definitions",
-      "example": ":::wa-tooltip bottom\nCSS\n>>>\nCascading Style Sheets\n:::",
+      "example": ":::wa-tooltip bottom-start\nCSS\n>>>\nCascading Style Sheets\n:::",
       "inlineExample": "Styled with (((CSS >>> Cascading Style Sheets))) on the web.",
-      "documentation": "Inline contextual help shown on hover or focus. The anchor term is rendered as a focusable, dotted-underlined span; the tip appears in a `<wa-tooltip>` wired to it automatically via a generated `for`/`id` pair. Declarative and zero-JavaScript.\n\n**Inline syntax** (primary, within a sentence):\n```\nStyling is handled by (((CSS >>> Cascading Style Sheets))) on the web.\n```\n\n**Block syntax** (alternative):\n```\n:::wa-tooltip bottom\nCSS\n>>>\nCascading Style Sheets\n:::\n```\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **distance:N**: Custom distance from the anchor in px (e.g., distance:10)\n\n**Tip content** is plain text (HTML-escaped). Use `\\n` for line breaks (rendered as `<br>`): `(((Org number >>> NO: 9 digits\\nSE: 10 digits)))`.\n\nLeading `placement`/`distance:N` tokens go before the anchor term. Unlike popover, there is no `link` or `without-arrow` (Web Awesome `<wa-tooltip>` has no `without-arrow`). All parameters are optional and can be combined in any order."
+      "documentation": "Inline contextual help shown on hover or focus. The anchor term is rendered as a focusable, dotted-underlined span; the tip appears in a `<wa-tooltip>` wired to it automatically via a generated `for`/`id` pair. Declarative and zero-JavaScript.\n\n**Inline syntax** (primary, within a sentence):\n```\nStyling is handled by (((CSS >>> Cascading Style Sheets))) on the web.\n```\n\n**Block syntax** (alternative):\n```\n:::wa-tooltip bottom-start\nCSS\n>>>\nCascading Style Sheets\n:::\n```\n\nPlacements: top (default), bottom, left, right, plus the eight aligned variants (top-start, top-end, right-start, right-end, bottom-start, bottom-end, left-start, left-end)\nParameters:\n- **distance:N**: Offset away from the anchor in px (e.g., distance:10)\n- **skidding:N**: Offset along the anchor in px; may be negative (e.g., skidding:12, skidding:-4)\n\n**Tip content** is plain text (HTML-escaped). Use `\\n` for line breaks (rendered as `<br>`): `(((Org number >>> NO: 9 digits\\nSE: 10 digits)))`.\n\nLeading `placement`/`distance:N`/`skidding:N` tokens go before the anchor term. Unlike popover, there is no `link` or `without-arrow` (Web Awesome `<wa-tooltip>` has no `without-arrow`). All parameters are optional and can be combined in any order."
     },
     {
       "name": "Format Date",

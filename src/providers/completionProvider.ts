@@ -425,7 +425,12 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
     // Popover completions after &&&
     if (linePrefix.match(/&&&/)) {
-      const placements = ['top', 'bottom', 'left', 'right'];
+      const placements = [
+        'top', 'top-start', 'top-end',
+        'right', 'right-start', 'right-end',
+        'bottom', 'bottom-start', 'bottom-end',
+        'left', 'left-start', 'left-end'
+      ];
       placements.forEach(placement => {
         const item = new vscode.CompletionItem(placement, vscode.CompletionItemKind.Property);
         item.detail = 'Popover Placement';
@@ -445,14 +450,25 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
       const distanceItem = new vscode.CompletionItem('distance:', vscode.CompletionItemKind.Property);
       distanceItem.detail = 'Popover Distance';
-      distanceItem.documentation = new vscode.MarkdownString('Custom distance from trigger in px (e.g., `distance:10`)');
+      distanceItem.documentation = new vscode.MarkdownString('Offset away from the trigger in px (e.g., `distance:10`)');
       distanceItem.insertText = new vscode.SnippetString('distance:${1:10}');
       completions.push(distanceItem);
+
+      const skiddingItem = new vscode.CompletionItem('skidding:', vscode.CompletionItemKind.Property);
+      skiddingItem.detail = 'Popover Skidding';
+      skiddingItem.documentation = new vscode.MarkdownString('Offset along the trigger in px; may be negative (e.g., `skidding:12`, `skidding:-4`)');
+      skiddingItem.insertText = new vscode.SnippetString('skidding:${1:12}');
+      completions.push(skiddingItem);
     }
 
-    // Tooltip completions after ((( — leading placement/distance tokens
+    // Tooltip completions after ((( — leading placement/distance/skidding tokens
     if (linePrefix.match(/\(\(\(/)) {
-      const placements = ['top', 'bottom', 'left', 'right'];
+      const placements = [
+        'top', 'top-start', 'top-end',
+        'right', 'right-start', 'right-end',
+        'bottom', 'bottom-start', 'bottom-end',
+        'left', 'left-start', 'left-end'
+      ];
       placements.forEach(placement => {
         const item = new vscode.CompletionItem(placement, vscode.CompletionItemKind.Property);
         item.detail = 'Tooltip Placement';
@@ -462,9 +478,15 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
       const distanceItem = new vscode.CompletionItem('distance:', vscode.CompletionItemKind.Property);
       distanceItem.detail = 'Tooltip Distance';
-      distanceItem.documentation = new vscode.MarkdownString('Custom distance from the anchor in px (e.g., `distance:10`)');
+      distanceItem.documentation = new vscode.MarkdownString('Offset away from the anchor in px (e.g., `distance:10`)');
       distanceItem.insertText = new vscode.SnippetString('distance:${1:10}');
       completions.push(distanceItem);
+
+      const skiddingItem = new vscode.CompletionItem('skidding:', vscode.CompletionItemKind.Property);
+      skiddingItem.detail = 'Tooltip Skidding';
+      skiddingItem.documentation = new vscode.MarkdownString('Offset along the anchor in px; may be negative (e.g., `skidding:12`, `skidding:-4`)');
+      skiddingItem.insertText = new vscode.SnippetString('skidding:${1:12}');
+      completions.push(skiddingItem);
     }
 
     // Timestamp completions: inline [[[ ]]] and the block :::wa-format-date /
@@ -680,6 +702,15 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       noScrollItem.detail = 'Tab Flag';
       noScrollItem.documentation = new vscode.MarkdownString('Disable scroll arrows for overflowing tabs');
       completions.push(noScrollItem);
+    }
+
+    // Per-tab flag completions on the +++ item header line.
+    // The /^\+{3} / anchor matches `+++ ` item headers but not the 6-plus group line.
+    if (linePrefix.match(/^\+{3} /)) {
+      const disabledItem = new vscode.CompletionItem('disabled', vscode.CompletionItemKind.Property);
+      disabledItem.detail = 'Tab Item Flag';
+      disabledItem.documentation = new vscode.MarkdownString('This tab renders but cannot be selected. Leading token on the `+++ ` item header (e.g., `+++ disabled Coming soon`).');
+      completions.push(disabledItem);
     }
 
     // Copy button parameter completions on the opening <<< line

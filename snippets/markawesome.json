@@ -302,6 +302,20 @@
     ],
     "description": "Insert tab group with manual activation (click only)"
   },
+  "Tab Group with a disabled tab": {
+    "prefix": "wa-tabs-disabled",
+    "body": [
+      "++++++",
+      "+++ ${1:Tab 1}",
+      "${2:Content 1}",
+      "+++",
+      "+++ disabled ${3:Coming soon}",
+      "${4:Not yet available.}",
+      "+++",
+      "++++++"
+    ],
+    "description": "Insert tab group with a disabled (non-selectable) tab"
+  },
   "Tag": {
     "prefix": "wa-tag",
     "body": [
@@ -600,13 +614,24 @@
   "Popover with Placement": {
     "prefix": "wa-popover-placement",
     "body": [
-      "&&&${1|top,bottom,left,right|}",
+      "&&&${1|top,top-start,top-end,right,right-start,right-end,bottom,bottom-start,bottom-end,left,left-start,left-end|}",
       "${2:Hover for info}",
       ">>>",
       "${3:Popover content here.}",
       "&&&"
     ],
     "description": "Insert popover with placement selection"
+  },
+  "Popover with Skidding": {
+    "prefix": "wa-popover-skidding",
+    "body": [
+      "&&&${1|top,top-start,top-end,right,right-start,right-end,bottom,bottom-start,bottom-end,left,left-start,left-end|} skidding:${2:12}",
+      "${3:Hover for info}",
+      ">>>",
+      "${4:Popover content here.}",
+      "&&&"
+    ],
+    "description": "Insert popover with aligned placement and skidding offset"
   },
   "Popover Link": {
     "prefix": "wa-popover-link",
@@ -627,13 +652,24 @@
   "Tooltip": {
     "prefix": "wa-tooltip",
     "body": [
-      ":::wa-tooltip ${1|top,bottom,left,right|}",
+      ":::wa-tooltip ${1|top,top-start,top-end,right,right-start,right-end,bottom,bottom-start,bottom-end,left,left-start,left-end|}",
       "${2:anchor term}",
       ">>>",
       "${3:tip text}",
       ":::"
     ],
     "description": "Insert tooltip (block alternative syntax)"
+  },
+  "Tooltip with Skidding": {
+    "prefix": "wa-tooltip-skidding",
+    "body": [
+      ":::wa-tooltip ${1|top,top-start,top-end,right,right-start,right-end,bottom,bottom-start,bottom-end,left,left-start,left-end|} skidding:${2:12}",
+      "${3:anchor term}",
+      ">>>",
+      "${4:tip text}",
+      ":::"
+    ],
+    "description": "Insert tooltip with aligned placement and skidding offset"
   },
   "Tooltip Inline": {
     "prefix": "wa-tooltip-inline",
