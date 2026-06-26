@@ -156,6 +156,16 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       }
     }
 
+    // Check for inline timestamp syntax [[[ ... ]]] anywhere on the line.
+    // A leading `relative` token inside the brackets means relative-time.
+    if (line.match(/\[\[\[[^\]]*\]\]\]/)) {
+      const isRelative = line.match(/\[\[\[[^\]]*\brelative\b/);
+      const component = components.find(c => c.name === (isRelative ? 'Relative Time' : 'Format Date'));
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
     // Check for layout syntax (::::type or ::::wa-type)
     if (line.match(/^::::(grid|stack|cluster|split|flank|frame)/)) {
       const match = line.match(/^::::(grid|stack|cluster|split|flank|frame)/);
@@ -186,7 +196,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|accordion|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|accordion|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -215,7 +225,9 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'copy-button': 'Copy Button',
       'badge': 'Badge',
       'button': 'Button',
-      'icon': 'Icon'
+      'icon': 'Icon',
+      'format-date': 'Format Date',
+      'relative-time': 'Relative Time'
     };
     return mapping[altName] || altName;
   }

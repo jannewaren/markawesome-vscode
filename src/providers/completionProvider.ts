@@ -45,7 +45,8 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
                          'wa-details', 'wa-accordion', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
-                         'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon'];
+                         'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon',
+                         'wa-format-date', 'wa-relative-time'];
       components.forEach(comp => {
         const item = new vscode.CompletionItem(comp, vscode.CompletionItemKind.Class);
         item.detail = 'Web Awesome Component';
@@ -464,6 +465,63 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       distanceItem.documentation = new vscode.MarkdownString('Custom distance from the anchor in px (e.g., `distance:10`)');
       distanceItem.insertText = new vscode.SnippetString('distance:${1:10}');
       completions.push(distanceItem);
+    }
+
+    // Timestamp completions: inline [[[ ]]] and the block :::wa-format-date /
+    // :::wa-relative-time selector lines.
+    const pushDateToken = (label: string, detail: string, doc: string, snippet?: string) => {
+      const item = new vscode.CompletionItem(label, vscode.CompletionItemKind.Property);
+      item.detail = detail;
+      item.documentation = new vscode.MarkdownString(doc);
+      if (snippet) {
+        item.insertText = new vscode.SnippetString(snippet);
+      }
+      completions.push(item);
+    };
+
+    const pushFormatDateTokens = () => {
+      pushDateToken('style:', 'Date Style Preset', 'Preset date format: short, medium, long, full', 'style:${1|short,medium,long,full|}');
+      pushDateToken('time:', 'Time Style Preset', 'Preset time format: short, medium, long, full', 'time:${1|short,medium,long,full|}');
+      pushDateToken('weekday:', 'Weekday', 'Weekday display: narrow, short, long', 'weekday:${1|narrow,short,long|}');
+      pushDateToken('era:', 'Era', 'Era display: narrow, short, long', 'era:${1|narrow,short,long|}');
+      pushDateToken('year:', 'Year', 'Year display: numeric, 2-digit', 'year:${1|numeric,2-digit|}');
+      pushDateToken('month:', 'Month', 'Month display: numeric, 2-digit, narrow, short, long', 'month:${1|numeric,2-digit,narrow,short,long|}');
+      pushDateToken('day:', 'Day', 'Day display: numeric, 2-digit', 'day:${1|numeric,2-digit|}');
+      pushDateToken('hour:', 'Hour', 'Hour display: numeric, 2-digit', 'hour:${1|numeric,2-digit|}');
+      pushDateToken('minute:', 'Minute', 'Minute display: numeric, 2-digit', 'minute:${1|numeric,2-digit|}');
+      pushDateToken('second:', 'Second', 'Second display: numeric, 2-digit', 'second:${1|numeric,2-digit|}');
+      pushDateToken('hour-format:', 'Hour Format', '12/24-hour clock: auto, 12, 24', 'hour-format:${1|auto,12,24|}');
+      pushDateToken('time-zone-name:', 'Time Zone Name', 'Time-zone name display: short, long', 'time-zone-name:${1|short,long|}');
+      pushDateToken('time-zone:', 'Time Zone', 'IANA time zone (e.g., America/New_York)', 'time-zone:${1:America/New_York}');
+    };
+
+    const pushRelativeTokens = () => {
+      pushDateToken('format:', 'Relative Format', 'Phrasing width: long (default), short, narrow', 'format:${1|long,short,narrow|}');
+      pushDateToken('numeric:', 'Relative Numeric', 'auto (allows "yesterday"), always ("1 day ago")', 'numeric:${1|auto,always|}');
+      const syncItem = new vscode.CompletionItem('sync', vscode.CompletionItemKind.Property);
+      syncItem.detail = 'Relative Time Flag';
+      syncItem.documentation = new vscode.MarkdownString('Keep the relative phrase ticking live as time passes');
+      completions.push(syncItem);
+    };
+
+    const pushLangToken = () => {
+      pushDateToken('lang:', 'Locale', 'Locale for formatting (e.g., fr, en-US). `locale:` is an alias.', 'lang:${1:en-US}');
+    };
+
+    if (linePrefix.match(/\[\[\[/)) {
+      const relativeItem = new vscode.CompletionItem('relative', vscode.CompletionItemKind.Keyword);
+      relativeItem.detail = 'Relative Time Mode';
+      relativeItem.documentation = new vscode.MarkdownString('Switch this inline timestamp to a relative "3 days ago" phrase (`<wa-relative-time>`)');
+      completions.push(relativeItem);
+      pushFormatDateTokens();
+      pushRelativeTokens();
+      pushLangToken();
+    } else if (linePrefix.match(/^:::wa-format-date\b/)) {
+      pushFormatDateTokens();
+      pushLangToken();
+    } else if (linePrefix.match(/^:::wa-relative-time\b/)) {
+      pushRelativeTokens();
+      pushLangToken();
     }
 
     // Layout type completions after ::::

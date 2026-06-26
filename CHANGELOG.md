@@ -2,6 +2,15 @@
 
 All notable changes to the "markawesome-vscode" extension will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- **Declarative timestamps** — two new components matching markawesome's `<wa-format-date>` and `<wa-relative-time>` support:
+  - **Format Date** and **Relative Time** entries in the component reference (`components.json`), surfaced on hover. Hover matches the inline `[[[ … ]]]` form (a leading `relative` token shows the Relative Time docs) and the `:::wa-format-date` / `:::wa-relative-time` block selectors.
+  - **IntelliSense**: typing `[[[` suggests the `relative` mode flag plus the formatting tokens — `style:`/`time:` presets, granular `weekday:`/`month:`/`day:`/`hour:`/… keys, `hour-format:`, `time-zone-name:`, `time-zone:`, `lang:`, and the relative `format:`/`numeric:`/`sync` tokens. The `:::wa-format-date` / `:::wa-relative-time` selector lines offer their mode-appropriate subset, and both selectors are added to the `:::` component picker. `[` is now a completion trigger character.
+  - **Snippets**: `wa-format-date` (`[[[date style:…]]]`), `wa-format-date-time` (adds `time:…`), and `wa-relative-time` (`[[[relative date]]]`).
+
 ## [0.12.0] - 2026-06-25
 
 Brings the extension to parity with markawesome 0.16 / jekyll-webawesome 0.22 by adding the copy-button **tooltip** attribute (`tooltip:full|copy|none`), which controls *when* the built-in tooltip appears (distinct from the existing `tooltip-placement`).

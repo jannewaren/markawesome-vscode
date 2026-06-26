@@ -180,6 +180,49 @@
       "documentation": "Inline contextual help shown on hover or focus. The anchor term is rendered as a focusable, dotted-underlined span; the tip appears in a `<wa-tooltip>` wired to it automatically via a generated `for`/`id` pair. Declarative and zero-JavaScript.\n\n**Inline syntax** (primary, within a sentence):\n```\nStyling is handled by (((CSS >>> Cascading Style Sheets))) on the web.\n```\n\n**Block syntax** (alternative):\n```\n:::wa-tooltip bottom\nCSS\n>>>\nCascading Style Sheets\n:::\n```\n\nPlacements: top (default), bottom, left, right\nParameters:\n- **distance:N**: Custom distance from the anchor in px (e.g., distance:10)\n\n**Tip content** is plain text (HTML-escaped). Use `\\n` for line breaks (rendered as `<br>`): `(((Org number >>> NO: 9 digits\\nSE: 10 digits)))`.\n\nLeading `placement`/`distance:N` tokens go before the anchor term. Unlike popover, there is no `link` or `without-arrow` (Web Awesome `<wa-tooltip>` has no `without-arrow`). All parameters are optional and can be combined in any order."
     },
     {
+      "name": "Format Date",
+      "primarySyntax": "[[[date style:preset? time:preset? granular? lang:locale?]]]",
+      "inlineSyntax": "[[[2026-06-26 style:long]]]",
+      "altSyntax": ":::wa-format-date date style:preset? time:preset? granular?",
+      "parameters": [
+        "style:short|medium|long|full",
+        "time:short|medium|long|full",
+        "weekday:narrow|short|long",
+        "era:narrow|short|long",
+        "year:numeric|2-digit",
+        "month:numeric|2-digit|narrow|short|long",
+        "day:numeric|2-digit",
+        "hour:numeric|2-digit",
+        "minute:numeric|2-digit",
+        "second:numeric|2-digit",
+        "hour-format:auto|12|24",
+        "time-zone-name:short|long",
+        "time-zone:IANA",
+        "lang:locale (or locale:)"
+      ],
+      "description": "Absolute, locale-formatted date baked in at build time (<wa-format-date>)",
+      "example": ":::wa-format-date 2026-06-26 style:full lang:fr\n:::",
+      "inlineExample": "Published [[[2026-06-26 style:long]]].",
+      "documentation": "Render an absolute, locale-formatted date with `<wa-format-date>`. The date value is baked in at build time; the browser formats it via `Intl.DateTimeFormat`.\n\n**Inline syntax** (primary, within prose):\n```\nPublished [[[2026-06-26 style:long]]].\n```\n\n**Block syntax** (alternative):\n```\n:::wa-format-date 2026-06-26 style:full lang:fr\n:::\n```\n\n**The date** is an ISO 8601 date (`2026-06-26`) or datetime with a `T` separator (`2026-06-26T14:30:00Z`). Omit it to show the viewer's current time.\n\n**Presets:** `style:short|medium|long|full` and `time:short|medium|long|full` expand to the granular attributes. A bare date defaults to `style:long`; `time:` without a date style emits time-only.\n\n**Granular overrides** (win over presets, rightmost-wins): `weekday`, `era`, `year`, `month`, `day`, `hour`, `minute`, `second` (each an `Intl` value), plus `hour-format:auto|12|24`, `time-zone-name:short|long`, `time-zone:IANA`, and `lang:`/`locale:` for the locale.\n\nUnknown tokens and invalid enum values are silently dropped.\n\n**Static-site note:** like `<wa-icon>`, it renders generated text into shadow DOM with no light-DOM fallback — with Web Awesome's JS disabled it shows nothing."
+    },
+    {
+      "name": "Relative Time",
+      "primarySyntax": "[[[relative date format:? numeric:? sync? lang:?]]]",
+      "inlineSyntax": "[[[relative 2026-06-20]]]",
+      "altSyntax": ":::wa-relative-time date format:? numeric:? sync?",
+      "flags": ["sync"],
+      "parameters": [
+        "format:long|short|narrow",
+        "numeric:auto|always",
+        "sync",
+        "lang:locale (or locale:)"
+      ],
+      "description": "Relative \"3 days ago\"-style phrase, optionally live-ticking (<wa-relative-time>)",
+      "example": ":::wa-relative-time 2026-06-20 sync\n:::",
+      "inlineExample": "Updated [[[relative 2026-06-20]]].",
+      "documentation": "Render a relative \"3 days ago\"-style phrase with `<wa-relative-time>`, optionally live-ticking. The browser formats it via `Intl.RelativeTimeFormat`.\n\n**Inline syntax** (primary): prefix the date with `relative`:\n```\nUpdated [[[relative 2026-06-20]]].\n```\n\n**Block syntax** (alternative):\n```\n:::wa-relative-time 2026-06-20 sync\n:::\n```\n\n**Parameters:**\n- **format:long|short|narrow** — phrasing width (default long)\n- **numeric:auto|always** — `auto` allows \"yesterday\"/\"tomorrow\"; `always` forces \"1 day ago\" (default auto)\n- **sync** — keep the phrase ticking live as time passes\n- **lang:**/**locale:** — the locale\n\nDate-formatting tokens (`style:`, `time:`, `month:`, …) are ignored in relative mode.\n\n**Static-site note:** like `<wa-icon>`, it renders generated text into shadow DOM with no light-DOM fallback — with Web Awesome's JS disabled it shows nothing."
+    },
+    {
       "name": "Grid Layout",
       "primarySyntax": "::::grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",
       "altSyntax": "::::wa-grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",

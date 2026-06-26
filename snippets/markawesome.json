@@ -640,6 +640,21 @@
     "body": "(((${1:term} >>> ${2:tip})))",
     "description": "Insert inline tooltip (for use within sentences)"
   },
+  "Format Date": {
+    "prefix": "wa-format-date",
+    "body": "[[[${1:2026-06-26} style:${2|short,medium,long,full|}]]]",
+    "description": "Insert an absolute, locale-formatted date (<wa-format-date>)"
+  },
+  "Format Date with Time": {
+    "prefix": "wa-format-date-time",
+    "body": "[[[${1:2026-06-26T14:30:00Z} style:${2|short,medium,long,full|} time:${3|short,medium,long,full|}]]]",
+    "description": "Insert a formatted date and time (<wa-format-date>)"
+  },
+  "Relative Time": {
+    "prefix": "wa-relative-time",
+    "body": "[[[relative ${1:2026-06-20}]]]",
+    "description": "Insert a relative \"3 days ago\" timestamp (<wa-relative-time>)"
+  },
   "Alternative Callout": {
     "prefix": "wa-alt-callout",
     "body": [
