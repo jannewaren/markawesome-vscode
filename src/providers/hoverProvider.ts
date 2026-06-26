@@ -76,6 +76,23 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       }
     }
 
+    // Check for video playlist syntax (6-fence) before single video (3-fence),
+    // since `;;;;;;` also starts with three semicolons.
+    if (line.match(/^;{6}/)) {
+      const component = components.find(c => c.name === 'Video Playlist');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
+    // Check for single video syntax (3-fence)
+    if (line.match(/^;{3}/)) {
+      const component = components.find(c => c.name === 'Video');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
     // Check for details syntax
     if (line.match(/^\^\^\^/)) {
       const component = components.find(c => c.name === 'Details');
@@ -196,7 +213,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|details|accordion|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -215,6 +232,8 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'card': 'Card',
       'comparison': 'Comparison',
       'carousel': 'Carousel',
+      'video-playlist': 'Video Playlist',
+      'video': 'Video',
       'details': 'Details',
       'accordion': 'Accordion',
       'dialog': 'Dialog',

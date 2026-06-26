@@ -44,6 +44,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
+                         'wa-video', 'wa-video-playlist',
                          'wa-details', 'wa-accordion', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon',
                          'wa-format-date', 'wa-relative-time'];
@@ -676,6 +677,40 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         if (param === 'autoplay-interval') {
           item.insertText = new vscode.SnippetString('autoplay-interval:${1:5000}');
         }
+        completions.push(item);
+      });
+    }
+
+    // Video completions on the ;;; (single) and ;;;;;; (playlist) opening line.
+    // /^;{3}/ covers both, since the 6-fence starts with three semicolons.
+    if (linePrefix.match(/^;{3}/)) {
+      const controlsModes = ['none', 'standard', 'full'];
+      controlsModes.forEach(mode => {
+        const item = new vscode.CompletionItem(`controls:${mode}`, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Video Controls Preset';
+        item.documentation = new vscode.MarkdownString(`Controls preset: ${mode} (forwarded to children on a \`;;;;;;\` playlist)`);
+        completions.push(item);
+      });
+
+      const preloadModes = ['auto', 'metadata', 'none'];
+      preloadModes.forEach(mode => {
+        const item = new vscode.CompletionItem(`preload:${mode}`, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Video Preload';
+        item.documentation = new vscode.MarkdownString(`How the browser preloads the video: ${mode}`);
+        completions.push(item);
+      });
+
+      const flags = [
+        { name: 'autoplay', doc: 'Play automatically when the component connects' },
+        { name: 'autoplay-muted', doc: 'Autoplay in a muted state' },
+        { name: 'autoplay-on-visible', doc: 'Resume playback when scrolled back into view' },
+        { name: 'loop', doc: 'Loop the video when playback ends' },
+        { name: 'muted', doc: 'Start the video muted' }
+      ];
+      flags.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Property);
+        item.detail = 'Video Flag';
+        item.documentation = new vscode.MarkdownString(doc);
         completions.push(item);
       });
     }

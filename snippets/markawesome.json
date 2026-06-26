@@ -179,6 +179,31 @@
     ],
     "description": "Insert carousel with navigation and pagination"
   },
+  "Video": {
+    "prefix": "wa-video",
+    "body": [
+      ";;;controls:${1|full,standard,none|}",
+      "[${2:My Clip}](${3:video.mp4})",
+      "![${4:Poster}](${5:poster.jpg})",
+      ";;;"
+    ],
+    "description": "Insert a single video (<wa-video>)"
+  },
+  "Video Playlist": {
+    "prefix": "wa-video-playlist",
+    "body": [
+      ";;;;;;controls:${1|standard,full,none|}",
+      ";;;",
+      "[${2:Part 1}](${3:part1.mp4})",
+      "![${4:Poster}](${5:part1.jpg})",
+      ";;;",
+      ";;;",
+      "[${6:Part 2}](${7:part2.mp4})",
+      ";;;",
+      ";;;;;;"
+    ],
+    "description": "Insert a video playlist (<wa-video-playlist>)"
+  },
   "Details": {
     "prefix": "wa-details",
     "body": [

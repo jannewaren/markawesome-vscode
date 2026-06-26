@@ -64,6 +64,34 @@
       "documentation": "Carousel for sliding content. Use ~~~ to separate slides.\n\nParameters:\n- **navigation**: Show prev/next arrows\n- **pagination**: Show dot indicators\n- **loop**: Enable infinite loop\n- **autoplay**: Auto-advance slides\n- **autoplay-interval:value**: Milliseconds between auto-advances (e.g., 5000; default 3000)\n- **mouse-dragging**: Enable drag to slide\n- **vertical**: Vertical orientation\n- **scroll-hint:value**: Show scroll hint\n- **aspect-ratio:value**: e.g., 16/9, 4/3\n- **slide-gap:value**: Gap between slides\n- **slides-per-page:n**: Slides visible at once\n- **slides-per-move:n**: Slides to move at once"
     },
     {
+      "name": "Video",
+      "primarySyntax": ";;;controls:? preload:? flags?",
+      "altSyntax": ":::wa-video controls:? preload:? flags?",
+      "parameters": [
+        "controls:none|standard|full",
+        "preload:auto|metadata|none",
+        "autoplay",
+        "autoplay-muted",
+        "autoplay-on-visible",
+        "loop",
+        "muted"
+      ],
+      "description": "Embed a single video with custom controls (<wa-video>, Web Awesome Pro)",
+      "example": ";;;controls:full\n[My Clip](video.mp4)\n![Poster](poster.jpg)\n;;;",
+      "documentation": "Embed a single video as `<wa-video>` (Web Awesome **Pro**, experimental).\n\n**Body:** the first markdown link `[Title](src)` supplies the video `title` and `src`; the first markdown image `![alt](poster)` supplies the `poster`. A block with no link (no `src`) is left untransformed.\n\n**Parameters** (order-independent, invalid enum values dropped):\n- **controls:none|standard|full** — controls preset (default `standard`)\n- **preload:auto|metadata|none** — how the browser preloads (default `metadata`)\n- **autoplay** — play when the component connects\n- **autoplay-muted** — autoplay in a muted state\n- **autoplay-on-visible** — resume playback when scrolled back into view\n- **loop** — loop when playback ends\n- **muted** — start muted\n\nv1 emits a single `src` (no `<source>`/`<track>` children yet). For a navigable set of videos, use **Video Playlist** (`;;;;;;`)."
+    },
+    {
+      "name": "Video Playlist",
+      "primarySyntax": ";;;;;;controls:?",
+      "altSyntax": ":::wa-video-playlist controls:?",
+      "parameters": [
+        "controls:none|standard|full"
+      ],
+      "description": "Group multiple videos into a playlist with navigation (<wa-video-playlist>, Web Awesome Pro)",
+      "example": ";;;;;;controls:standard\n;;;\n[Part 1](part1.mp4)\n![Poster](part1.jpg)\n;;;\n;;;\n[Part 2](part2.mp4)\n;;;\n;;;;;;",
+      "documentation": "Group multiple videos into `<wa-video-playlist>` (Web Awesome **Pro**, experimental). Wrap each video in a bare `;;;` … `;;;` item between the `;;;;;;` fences (mirrors the carousel `~~~`/`~~~~~~` structure).\n\nEach item follows the same body rules as a single **Video**: the first markdown link `[Title](src)` supplies `title`/`src` and the first markdown image `![alt](poster)` supplies the `poster`.\n\n**controls:none|standard|full** sets the controls preset for the whole playlist (default `full`); it is forwarded to every child video, so the children omit their own `controls`."
+    },
+    {
       "name": "Details",
       "primarySyntax": "^^^appearance? icon-placement? disabled? open? name:value? icon:expand:name? icon:collapse:name?",
       "altSyntax": ":::wa-details appearance? icon-placement? disabled? open? name:value? icon:expand:name? icon:collapse:name?",
