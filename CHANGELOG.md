@@ -4,6 +4,8 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-06-26
+
 ### Added
 
 - **Video & video playlist** — two new components matching markawesome's `<wa-video>` and `<wa-video-playlist>` support:
