@@ -9,6 +9,9 @@
       "include": "#cards"
     },
     {
+      "include": "#tree"
+    },
+    {
       "include": "#comparison"
     },
     {
@@ -107,6 +110,33 @@
             }
           },
           "contentName": "markup.quote.card.markawesome",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "tree": {
+      "patterns": [
+        {
+          "begin": "^(\\|{6})((?:\\s*(?:open|expanded))*)\\s*$",
+          "end": "^(\\|{6})\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tree.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.tree.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.tree.markawesome"
+            }
+          },
+          "contentName": "markup.list.tree.markawesome",
           "patterns": [
             {
               "include": "text.html.markdown"

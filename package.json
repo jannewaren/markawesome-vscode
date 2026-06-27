@@ -89,6 +89,10 @@
         "title": "Markawesome: Wrap in Accordion"
       },
       {
+        "command": "markawesome.wrapInTree",
+        "title": "Markawesome: Wrap in Tree"
+      },
+      {
         "command": "markawesome.imagesToComparison",
         "title": "Markawesome: Convert Images to Comparison"
       },
@@ -167,6 +171,11 @@
         },
         {
           "command": "markawesome.wrapInAccordion",
+          "group": "2_wrap",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.wrapInTree",
           "group": "2_wrap",
           "when": "editorHasSelection"
         },

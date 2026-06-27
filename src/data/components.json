@@ -116,6 +116,16 @@
       "documentation": "A multi-section collapsible container. The container fence is `//////` (6 slashes); each item is a `///` block (3 slashes) with an explicit `///` close. Item bodies are full Markdown and may contain other components. Use the `:::wa-accordion … :::` alternative form if you prefer.\n\n**Container tokens** (bare, order-independent, rightmost-wins):\n- **appearance**: outlined (default), filled, filled-outlined, plain\n- **mode**: multiple (default — several open at once), single (one open at a time, one always stays open), single-collapsible (one open at a time, all can be closed)\n- **icon-placement**: end (default), start\n- **heading:N**: semantic heading level for item headers — `1`–`6` or `none` (e.g., `heading:2`)\n\n**Item tokens** (leading, on the `///` header line):\n- **expanded**: this section starts open on load\n- **disabled**: this section renders but cannot be toggled\n- **icon:name**: custom expand icon for this item, inserted as its first child (e.g., `icon:star`)\n- The rest of the header line becomes the item label (plain text)\n\n`wa-accordion` is experimental in Web Awesome, but everything here is declarative and static-site-safe."
     },
     {
+      "name": "Tree",
+      "primarySyntax": "||||||open?",
+      "altSyntax": ":::wa-tree open?",
+      "flags": ["open", "expanded"],
+      "parameters": ["icon:name (per item)"],
+      "description": "Hierarchical list rendered from a nested Markdown bullet list — file/directory layouts, taxonomies, nested navigation",
+      "example": "||||||open\n- icon:folder src\n  - icon:file index.ts\n  - icon:file utils.ts\n- icon:file README.md\n||||||",
+      "documentation": "A `<wa-tree>` / `<wa-tree-item>` hierarchy rendered from a **nested Markdown bullet list**. The fence is `||||||` (6 pipes) wrapping a normal nested list, closed by `||||||`; children are simply more-indented list items (2- or 4-space indentation both work). Use the `:::wa-tree … :::` alternative form if you prefer.\n\n**Display/navigation only**: Web Awesome's tree selection (`selection`, `lazy`, `selected`) is interactive (needs JavaScript), so it is deliberately omitted — this emits a static-safe tree (nesting, initial expand state, leading icons).\n\n**Fence token**:\n- **open** (alias **expanded**): mark every branch (any node with children) `expanded`\n\n**Per-node leading tokens** (on each list item, stripped from the label):\n- **expanded**: force this one branch open\n- **icon:name**: leading folder/file icon for this item (e.g., `icon:folder`)\n- The rest of the item becomes its label (plain text). Colon-bearing labels like `cbc:ID` are kept verbatim — only a leading `icon:` token is treated as an icon.\n\n`expanded` is emitted only on nodes that have children; leaves never get it.\n\n**Web Awesome runtime caveat** (WA 3.9.0): `<wa-tree-item>` only honors a static `expanded` on items that are *visible at load*, so `open` (and a per-node `expanded`) expands the **top-level** branches and deeper branches stay collapsed until their parent is opened. The attribute is still emitted on every branch (harmless and forward-compatible); full deep-expand-on-load would need JavaScript."
+    },
+    {
       "name": "Dialog",
       "primarySyntax": "???params?",
       "altSyntax": ":::wa-dialog params?",

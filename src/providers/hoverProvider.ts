@@ -60,6 +60,15 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       }
     }
 
+    // Check for tree syntax (6-pipe fence) before comparison (3-pipe),
+    // since `||||||` also starts with three pipes.
+    if (line.match(/^\|{6}/)) {
+      const component = components.find(c => c.name === 'Tree');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
     // Check for comparison syntax
     if (line.match(/^\|\|\|/)) {
       const component = components.find(c => c.name === 'Comparison');
@@ -213,7 +222,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|tree|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -236,6 +245,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'video': 'Video',
       'details': 'Details',
       'accordion': 'Accordion',
+      'tree': 'Tree',
       'dialog': 'Dialog',
       'popover': 'Popover',
       'tooltip': 'Tooltip',

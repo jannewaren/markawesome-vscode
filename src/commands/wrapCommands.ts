@@ -365,3 +365,30 @@ export async function wrapInTabGroup() {
     editBuilder.replace(selection, wrapped);
   });
 }
+
+export async function wrapInTree() {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor || editor.selection.isEmpty) {
+    vscode.window.showErrorMessage('Please select a nested bullet list to wrap');
+    return;
+  }
+
+  const expandOptions = ['open (expand top-level branches)', 'closed (default)'];
+  const expand = await vscode.window.showQuickPick(expandOptions, {
+    placeHolder: 'Expand top-level branches on load? (optional)'
+  });
+
+  if (expand === undefined) {
+    return;
+  }
+
+  const selection = editor.selection;
+  const text = editor.document.getText(selection);
+
+  const fenceToken = expand.startsWith('open') ? 'open' : '';
+  const wrapped = `||||||${fenceToken}\n${text}\n||||||`;
+
+  editor.edit(editBuilder => {
+    editBuilder.replace(selection, wrapped);
+  });
+}

@@ -45,7 +45,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
                          'wa-video', 'wa-video-playlist',
-                         'wa-details', 'wa-accordion', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
+                         'wa-details', 'wa-accordion', 'wa-tree', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon',
                          'wa-format-date', 'wa-relative-time'];
       components.forEach(comp => {
@@ -262,6 +262,21 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       iconItem.documentation = new vscode.MarkdownString('Custom expand icon for this item, inserted as its first child (e.g., `icon:star`)');
       iconItem.insertText = new vscode.SnippetString('icon:${1:icon-name}');
       completions.push(iconItem);
+    }
+
+    // Tree fence-token completions on the |||||| line (and :::wa-tree). The
+    // 6-pipe anchor never collides with comparison's 3-pipe `|||` fence.
+    if (linePrefix.match(/^\|{6}/) || linePrefix.match(/^:::wa-tree/)) {
+      const tokens = [
+        { name: 'open', doc: 'Mark every branch (any node with children) expanded. Web Awesome (3.9.0) only expands the top-level branches on load; deeper branches stay collapsed until opened.' },
+        { name: 'expanded', doc: 'Alias of `open` — mark every branch expanded (WA expands only the top level on load)' }
+      ];
+      tokens.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Property);
+        item.detail = 'Tree Fence Token';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
     }
 
     // Dialog completions after ???

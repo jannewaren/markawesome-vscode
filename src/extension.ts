@@ -14,7 +14,8 @@ import {
   wrapInPopover,
   wrapInTooltip,
   wrapInTabGroup,
-  wrapInAccordion
+  wrapInAccordion,
+  wrapInTree
 } from './commands/wrapCommands';
 import { imagesToComparison, imagesToCarousel } from './commands/transformCommands';
 
@@ -100,6 +101,11 @@ export function activate(context: vscode.ExtensionContext) {
     wrapInAccordion
   );
 
+  const wrapTreeCmd = vscode.commands.registerCommand(
+    'markawesome.wrapInTree',
+    wrapInTree
+  );
+
   const imagesToComparisonCmd = vscode.commands.registerCommand(
     'markawesome.imagesToComparison',
     imagesToComparison
@@ -127,6 +133,7 @@ export function activate(context: vscode.ExtensionContext) {
     wrapTooltipCmd,
     wrapTabGroupCmd,
     wrapAccordionCmd,
+    wrapTreeCmd,
     imagesToComparisonCmd,
     imagesToCarouselCmd
   );

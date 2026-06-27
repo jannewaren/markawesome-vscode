@@ -4,6 +4,15 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+### Added
+
+- **Tree** — a new component matching markawesome's `<wa-tree>` / `<wa-tree-item>` support, rendered from a nested Markdown bullet list (the `||||||` 6-pipe fence). The extension only emits the static-safe surface both engines accept (display/navigation only — no interactive `selection`/`lazy`).
+  - **Component reference** (`components.json`): a **Tree** entry surfaced on hover and in the Insert Component picker. Hover matches the `||||||` fence (checked before comparison's `|||`, since it also starts with three pipes) and the `:::wa-tree` block selector.
+  - **IntelliSense**: typing `||||||` (or `:::wa-tree`) suggests the `open` / `expanded` fence tokens; `wa-tree` is added to the `:::` component picker. `|` was already a completion trigger character.
+  - **Snippet**: `wa-tree` inserts a `||||||open` fence wrapping a small nested list with `icon:` placeholders.
+  - **Command**: *Markawesome: Wrap in Tree* wraps a selected nested bullet list in `||||||` fences (with an optional `open`).
+  - **Grammar** (`tmLanguage`): a scope for the `||||||` fence and its `open`/`expanded` tokens.
+
 ## [0.13.0] - 2026-06-26
 
 ### Added

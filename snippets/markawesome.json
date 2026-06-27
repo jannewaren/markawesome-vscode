@@ -285,6 +285,18 @@
     ],
     "description": "Insert a single-open accordion (mode: single)"
   },
+  "Tree": {
+    "prefix": "wa-tree",
+    "body": [
+      "||||||${1:open}",
+      "- ${2:icon:folder} ${3:Parent}",
+      "  - ${4:icon:file} ${5:Child one}",
+      "  - ${6:icon:file} ${7:Child two}",
+      "- ${8:icon:file} ${9:Sibling}",
+      "||||||"
+    ],
+    "description": "Insert a tree from a nested bullet list (wa-tree)"
+  },
   "Dialog": {
     "prefix": "wa-dialog",
     "body": [
