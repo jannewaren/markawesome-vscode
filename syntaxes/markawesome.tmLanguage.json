@@ -12,6 +12,9 @@
       "include": "#tree"
     },
     {
+      "include": "#random-content"
+    },
+    {
       "include": "#comparison"
     },
     {
@@ -138,6 +141,37 @@
           },
           "contentName": "markup.list.tree.markawesome",
           "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "random-content": {
+      "patterns": [
+        {
+          "begin": "^(\\.{6})(.*)$",
+          "end": "^(\\.{6})\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.random-content.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.random-content.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.random-content.markawesome"
+            }
+          },
+          "contentName": "markup.quote.random-content.markawesome",
+          "patterns": [
+            {
+              "match": "^(>>>)\\s*$",
+              "name": "punctuation.definition.random-content.separator.markawesome"
+            },
             {
               "include": "text.html.markdown"
             }
@@ -581,7 +615,7 @@
     "alternative-syntax": {
       "patterns": [
         {
-          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-dialog|wa-popover|wa-tooltip|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-random-content|wa-dialog|wa-popover|wa-tooltip|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {

@@ -6,6 +6,11 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ### Added
 
+- **Random Content** — a new component matching markawesome's `<wa-random-content>` support (Web Awesome 3.10.0, experimental): a container that shows one or more of its options at random (optionally rotating them) and hides the rest, all in Web Awesome's runtime, so authors write no JavaScript.
+  - **Component reference** (`components.json`): a **Random Content** entry surfaced on hover and in the Insert Component picker. Hover matches the `......` 6-dot fence and the `:::wa-random-content` block selector.
+  - **IntelliSense**: typing `......` (or `:::wa-random-content`) suggests the params — `mode:` (`unique`/`random`/`sequence`), `animation:` (`none`/`fade`/`fade-up`/`fade-down`/`fade-left`/`fade-right`), `items:`, `autoplay`, and `autoplay-interval:`; `wa-random-content` is added to the `:::` component picker. `.` is now a completion trigger character (the provider stays silent unless the line starts with `......`).
+  - **Snippet**: `wa-random-content` inserts a `......mode:random` fence with two options separated by `>>>`.
+  - **Grammar** (`tmLanguage`): a scope for the `......` fence, its params, and the `>>>` option separator.
 - **Tree** — a new component matching markawesome's `<wa-tree>` / `<wa-tree-item>` support, rendered from a nested Markdown bullet list (the `||||||` 6-pipe fence). The extension only emits the static-safe surface both engines accept (display/navigation only — no interactive `selection`/`lazy`).
   - **Component reference** (`components.json`): a **Tree** entry surfaced on hover and in the Insert Component picker. Hover matches the `||||||` fence (checked before comparison's `|||`, since it also starts with three pipes) and the `:::wa-tree` block selector.
   - **IntelliSense**: typing `||||||` (or `:::wa-tree`) suggests the `open` / `expanded` fence tokens; `wa-tree` is added to the `:::` component picker. `|` was already a completion trigger character.

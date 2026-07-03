@@ -45,7 +45,8 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       // Add alternative syntax components
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
                          'wa-video', 'wa-video-playlist',
-                         'wa-details', 'wa-accordion', 'wa-tree', 'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
+                         'wa-details', 'wa-accordion', 'wa-tree', 'wa-random-content',
+                         'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon',
                          'wa-format-date', 'wa-relative-time'];
       components.forEach(comp => {
@@ -277,6 +278,40 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         item.documentation = new vscode.MarkdownString(doc);
         completions.push(item);
       });
+    }
+
+    // Random-content param completions on the ...... fence line (6 dots) and
+    // :::wa-random-content. The /^\.{6}/ anchor only fires on a full 6-dot
+    // fence, so the '.' trigger char is inert in ordinary prose.
+    if (linePrefix.match(/^\.{6}/) || linePrefix.match(/^:::wa-random-content/)) {
+      const modeItem = new vscode.CompletionItem('mode:', vscode.CompletionItemKind.EnumMember);
+      modeItem.detail = 'Random Content Mode';
+      modeItem.documentation = new vscode.MarkdownString('Which children to show: `unique` (WA default), `random`, or `sequence`');
+      modeItem.insertText = new vscode.SnippetString('mode:${1|unique,random,sequence|}');
+      completions.push(modeItem);
+
+      const animationItem = new vscode.CompletionItem('animation:', vscode.CompletionItemKind.EnumMember);
+      animationItem.detail = 'Random Content Animation';
+      animationItem.documentation = new vscode.MarkdownString('Transition when rotating: `none`, `fade`, `fade-up`, `fade-down`, `fade-left`, `fade-right`');
+      animationItem.insertText = new vscode.SnippetString('animation:${1|none,fade,fade-up,fade-down,fade-left,fade-right|}');
+      completions.push(animationItem);
+
+      const itemsItem = new vscode.CompletionItem('items:', vscode.CompletionItemKind.Property);
+      itemsItem.detail = 'Random Content Items';
+      itemsItem.documentation = new vscode.MarkdownString('How many children to show at once (a bare integer like `2` also works)');
+      itemsItem.insertText = new vscode.SnippetString('items:${1:2}');
+      completions.push(itemsItem);
+
+      const autoplayItem = new vscode.CompletionItem('autoplay', vscode.CompletionItemKind.Property);
+      autoplayItem.detail = 'Random Content Flag';
+      autoplayItem.documentation = new vscode.MarkdownString('Rotate the shown children automatically');
+      completions.push(autoplayItem);
+
+      const intervalItem = new vscode.CompletionItem('autoplay-interval:', vscode.CompletionItemKind.Property);
+      intervalItem.detail = 'Random Content Autoplay Interval';
+      intervalItem.documentation = new vscode.MarkdownString('Milliseconds between rotations (e.g., `autoplay-interval:3000`)');
+      intervalItem.insertText = new vscode.SnippetString('autoplay-interval:${1:3000}');
+      completions.push(intervalItem);
     }
 
     // Dialog completions after ???

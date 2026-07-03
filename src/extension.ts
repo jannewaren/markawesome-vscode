@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
   const completionProvider = vscode.languages.registerCompletionItemProvider(
     { language: 'markdown', scheme: 'file' },
     new WebAwesomeCompletionProvider(),
-    ':', '=', '|', '^', '?', '@', '!', '%', '~', '+', '&', '$', '<', '/', '(', '[', ';'
+    ':', '=', '|', '^', '?', '@', '!', '%', '~', '+', '&', '$', '<', '/', '(', '[', ';', '.'
   );
 
   // Register hover provider

@@ -297,6 +297,17 @@
     ],
     "description": "Insert a tree from a nested bullet list (wa-tree)"
   },
+  "Random Content Basic": {
+    "prefix": "wa-random-content",
+    "body": [
+      "......${1:mode:random}",
+      "${2:Option A}",
+      ">>>",
+      "${3:Option B}",
+      "......"
+    ],
+    "description": "Insert a random-content rotator (wa-random-content)"
+  },
   "Dialog": {
     "prefix": "wa-dialog",
     "body": [

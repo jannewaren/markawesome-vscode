@@ -118,6 +118,14 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       }
     }
 
+    // Check for random-content syntax (...... 6-dot fence)
+    if (line.match(/^\.{6}/)) {
+      const component = components.find(c => c.name === 'Random Content');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
     // Check for dialog syntax
     if (line.match(/^\?\?\?/)) {
       const component = components.find(c => c.name === 'Dialog');
@@ -222,7 +230,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|tree|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|tree|random-content|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -246,6 +254,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'details': 'Details',
       'accordion': 'Accordion',
       'tree': 'Tree',
+      'random-content': 'Random Content',
       'dialog': 'Dialog',
       'popover': 'Popover',
       'tooltip': 'Tooltip',
