@@ -75,7 +75,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
-      const families = ['classic', 'sharp', 'duotone', 'sharp-duotone', 'brands'];
+      const families = ['classic', 'sharp', 'duotone', 'sharp-duotone', 'brands', 'mosaic', 'pixel', 'vellum', 'slab-duo', 'slab-press-duo', 'chisel', 'etch', 'graphite', 'jelly', 'jelly-duo', 'jelly-fill', 'notdog', 'notdog-duo', 'slab', 'slab-press', 'thumbprint', 'utility', 'utility-duo', 'utility-fill', 'whiteboard'];
       families.forEach(family => {
         const item = new vscode.CompletionItem(family, vscode.CompletionItemKind.EnumMember);
         item.detail = 'Callout Icon Family';
@@ -83,7 +83,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
-      const iconVariants = ['thin', 'light', 'regular', 'solid'];
+      const iconVariants = ['thin', 'light', 'regular', 'solid', 'semibold'];
       iconVariants.forEach(variant => {
         const item = new vscode.CompletionItem(variant, vscode.CompletionItemKind.EnumMember);
         item.detail = 'Callout Icon Variant';
@@ -91,11 +91,19 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
-      const animations = ['beat', 'fade', 'beat-fade', 'bounce', 'flip', 'shake', 'spin', 'spin-pulse', 'spin-reverse'];
+      const animations = ['beat', 'fade', 'beat-fade', 'bounce', 'flip', 'shake', 'spin', 'spin-pulse', 'spin-reverse', 'flip-360', 'spin-snap', 'spin-snap-4', 'spin-snap-8', 'buzz', 'float', 'jello', 'swing', 'wag'];
       animations.forEach(animation => {
         const item = new vscode.CompletionItem(animation, vscode.CompletionItemKind.EnumMember);
         item.detail = 'Callout Icon Animation';
         item.documentation = new vscode.MarkdownString(`Animate the callout icon (${animation}) — no Pro kit required`);
+        completions.push(item);
+      });
+
+      const canvas = ['fixed', 'auto', 'square', 'roomy'];
+      canvas.forEach(size => {
+        const item = new vscode.CompletionItem(size, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Callout Icon Canvas';
+        item.documentation = new vscode.MarkdownString(`Set the callout icon's sizing box (canvas="${size}") — WA 3.10.0`);
         completions.push(item);
       });
 
@@ -131,7 +139,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
 
     // Icon attribute completions after :::wa-icon <name>
     if (linePrefix.match(/:::wa-icon\s+\S+\s/)) {
-      const families = ['classic', 'sharp', 'duotone', 'sharp-duotone', 'brands'];
+      const families = ['classic', 'sharp', 'duotone', 'sharp-duotone', 'brands', 'mosaic', 'pixel', 'vellum', 'slab-duo', 'slab-press-duo', 'chisel', 'etch', 'graphite', 'jelly', 'jelly-duo', 'jelly-fill', 'notdog', 'notdog-duo', 'slab', 'slab-press', 'thumbprint', 'utility', 'utility-duo', 'utility-fill', 'whiteboard'];
       families.forEach(family => {
         const item = new vscode.CompletionItem(family, vscode.CompletionItemKind.EnumMember);
         item.detail = 'Icon Family';
@@ -139,7 +147,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
-      const iconVariants = ['thin', 'light', 'regular', 'solid'];
+      const iconVariants = ['thin', 'light', 'regular', 'solid', 'semibold'];
       iconVariants.forEach(variant => {
         const item = new vscode.CompletionItem(variant, vscode.CompletionItemKind.EnumMember);
         item.detail = 'Icon Variant';
@@ -147,11 +155,19 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         completions.push(item);
       });
 
-      const animations = ['beat', 'fade', 'beat-fade', 'bounce', 'flip', 'shake', 'spin', 'spin-pulse', 'spin-reverse'];
+      const animations = ['beat', 'fade', 'beat-fade', 'bounce', 'flip', 'shake', 'spin', 'spin-pulse', 'spin-reverse', 'flip-360', 'spin-snap', 'spin-snap-4', 'spin-snap-8', 'buzz', 'float', 'jello', 'swing', 'wag'];
       animations.forEach(animation => {
         const item = new vscode.CompletionItem(animation, vscode.CompletionItemKind.EnumMember);
         item.detail = 'Icon Animation';
         item.documentation = new vscode.MarkdownString(`Animate the icon (${animation}) — no Pro kit required`);
+        completions.push(item);
+      });
+
+      const canvas = ['fixed', 'auto', 'square', 'roomy'];
+      canvas.forEach(size => {
+        const item = new vscode.CompletionItem(size, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Icon Canvas';
+        item.documentation = new vscode.MarkdownString(`Icon sizing box (canvas="${size}") — WA 3.10.0`);
         completions.push(item);
       });
     }

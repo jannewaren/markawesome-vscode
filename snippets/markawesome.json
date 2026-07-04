@@ -74,7 +74,7 @@
   "Callout Animated Icon": {
     "prefix": "wa-callout-animation",
     "body": [
-      ":::${1|info,success,warning,danger,neutral|} ${2|beat,fade,beat-fade,bounce,flip,shake,spin,spin-pulse,spin-reverse|}",
+      ":::${1|info,success,warning,danger,neutral|} ${2|beat,fade,beat-fade,bounce,flip,shake,spin,spin-pulse,spin-reverse,flip-360,spin-snap,spin-snap-4,spin-snap-8,buzz,float,jello,swing,wag|}",
       "${3:This callout's icon animates.}",
       ":::"
     ],
@@ -92,10 +92,18 @@
   "Icon Animated": {
     "prefix": "wa-icon-animation",
     "body": [
-      ":::wa-icon ${1:bell} ${2|beat,fade,beat-fade,bounce,flip,shake,spin,spin-pulse,spin-reverse|}",
+      ":::wa-icon ${1:bell} ${2|beat,fade,beat-fade,bounce,flip,shake,spin,spin-pulse,spin-reverse,flip-360,spin-snap,spin-snap-4,spin-snap-8,buzz,float,jello,swing,wag|}",
       ":::"
     ],
     "description": "Insert an animated icon block (no Pro kit required)"
+  },
+  "Icon Canvas": {
+    "prefix": "wa-icon-canvas",
+    "body": [
+      ":::wa-icon ${1:bell} ${2|fixed,auto,square,roomy|}",
+      ":::"
+    ],
+    "description": "Insert an icon block with a canvas sizing box (WA 3.10.0)"
   },
   "Icon Inline": {
     "prefix": "wa-icon-inline",

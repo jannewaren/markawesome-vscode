@@ -14,6 +14,7 @@ interface Component {
   sizes?: string[];
   families?: string[];
   animations?: string[];
+  canvas?: string[];
   flags?: string[];
   parameters?: string[];
   description: string;
@@ -325,6 +326,9 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
     }
     if (component.animations && component.animations.length > 0) {
       md.appendMarkdown(`**Icon Animations:** ${component.animations.map(a => `\`${a}\``).join(', ')}\n\n`);
+    }
+    if (component.canvas && component.canvas.length > 0) {
+      md.appendMarkdown(`**Icon Canvas:** ${component.canvas.map(c => `\`${c}\``).join(', ')}\n\n`);
     }
     if (component.flags && component.flags.length > 0) {
       md.appendMarkdown(`**Flags:** ${component.flags.map(f => `\`${f}\``).join(', ')}\n\n`);
