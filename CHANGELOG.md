@@ -4,6 +4,8 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-07-04
+
 ### Added
 
 - **`<wa-icon>` Web Awesome 3.10.0 attributes** — the editor now reflects the widened icon vocabulary both engines accept (for `:::wa-icon …` **and** callout icon overrides):
