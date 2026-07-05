@@ -8,7 +8,7 @@ A VS Code extension providing snippets, IntelliSense, hover docs, and commands f
 
 ## The markawesome ecosystem — keep the syntax in sync
 
-The Markawesome-flavoured Markdown syntax spans **five repositories that must
+The Markawesome-flavoured Markdown syntax spans **six repositories that must
 stay in lockstep**:
 
 | Repo | Role | Stack | Registry |
@@ -18,6 +18,7 @@ stay in lockstep**:
 | `jekyll-webawesome` | **Uses** it (Jekyll integration) | Ruby | RubyGems |
 | `eleventy-plugin-webawesome` | **Uses** it (Eleventy integration) | Node | npm |
 | `markawesome-vscode` | **Produces** it (snippets/completions/validation) | TypeScript | VS Code Marketplace |
+| `markawesome-skill` | **Teaches** it (AI authoring skill) | Markdown | npm |
 
 **This repo's role:** **produces** the syntax — editor tooling (snippets,
 completions, hovers, wrap/insert commands). It is shared across **both** the Ruby
