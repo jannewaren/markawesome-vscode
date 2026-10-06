@@ -4,6 +4,10 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+### Changed
+
+- **Accordion and Random Content are no longer called "experimental".** Web Awesome 3.13.0 promoted `<wa-accordion>` and `<wa-random-content>` to stable, so their component-reference docs (hover) and the README drop the caveat. The ecosystem now targets Web Awesome **3.14.0**.
+
 ## [0.14.0] - 2026-07-04
 
 ### Added

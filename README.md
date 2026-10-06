@@ -333,7 +333,7 @@ npm install markawesome
 - **Icon**: `icon:name` adds a custom expand icon as the item's first child
 - The rest of the header line is the item label (plain text)
 
-`wa-accordion` is experimental in Web Awesome, but everything here is declarative and static-site-safe.
+`wa-accordion` is stable in Web Awesome (since 3.13.0), and everything here is declarative and static-site-safe.
 
 ### Tab Placements
 
