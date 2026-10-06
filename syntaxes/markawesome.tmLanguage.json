@@ -9,6 +9,12 @@
       "include": "#cards"
     },
     {
+      "include": "#divider"
+    },
+    {
+      "include": "#stepper"
+    },
+    {
       "include": "#tree"
     },
     {
@@ -114,6 +120,68 @@
           },
           "contentName": "markup.quote.card.markawesome",
           "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
+        }
+      ]
+    },
+    "divider": {
+      "patterns": [
+        {
+          "match": "^(---)[ \\t]+(?![|:\\-\\s]*$)((?:(?:start|center|end|horizontal|vertical|icon:\\S+)[ \\t]+)*)(.*?)(?<=[ \\t])(---)[ \\t]*$",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.divider.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.divider.params.markawesome"
+            },
+            "3": {
+              "name": "markup.other.divider.label.markawesome"
+            },
+            "4": {
+              "name": "punctuation.definition.divider.markawesome"
+            }
+          }
+        }
+      ]
+    },
+    "stepper": {
+      "patterns": [
+        {
+          "begin": "^(>{6})(.*)$",
+          "end": "^(>{6})\\s*$",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.stepper.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.stepper.params.markawesome"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.stepper.markawesome"
+            }
+          },
+          "contentName": "markup.list.stepper.markawesome",
+          "patterns": [
+            {
+              "match": "^([-*+])[ \\t]+(?:(\\[[ xX]\\])[ \\t]+)?((?:(?:active|loading|disabled|neutral|brand|success|warning|danger|none|pulse|bounce|icon:\\S+)[ \\t]+)*)",
+              "captures": {
+                "1": {
+                  "name": "punctuation.definition.list.begin.markdown"
+                },
+                "2": {
+                  "name": "constant.language.stepper.checkbox.markawesome"
+                },
+                "3": {
+                  "name": "entity.name.tag.stepper.step.params.markawesome"
+                }
+              }
+            },
             {
               "include": "text.html.markdown"
             }
@@ -615,7 +683,7 @@
     "alternative-syntax": {
       "patterns": [
         {
-          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-random-content|wa-dialog|wa-popover|wa-tooltip|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-random-content|wa-divider|wa-stepper|wa-dialog|wa-popover|wa-tooltip|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {

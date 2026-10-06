@@ -46,6 +46,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       const components = ['wa-callout', 'wa-card', 'wa-comparison', 'wa-carousel',
                          'wa-video', 'wa-video-playlist',
                          'wa-details', 'wa-accordion', 'wa-tree', 'wa-random-content',
+                         'wa-divider', 'wa-stepper',
                          'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon',
                          'wa-format-date', 'wa-relative-time'];
@@ -328,6 +329,112 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       intervalItem.documentation = new vscode.MarkdownString('Milliseconds between rotations (e.g., `autoplay-interval:3000`)');
       intervalItem.insertText = new vscode.SnippetString('autoplay-interval:${1:3000}');
       completions.push(intervalItem);
+    }
+
+    // Divider leading-token completions on a `--- ` line (and :::wa-divider).
+    // No '-' trigger char: a plain `---` rule must not pop suggestions, so
+    // these appear via Ctrl+Space once the line starts with `--- `.
+    if (linePrefix.match(/^---[ \t]+(?:\S+[ \t]+)*$/) || linePrefix.match(/^:::wa-divider/)) {
+      const placements = [
+        { name: 'start', doc: 'Put the label at the start of the line (`label-placement="start"`)' },
+        { name: 'center', doc: 'Center the label (Web Awesome default)' },
+        { name: 'end', doc: 'Put the label at the end of the line (`label-placement="end"`)' }
+      ];
+      placements.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Divider Label Placement';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+
+      const orientations = [
+        { name: 'horizontal', doc: 'A horizontal rule (default)' },
+        { name: 'vertical', doc: 'An upright separator between inline items, e.g. inside a `::::cluster`' }
+      ];
+      orientations.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Divider Orientation';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+
+      const iconItem = new vscode.CompletionItem('icon:', vscode.CompletionItemKind.Property);
+      iconItem.detail = 'Divider Icon';
+      iconItem.documentation = new vscode.MarkdownString('An icon before the label; on its own it makes an icon-only divider (e.g., `--- icon:star ---`)');
+      iconItem.insertText = new vscode.SnippetString('icon:${1:icon-name}');
+      completions.push(iconItem);
+    }
+
+    // Stepper container completions on the >>>>>> fence (6 chevrons) and
+    // :::wa-stepper. The /^>{6}/ anchor keeps the '>' trigger char inert in
+    // blockquotes and on the `>>>` separator line.
+    if (linePrefix.match(/^>{6}/) || linePrefix.match(/^:::wa-stepper/)) {
+      const orientations = [
+        { name: 'horizontal', doc: 'Steps in a row (default)' },
+        { name: 'vertical', doc: 'Steps in a column — roomier for descriptions' },
+        { name: 'auto', doc: 'Horizontal when there is room, vertical otherwise' }
+      ];
+      orientations.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Stepper Orientation';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+
+      const labelItem = new vscode.CompletionItem('label:', vscode.CompletionItemKind.Property);
+      labelItem.detail = 'Stepper Label';
+      labelItem.documentation = new vscode.MarkdownString('Accessible name for the stepper (e.g., `label:"Checkout progress"`)');
+      labelItem.insertText = new vscode.SnippetString('label:"${1:Progress}"');
+      completions.push(labelItem);
+    }
+
+    // Stepper step-line completions: the checkbox, then leading flags, on a
+    // list line inside a >>>>>> / :::wa-stepper block.
+    if (linePrefix.match(/^[-*+][ \t]+(?:\S+[ \t]+)*$/) && this.isInsideStepper(document, position.line)) {
+      if (linePrefix.match(/^[-*+][ \t]+$/)) {
+        [
+          { name: '[x]', doc: 'Completed step (shows a checkmark)' },
+          { name: '[ ]', doc: 'Not yet completed' }
+        ].forEach(({ name, doc }) => {
+          const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Value);
+          item.detail = 'Step Status';
+          item.documentation = new vscode.MarkdownString(doc);
+          item.insertText = `${name} `;
+          completions.push(item);
+        });
+      }
+
+      const flags = [
+        { name: 'active', doc: 'Make this the current step (otherwise the first incomplete step is current)' },
+        { name: 'loading', doc: 'Show a loading indicator on this step' },
+        { name: 'disabled', doc: 'Render this step disabled' }
+      ];
+      flags.forEach(({ name, doc }) => {
+        const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Property);
+        item.detail = 'Step Flag';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+
+      ['neutral', 'brand', 'success', 'warning', 'danger'].forEach(variant => {
+        const item = new vscode.CompletionItem(variant, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Step Variant';
+        item.documentation = new vscode.MarkdownString(`Color this step's marker (${variant})`);
+        completions.push(item);
+      });
+
+      ['pulse', 'bounce', 'none'].forEach(attention => {
+        const item = new vscode.CompletionItem(attention, vscode.CompletionItemKind.EnumMember);
+        item.detail = 'Step Attention';
+        item.documentation = new vscode.MarkdownString(`Draw attention to this step (${attention})`);
+        completions.push(item);
+      });
+
+      const iconItem = new vscode.CompletionItem('icon:', vscode.CompletionItemKind.Property);
+      iconItem.detail = 'Step Icon';
+      iconItem.documentation = new vscode.MarkdownString('Replace the step number with an icon (e.g., `icon:credit-card`)');
+      iconItem.insertText = new vscode.SnippetString('icon:${1:icon-name}');
+      completions.push(iconItem);
     }
 
     // Dialog completions after ???
@@ -868,5 +975,26 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
     }
 
     return completions.length > 0 ? completions : undefined;
+  }
+
+  // True when `line` sits inside an open >>>>>> or :::wa-stepper block: scan
+  // upward to the nearest fence/opener and check it opens rather than closes.
+  private isInsideStepper(document: vscode.TextDocument, line: number): boolean {
+    let chevronFences = 0;
+    let opener = -1;
+    for (let i = line - 1; i >= 0; i--) {
+      const text = document.lineAt(i).text;
+      if (text.match(/^>{6}/)) {
+        chevronFences++;
+        if (opener === -1) {
+          opener = i;
+        }
+      } else if (text.match(/^:::wa-stepper/)) {
+        return opener === -1;
+      } else if (opener === -1 && text.match(/^:::\s*$/)) {
+        return false;
+      }
+    }
+    return chevronFences % 2 === 1;
   }
 }

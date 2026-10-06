@@ -9,6 +9,8 @@ interface Component {
   variants?: string[];
   appearances?: string[];
   placements?: string[];
+  orientations?: string[];
+  attentions?: string[];
   tooltips?: string[];
   modes?: string[];
   sizes?: string[];
@@ -56,6 +58,24 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
     // Check for card syntax
     if (line.match(/^===/)) {
       const component = components.find(c => c.name === 'Card');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
+    // Check for labeled-divider syntax (`--- label ---` on one line). A plain
+    // `---` and pipe-less table separators like `--- | ---` are not dividers.
+    if (line.match(/^---[ \t]+(?![|:\-\s]*$)\S.*[ \t]---[ \t]*$/)) {
+      const component = components.find(c => c.name === 'Divider');
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
+    // Check for stepper syntax (6-chevron fence). Anchored on all six, so the
+    // `>>>` separator of details/dialog/popover/tooltip never matches.
+    if (line.match(/^>{6}/)) {
+      const component = components.find(c => c.name === 'Stepper');
       if (component) {
         return this.createHover(component);
       }
@@ -231,7 +251,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|tree|random-content|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|tree|random-content|divider|stepper|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -256,6 +276,8 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'accordion': 'Accordion',
       'tree': 'Tree',
       'random-content': 'Random Content',
+      'divider': 'Divider',
+      'stepper': 'Stepper',
       'dialog': 'Dialog',
       'popover': 'Popover',
       'tooltip': 'Tooltip',
@@ -317,6 +339,12 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
     }
     if (component.placements && component.placements.length > 0) {
       md.appendMarkdown(`**Placements:** ${component.placements.map(p => `\`${p}\``).join(', ')}\n\n`);
+    }
+    if (component.orientations && component.orientations.length > 0) {
+      md.appendMarkdown(`**Orientations:** ${component.orientations.map(o => `\`${o}\``).join(', ')}\n\n`);
+    }
+    if (component.attentions && component.attentions.length > 0) {
+      md.appendMarkdown(`**Attention:** ${component.attentions.map(a => `\`${a}\``).join(', ')}\n\n`);
     }
     if (component.tooltips && component.tooltips.length > 0) {
       md.appendMarkdown(`**Tooltip mode:** ${component.tooltips.map(t => `\`${t}\``).join(', ')}\n\n`);

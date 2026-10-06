@@ -15,7 +15,8 @@ import {
   wrapInTooltip,
   wrapInTabGroup,
   wrapInAccordion,
-  wrapInTree
+  wrapInTree,
+  wrapInStepper
 } from './commands/wrapCommands';
 import { imagesToComparison, imagesToCarousel } from './commands/transformCommands';
 
@@ -26,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
   const completionProvider = vscode.languages.registerCompletionItemProvider(
     { language: 'markdown', scheme: 'file' },
     new WebAwesomeCompletionProvider(),
-    ':', '=', '|', '^', '?', '@', '!', '%', '~', '+', '&', '$', '<', '/', '(', '[', ';', '.'
+    ':', '=', '|', '^', '?', '@', '!', '%', '~', '+', '&', '$', '<', '/', '(', '[', ';', '.', '>'
   );
 
   // Register hover provider
@@ -106,6 +107,11 @@ export function activate(context: vscode.ExtensionContext) {
     wrapInTree
   );
 
+  const wrapStepperCmd = vscode.commands.registerCommand(
+    'markawesome.wrapInStepper',
+    wrapInStepper
+  );
+
   const imagesToComparisonCmd = vscode.commands.registerCommand(
     'markawesome.imagesToComparison',
     imagesToComparison
@@ -134,6 +140,7 @@ export function activate(context: vscode.ExtensionContext) {
     wrapTabGroupCmd,
     wrapAccordionCmd,
     wrapTreeCmd,
+    wrapStepperCmd,
     imagesToComparisonCmd,
     imagesToCarouselCmd
   );

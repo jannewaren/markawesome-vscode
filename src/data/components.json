@@ -137,6 +137,30 @@
       "documentation": "Web Awesome's `<wa-random-content>` — a container that shows one or more of its direct children at random (optionally rotating them) and hides the rest, all in Web Awesome's own runtime, so you author **zero JavaScript**. Great for a rotating tips / testimonials / featured-content block on a static site.\n\nThe fence is `......` (6 dots) carrying the params, with each option separated by a `>>>` line, closed by `......`. Use the `:::wa-random-content … :::` alternative form if you prefer. Each option's Markdown is wrapped in a single `<div>` so Web Awesome sees exactly one selectable child per option; empty options are dropped.\n\n**Parameters** (order-independent, on the opening fence line):\n- **mode**: `unique` (WA default), `random`, or `sequence` — as a bare word or `mode:random`\n- **animation**: `none`, `fade`, `fade-up`, `fade-down`, `fade-left`, `fade-right` — as a bare word or `animation:fade`\n- **items:n**: how many children to show at once (a bare integer like `2` also works)\n- **autoplay**: rotate the shown children automatically\n- **autoplay-interval:value**: milliseconds between rotations (e.g., `autoplay-interval:3000`)\n\nThe `>>>` separator is the same glyph used inside details/dialog/popover/tooltip; it only splits options **inside** a `......`/`:::wa-random-content` block."
     },
     {
+      "name": "Divider",
+      "primarySyntax": "--- placement? orientation? icon:name? label ---",
+      "altSyntax": ":::wa-divider placement? orientation? icon:name?",
+      "placements": ["start", "center", "end"],
+      "orientations": ["horizontal", "vertical"],
+      "parameters": ["icon:name"],
+      "description": "Labeled divider — a horizontal (or vertical) rule with a label such as \"or\", a section name, or an icon",
+      "example": "--- or ---",
+      "documentation": "A `<wa-divider>` with a label in its default slot (Web Awesome 3.13.0+). The primary syntax is **one line** with mirrored dashes: `--- label ---`. It needs text between the dashes, so a plain `---` (and `--- ---`) stays an ordinary `<hr>`; a line made only of `|`, `:` and `-` (a pipe-less table separator such as `--- | ---`) is also left alone.\n\n**Leading tokens** (consumed from the left; the rest of the line is the label, as inline Markdown):\n- **start**, **center**, **end**: where the label sits on the line (`label-placement`; WA default `center`)\n- **horizontal**, **vertical**: `orientation` — `vertical` makes an upright separator between inline items, e.g. inside a `::::cluster`\n- **icon:name**: a `<wa-icon>` before the label; on its own (`--- icon:star ---`) it makes an icon-only flourish\n\nTo start a label with one of those words, use the alternative form, whose body is the label (an empty body gives a bare divider):\n\n```\n:::wa-divider start icon:star\nRelease **notes**\n:::\n```\n\nDividers are emitted before any container, so they work inside layouts, cards, callouts, tabs, accordion and dialog bodies."
+    },
+    {
+      "name": "Stepper",
+      "primarySyntax": ">>>>>> orientation? label:\"text\"?",
+      "altSyntax": ":::wa-stepper orientation? label:\"text\"?",
+      "orientations": ["horizontal", "vertical", "auto"],
+      "variants": ["neutral", "brand", "success", "warning", "danger"],
+      "attentions": ["none", "pulse", "bounce"],
+      "flags": ["active", "loading", "disabled"],
+      "parameters": ["label:\"text\"", "[x] (completed)", "icon:name (per step)"],
+      "description": "Display-only progress stepper written as a Markdown task list — checkout flows, onboarding, tutorial progress, process status",
+      "example": ">>>>>> label:\"Checkout progress\"\n- [x] Cart\n- [x] Shipping\n- [ ] Payment\n- [ ] Review\n>>>>>>",
+      "documentation": "A display-only `<wa-stepper>` / `<wa-step>` progress indicator (Web Awesome 3.14.0, **experimental**). The fence is `>>>>>>` (6 chevrons) wrapping a Markdown task list, closed by `>>>>>>` — it never collides with the `>>>` separator used by details, dialog, popover, tooltip and random content. Use the `:::wa-stepper … :::` alternative form if you prefer.\n\n**Container tokens** (on the fence line):\n- **horizontal** (default), **vertical**, **auto**: `orientation`\n- **label:\"text\"**: accessible name for the stepper\n\n**Steps** — each unindented list line (`-`, `*` or `+`):\n- **[x]** / **[X]** marks the step completed (shows a checkmark); `[ ]` or no box means not completed\n- leading flags: **active** (make this the current step), **loading**, **disabled**, a variant (**neutral**, **brand**, **success**, **warning**, **danger**), an attention (**pulse**, **bounce**, **none**), and **icon:name** (replaces the step number)\n- the rest of the line is the step label (inline Markdown)\n- lines indented two or more spaces under a step become its **description**\n\nThe current step is the one flagged `active`, else the first incomplete step, else the last step. Clicking to navigate (`clickable`, `linear`) is deliberately not exposed: these steps have no content panels, so there is nothing to navigate between without JavaScript.\n\n```\n>>>>>> vertical\n- [x] icon:user Create an account\n  Takes about a minute.\n- [ ] active warning pulse Verify your email\n- [ ] Launch\n>>>>>>\n```"
+    },
+    {
       "name": "Dialog",
       "primarySyntax": "???params?",
       "altSyntax": ":::wa-dialog params?",

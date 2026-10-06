@@ -4,6 +4,13 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+### Added
+
+- **Labeled divider** (`--- label ---`, Web Awesome 3.13.0+): Divider entry in the component reference (hover, Insert Component); snippets `wa-divider`, `wa-divider-start` and `wa-divider-vertical`; Ctrl+Space completions on a `--- ` line and `:::wa-divider` for `start`/`center`/`end`, `horizontal`/`vertical` and `icon:` (no `-` trigger char, so typing a plain `---` rule never pops suggestions); hover on a labeled-divider line; and a tmLanguage rule that scopes the dashes, leading tokens and label while leaving plain `---` and `--- | ---` table separators alone.
+- **Display-only stepper** (`>>>>>>` around a task list, Web Awesome 3.14.0): Stepper entry in the component reference; snippets `wa-stepper` and `wa-stepper-vertical`; completions for `horizontal`/`vertical`/`auto` and `label:"…"` on the fence (new `>` trigger char — the fence anchor needs all six, so blockquotes and `>>>` separators stay inert), plus `[x]`/`[ ]`, `active`/`loading`/`disabled`, variants, attention and `icon:` on step lines inside the block; hover on the fence; a tmLanguage rule for the fence and step-line tokens; and a **Markawesome: Wrap in Stepper** command (Command Palette + context menu) that wraps a selected list, turning an ordered list into bullets.
+- `:::wa-divider` and `:::wa-stepper` join the `:::` alternative-syntax completions, hover mapping and grammar.
+- Hover now also lists a component's **Orientations** and **Attention** values (Badge's attention values show up too).
+
 ### Changed
 
 - **Accordion and Random Content are no longer called "experimental".** Web Awesome 3.13.0 promoted `<wa-accordion>` and `<wa-random-content>` to stable, so their component-reference docs (hover) and the README drop the caveat. The ecosystem now targets Web Awesome **3.14.0**.

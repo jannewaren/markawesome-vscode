@@ -28,6 +28,11 @@ Quick insertion of component templates with tab stops:
 | `wa-accordion`       | Multi-section accordion (3 items)   |
 | `wa-accordion-single` | Single-open accordion (mode single) |
 | `wa-tabs`            | Tab group with 3 tabs               |
+| `wa-divider`         | Labeled divider (`--- or ---`)      |
+| `wa-divider-start`   | Divider with a start/end label and icon |
+| `wa-divider-vertical` | Vertical divider between inline items |
+| `wa-stepper`         | Display-only stepper (task list)    |
+| `wa-stepper-vertical` | Vertical stepper with icons and descriptions |
 | `wa-tag`             | Tag component                       |
 | `wa-copy`            | Copy button                         |
 | `wa-copy-placement`  | Copy button with tooltip placement  |
@@ -51,6 +56,8 @@ Intelligent autocomplete suggestions as you type:
 - Type `===` → Suggests card appearance and orientation options
 - Type `^^^` → Suggests details appearance and icon placement
 - Type `//////` → Suggests accordion appearance, mode, icon placement, and `heading:`; `/// ` suggests item `expanded`/`disabled`/`icon:`
+- Type `>>>>>>` → Suggests stepper orientation and `label:"…"`; on a step line inside the block, Ctrl+Space suggests `[x]`/`[ ]`, `active`/`loading`/`disabled`, variants, `pulse`/`bounce`/`none` and `icon:`
+- On a `--- ` line, Ctrl+Space suggests divider `start`/`center`/`end`, `horizontal`/`vertical` and `icon:` (no auto-popup on `-`, so plain `---` rules stay quiet)
 - Type `???` → Suggests dialog parameters
 - Type `@@@` → Suggests tag variants and the `xs`–`xl` size scale
 - Type `!!!` → Suggests badge variants
@@ -80,6 +87,8 @@ Access powerful commands via Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`):
 - `Markawesome: Wrap in Tag` - Wrap selected text in a tag
 - `Markawesome: Wrap in Details` - Wrap selected text in collapsible details
 - `Markawesome: Wrap in Accordion` - Wrap selected text in a multi-section accordion (choose appearance and mode)
+- `Markawesome: Wrap in Tree` - Wrap a selected nested bullet list in a tree
+- `Markawesome: Wrap in Stepper` - Wrap a selected list in a stepper (choose orientation); an ordered list is turned into bullets
 - `Markawesome: Convert Images to Comparison` - Convert 2 selected images to a comparison component
 - `Markawesome: Convert Images to Carousel` - Convert multiple selected images to a carousel
 - `Markawesome: Wrap in Popover` - Wrap selected text in a popover with placement selection
@@ -188,6 +197,41 @@ This item uses a custom expand icon and may contain **markdown** and other compo
 ```
 
 The container fence is `//////` (6 slashes); each item is a `///` block (3 slashes) with an explicit `///` close. Container tokens: `appearance` (outlined/filled/filled-outlined/plain), `mode` (multiple/single/single-collapsible), icon placement (start/end), and `heading:N` (1–6 or none). Item tokens (leading): `expanded`, `disabled`, and `icon:name`; the rest of the header line is the label.
+
+### Divider
+
+```markdown
+--- or ---
+--- start Release notes ---
+--- end icon:clock Updated today ---
+--- icon:star ---
+
+::::cluster
+%%%success
+Approve
+%%%
+--- vertical or ---
+%%%danger
+Reject
+%%%
+::::
+```
+
+A labeled divider is one line with mirrored dashes: `--- label ---`. A plain `---` stays an ordinary rule. Leading tokens set the label placement (`start`/`center`/`end`), the orientation (`horizontal`/`vertical`) and an `icon:name`; the rest is the label. Use `:::wa-divider params?` with the label as its body when a label must start with one of those words.
+
+### Stepper
+
+```markdown
+>>>>>> vertical label:"Checkout progress"
+- [x] Cart
+- [x] Shipping
+  Standard, 3–5 days
+- [ ] pulse icon:credit-card Payment
+- [ ] Review
+>>>>>>
+```
+
+A display-only progress indicator written as a task list inside a `>>>>>>` fence. `[x]` marks a step complete, indented lines become its description, and the first incomplete step is current (or flag one with `active`).
 
 ### Dialog
 
@@ -334,6 +378,33 @@ npm install markawesome
 - The rest of the header line is the item label (plain text)
 
 `wa-accordion` is stable in Web Awesome (since 3.13.0), and everything here is declarative and static-site-safe.
+
+### Divider Options
+
+**Primary** (`--- label ---`, one line) or **alternative** (`:::wa-divider params?` … `:::`, body = label):
+
+- **Label placement**: `start`, `center` (default), `end`
+- **Orientation**: `horizontal` (default), `vertical`
+- **Icon**: `icon:name` before the label, or on its own for an icon-only divider
+- Plain `---`, `--- ---` and pipe-less table separators (`--- | ---`) are not dividers
+
+### Stepper Options
+
+**Container** (`>>>>>>` … `>>>>>>`, or `:::wa-stepper` … `:::`):
+
+- **Orientation**: `horizontal` (default), `vertical`, `auto`
+- **Label**: `label:"text"` — accessible name
+
+**Steps** (unindented `-`/`*`/`+` list lines):
+
+- **Status**: `[x]` completed, `[ ]` (or no box) not yet
+- **Flags** (leading): `active`, `loading`, `disabled`
+- **Variants**: `neutral`, `brand`, `success`, `warning`, `danger`
+- **Attention**: `pulse`, `bounce`, `none`
+- **Icon**: `icon:name` replaces the step number
+- Lines indented two or more spaces become the step description
+
+`wa-stepper` is experimental in Web Awesome 3.14.0. It is display-only here: clicking between steps (`clickable`, `linear`) is not exposed.
 
 ### Tab Placements
 

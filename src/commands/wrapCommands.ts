@@ -392,3 +392,33 @@ export async function wrapInTree() {
     editBuilder.replace(selection, wrapped);
   });
 }
+
+export async function wrapInStepper() {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor || editor.selection.isEmpty) {
+    vscode.window.showErrorMessage('Please select a list to wrap');
+    return;
+  }
+
+  const orientationOptions = ['horizontal (default)', 'vertical', 'auto'];
+  const orientation = await vscode.window.showQuickPick(orientationOptions, {
+    placeHolder: 'Stepper orientation (optional)'
+  });
+
+  if (orientation === undefined) {
+    return;
+  }
+
+  const selection = editor.selection;
+  const text = editor.document.getText(selection);
+
+  // Steps are unordered list lines, so renumber an ordered list (`1.`/`1)`)
+  // as bullets; `[x]` checkboxes and indented description lines pass through.
+  const steps = text.replace(/^\d+[.)][ \t]+/gm, '- ');
+  const fenceToken = orientation.startsWith('horizontal') ? '' : ` ${orientation}`;
+  const wrapped = `>>>>>>${fenceToken}\n${steps}\n>>>>>>`;
+
+  editor.edit(editBuilder => {
+    editBuilder.replace(selection, wrapped);
+  });
+}
