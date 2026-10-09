@@ -4,6 +4,8 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-10-09
+
 ### Added
 
 - **Labeled divider** (`--- label ---`, Web Awesome 3.13.0+): Divider entry in the component reference (hover, Insert Component); snippets `wa-divider`, `wa-divider-start` and `wa-divider-vertical`; Ctrl+Space completions on a `--- ` line and `:::wa-divider` for `start`/`center`/`end`, `horizontal`/`vertical` and `icon:` (no `-` trigger char, so typing a plain `---` rule never pops suggestions); hover on a labeled-divider line; and a tmLanguage rule that scopes the dashes, leading tokens and label while leaving plain `---` and `--- | ---` table separators alone.
