@@ -404,7 +404,7 @@ npm install markawesome
 - **Icon**: `icon:name` replaces the step number
 - Lines indented two or more spaces become the step description
 
-`wa-stepper` is experimental in Web Awesome 3.14.0. It is display-only here: clicking between steps (`clickable`, `linear`) is not exposed.
+`wa-stepper` is stable as of Web Awesome 3.15.0. It is display-only here: clicking between steps (`clickable`, `linear`) is not exposed.
 
 ### Tab Placements
 

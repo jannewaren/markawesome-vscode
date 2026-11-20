@@ -4,6 +4,10 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+### Changed
+
+- **Web Awesome 3.15.0.** `<wa-stepper>` is stable as of Web Awesome 3.15.0, so the Stepper hover/reference entry and the README drop the "experimental" caveat.
+
 ## [0.15.0] - 2026-10-09
 
 ### Added
