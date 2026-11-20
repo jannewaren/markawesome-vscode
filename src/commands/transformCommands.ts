@@ -101,3 +101,43 @@ export async function imagesToCarousel() {
     editBuilder.replace(selection, carousel);
   });
 }
+
+export async function imagesToLightbox() {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor || editor.selection.isEmpty) {
+    vscode.window.showErrorMessage('Please select image markdown lines');
+    return;
+  }
+
+  const selection = editor.selection;
+  const text = editor.document.getText(selection);
+
+  // Keep each image line as written: a plain image `![alt](src "caption")` or a
+  // linked image `[![alt](thumb)](full "caption")`, so captions and separate
+  // thumbnails survive. Several images on one line are split onto their own.
+  const imageRegex = /\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)|!\[[^\]]*\]\([^)]+\)/g;
+  const images = text.match(imageRegex) ?? [];
+
+  if (images.length < 1) {
+    vscode.window.showErrorMessage('Please select at least 1 image for a lightbox');
+    return;
+  }
+
+  const options = await vscode.window.showQuickPick(
+    ['thumbnails', 'loop', 'no-nav', 'no-counter', 'no-zoom', 'landscape', 'portrait', 'natural'],
+    {
+      placeHolder: 'Select lightbox options (optional)',
+      canPickMany: true
+    }
+  );
+  if (options === undefined) {
+    return;
+  }
+
+  const optionsStr = options.join(' ');
+  const lightbox = `::::lightbox${optionsStr ? ' ' + optionsStr : ''}\n${images.join('\n')}\n::::`;
+
+  editor.edit((editBuilder: vscode.TextEditorEdit) => {
+    editBuilder.replace(selection, lightbox);
+  });
+}

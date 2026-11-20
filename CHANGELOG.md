@@ -4,6 +4,14 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+### Added
+
+- **Lightbox** (`::::lightbox` around image lines, Web Awesome 3.15.0, experimental): Lightbox entry in the component reference (hover, Insert Component); `wa-lightbox` snippet; completions on the fence for `loop`, `thumbnails`, `no-nav`, `no-counter`, `no-zoom`, `square`/`landscape`/`portrait`/`natural`, `label:"…"` and the grid's `gap:`/`min:`/`align:`/`justify:`; hover on `::::lightbox`; the fence joins the layout grammar rule; and a **Markawesome: Convert Images to Lightbox** command (Command Palette + context menu) that keeps each image line as written, so captions and linked thumbnails survive.
+- **Counter** (`[[[ date countdown|countup … ]]]`, Web Awesome 3.15.0, experimental): Counter reference entry; `wa-countdown` and `wa-countup` snippets; `countdown`/`countup` completions inside `[[[`, then `largest:`, `smallest:`, `format:`, `no-labels`, `delimiter:`, `label:`, `finished:`; `:::wa-counter` completions (incl. `up`).
+- **Number ticker** (`[[[ 87% ]]]`, `[[[ 18452.75 currency:EUR ]]]`, Web Awesome 3.15.0, experimental): Number Ticker reference entry; `wa-ticker` and `wa-ticker-currency` snippets; after a leading number inside `[[[` the completions switch to `currency:`, `display:`, `percent`, `from:`, `duration:`, `delay:`, `easing:`, `eager`, `no-grouping`, `decimals:`; `:::wa-number-ticker` completions.
+- Hover on an inline `[[[ … ]]]` now picks Counter, Number Ticker, Relative Time or Format Date the same way the engines do. `:::wa-counter`, `:::wa-number-ticker` and `:::wa-lightbox` join the `:::` alternative-syntax completions and hover mapping.
+- New inline `[[[ … ]]]` grammar rule: brackets, the `countdown`/`countup`/`relative` mode keywords and a leading ticker number are scoped.
+
 ### Changed
 
 - **Web Awesome 3.15.0.** `<wa-stepper>` is stable as of Web Awesome 3.15.0, so the Stepper hover/reference entry and the README drop the "experimental" caveat.

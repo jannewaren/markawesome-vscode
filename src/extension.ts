@@ -18,7 +18,7 @@ import {
   wrapInTree,
   wrapInStepper
 } from './commands/wrapCommands';
-import { imagesToComparison, imagesToCarousel } from './commands/transformCommands';
+import { imagesToComparison, imagesToCarousel, imagesToLightbox } from './commands/transformCommands';
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('Markawesome extension is now active');
@@ -122,6 +122,11 @@ export function activate(context: vscode.ExtensionContext) {
     imagesToCarousel
   );
 
+  const imagesToLightboxCmd = vscode.commands.registerCommand(
+    'markawesome.imagesToLightbox',
+    imagesToLightbox
+  );
+
   // Add to subscriptions
   context.subscriptions.push(
     completionProvider,
@@ -142,7 +147,8 @@ export function activate(context: vscode.ExtensionContext) {
     wrapTreeCmd,
     wrapStepperCmd,
     imagesToComparisonCmd,
-    imagesToCarouselCmd
+    imagesToCarouselCmd,
+    imagesToLightboxCmd
   );
 }
 

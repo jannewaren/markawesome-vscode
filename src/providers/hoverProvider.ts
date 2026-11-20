@@ -213,9 +213,21 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for inline timestamp syntax [[[ ... ]]] anywhere on the line.
     // A leading `relative` token inside the brackets means relative-time.
+    // `countdown`/`countup` means a counter; a leading number means a ticker.
     if (line.match(/\[\[\[[^\]]*\]\]\]/)) {
+      const isCounter = line.match(/\[\[\[[^\]]*\b(countdown|countup)\b/);
+      const isTicker = line.match(/\[\[\[[ \t]*-?\d+(?:\.\d+)?%?(?:[ \t]|\]\]\])/);
       const isRelative = line.match(/\[\[\[[^\]]*\brelative\b/);
-      const component = components.find(c => c.name === (isRelative ? 'Relative Time' : 'Format Date'));
+      const name = isCounter ? 'Counter' : isTicker ? 'Number Ticker' : isRelative ? 'Relative Time' : 'Format Date';
+      const component = components.find(c => c.name === name);
+      if (component) {
+        return this.createHover(component);
+      }
+    }
+
+    // Check for lightbox syntax (::::lightbox)
+    if (line.match(/^::::lightbox\b/)) {
+      const component = components.find(c => c.name === 'Lightbox');
       if (component) {
         return this.createHover(component);
       }
@@ -251,7 +263,7 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
 
     // Check for alternative syntax
     if (line.match(/^:::wa-/)) {
-      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|tree|random-content|divider|stepper|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time)/);
+      const match = line.match(/^:::wa-(callout|card|comparison|carousel|video-playlist|video|details|accordion|tree|random-content|divider|stepper|dialog|popover|tooltip|tabs|tag|copy-button|badge|button|icon|format-date|relative-time|counter|number-ticker|lightbox)/);
       if (match) {
         const componentName = this.mapAltSyntaxToName(match[1]);
         const component = components.find(c => c.name === componentName);
@@ -288,7 +300,10 @@ export class WebAwesomeHoverProvider implements vscode.HoverProvider {
       'button': 'Button',
       'icon': 'Icon',
       'format-date': 'Format Date',
-      'relative-time': 'Relative Time'
+      'relative-time': 'Relative Time',
+      'counter': 'Counter',
+      'number-ticker': 'Number Ticker',
+      'lightbox': 'Lightbox'
     };
     return mapping[altName] || altName;
   }

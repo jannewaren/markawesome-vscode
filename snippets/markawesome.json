@@ -791,6 +791,37 @@
     "body": "[[[relative ${1:2026-06-20}]]]",
     "description": "Insert a relative \"3 days ago\" timestamp (<wa-relative-time>)"
   },
+  "Countdown": {
+    "prefix": "wa-countdown",
+    "body": "[[[${1:2026-12-24T18:00:00Z} countdown finished:\"${2:We're live!}\"]]]",
+    "description": "Insert a live countdown to a date (<wa-counter>)"
+  },
+  "Count Up": {
+    "prefix": "wa-countup",
+    "body": "[[[${1:2020-03-01} countup largest:${2|years,months,days,hours|}]]]",
+    "description": "Insert a live count-up from a date (<wa-counter direction=\"up\">)"
+  },
+  "Number Ticker": {
+    "prefix": "wa-ticker",
+    "body": "[[[${1:12000}${2: from:0}]]]",
+    "description": "Insert a number that counts up on scroll-in (<wa-number-ticker>); use 87% for a percentage"
+  },
+  "Number Ticker Currency": {
+    "prefix": "wa-ticker-currency",
+    "body": "[[[${1:18452.75} currency:${2:EUR}]]]",
+    "description": "Insert a currency number ticker (<wa-number-ticker type=\"currency\">)"
+  },
+  "Lightbox": {
+    "prefix": "wa-lightbox",
+    "body": [
+      "::::lightbox ${1:thumbnails loop} min:${2:10rem}",
+      "![${3:Alt text}](${4:image-1.jpg} \"${5:Caption}\")",
+      "![${6:Alt text}](${7:image-2.jpg} \"${8:Caption}\")",
+      "[![${9:Video poster}](${10:poster.jpg})](${11:clip.mp4} \"${12:Caption}\")",
+      "::::"
+    ],
+    "description": "Insert an image/video gallery that opens a full-screen viewer (<wa-lightbox>)"
+  },
   "Alternative Callout": {
     "prefix": "wa-alt-callout",
     "body": [

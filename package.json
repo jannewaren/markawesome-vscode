@@ -103,6 +103,10 @@
       {
         "command": "markawesome.imagesToCarousel",
         "title": "Markawesome: Convert Images to Carousel"
+      },
+      {
+        "command": "markawesome.imagesToLightbox",
+        "title": "Markawesome: Convert Images to Lightbox"
       }
     ],
     "menus": {
@@ -195,6 +199,11 @@
         },
         {
           "command": "markawesome.imagesToCarousel",
+          "group": "3_transform",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "markawesome.imagesToLightbox",
           "group": "3_transform",
           "when": "editorHasSelection"
         }

@@ -67,6 +67,9 @@
     },
     {
       "include": "#separator"
+    },
+    {
+      "include": "#timestamp"
     }
   ],
   "repository": {
@@ -624,10 +627,39 @@
         }
       ]
     },
+    "timestamp": {
+      "patterns": [
+        {
+          "comment": "Inline [[[ … ]]]: a date, relative time, counter (countdown/countup) or number ticker (leading number)",
+          "match": "(\\[\\[\\[)([^\\]\\r\\n]+?)(\\]\\]\\])",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.timestamp.markawesome"
+            },
+            "2": {
+              "name": "entity.name.tag.timestamp.params.markawesome",
+              "patterns": [
+                {
+                  "match": "\\b(countdown|countup|relative)\\b",
+                  "name": "keyword.other.timestamp.mode.markawesome"
+                },
+                {
+                  "match": "^\\s*-?\\d+(?:\\.\\d+)?%?(?=\\s|$)",
+                  "name": "constant.numeric.ticker.markawesome"
+                }
+              ]
+            },
+            "3": {
+              "name": "punctuation.definition.timestamp.markawesome"
+            }
+          }
+        }
+      ]
+    },
     "layouts": {
       "patterns": [
         {
-          "begin": "^(::::)(grid|stack|cluster|split|flank|frame)((?:\\s+\\S+)*)\\s*$",
+          "begin": "^(::::)(grid|stack|cluster|split|flank|frame|lightbox)((?:\\s+\\S+)*)\\s*$",
           "end": "^(::::)\\s*$",
           "beginCaptures": {
             "1": {
@@ -683,7 +715,7 @@
     "alternative-syntax": {
       "patterns": [
         {
-          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-random-content|wa-divider|wa-stepper|wa-dialog|wa-popover|wa-tooltip|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
+          "begin": "^(:::)(wa-callout|wa-card|wa-comparison|wa-carousel|wa-details|wa-accordion|wa-random-content|wa-divider|wa-stepper|wa-lightbox|wa-dialog|wa-popover|wa-tooltip|wa-tabs|wa-tag|wa-copy-button|wa-badge|wa-button|wa-icon)(?:\\s+(.*))?$",
           "end": "^(:::)\\s*$",
           "beginCaptures": {
             "1": {

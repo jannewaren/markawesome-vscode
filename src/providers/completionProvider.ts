@@ -49,7 +49,8 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
                          'wa-divider', 'wa-stepper',
                          'wa-dialog', 'wa-popover', 'wa-tabs', 'wa-tag',
                          'wa-copy-button', 'wa-badge', 'wa-button', 'wa-icon',
-                         'wa-format-date', 'wa-relative-time'];
+                         'wa-format-date', 'wa-relative-time', 'wa-counter',
+                         'wa-number-ticker', 'wa-lightbox'];
       components.forEach(comp => {
         const item = new vscode.CompletionItem(comp, vscode.CompletionItemKind.Class);
         item.detail = 'Web Awesome Component';
@@ -700,6 +701,29 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       completions.push(syncItem);
     };
 
+    const pushCounterTokens = () => {
+      pushDateToken('largest:', 'Counter Largest Unit', 'Largest unit shown; time beyond it rolls up into it', 'largest:${1|years,months,days,hours,minutes,seconds|}');
+      pushDateToken('smallest:', 'Counter Smallest Unit', 'Smallest unit shown; time below it is dropped', 'smallest:${1|years,months,days,hours,minutes,seconds|}');
+      pushDateToken('format:', 'Counter Label Format', 'Unit label style: long (default), short, narrow', 'format:${1|long,short,narrow|}');
+      pushDateToken('no-labels', 'Counter Flag', 'Hide the unit labels (`without-labels`)');
+      pushDateToken('delimiter:', 'Counter Delimiter', 'Text between units, e.g. `delimiter:":"` for a clock look', 'delimiter:"${1::}"');
+      pushDateToken('label:', 'Counter Label', 'Accessible name for the counter', 'label:"${1:Time remaining}"');
+      pushDateToken('finished:', 'Counter Finished Text', 'Shown in place of the units once a countdown reaches zero (the `finished` slot)', 'finished:"${1:We\'re live!}"');
+    };
+
+    const pushTickerTokens = () => {
+      pushDateToken('currency:', 'Ticker Currency', 'ISO 4217 code; formats as currency (e.g. `currency:EUR`)', 'currency:${1:EUR}');
+      pushDateToken('display:', 'Ticker Currency Display', 'symbol (default), narrowSymbol, code, name', 'display:${1|symbol,narrowSymbol,code,name|}');
+      pushDateToken('percent', 'Ticker Type', 'Format the value as a percentage, as written (`87%` shifts for you)');
+      pushDateToken('from:', 'Ticker Start Value', 'Number to count from (`start-value`)', 'from:${1:0}');
+      pushDateToken('duration:', 'Ticker Duration', 'Longest count in milliseconds (default 2000)', 'duration:${1:2000}');
+      pushDateToken('delay:', 'Ticker Delay', 'Milliseconds to wait before counting', 'delay:${1:0}');
+      pushDateToken('easing:', 'Ticker Easing', 'Any CSS easing; quote values with spaces', 'easing:${1|linear,ease-in-out,ease-out|}');
+      pushDateToken('eager', 'Ticker Flag', 'Start counting immediately instead of on scroll-in');
+      pushDateToken('no-grouping', 'Ticker Flag', 'Turn off grouping separators (`without-grouping`)');
+      pushDateToken('decimals:', 'Ticker Decimals', 'Fixed number of fraction digits (0–100)', 'decimals:${1:2}');
+    };
+
     const pushLangToken = () => {
       pushDateToken('lang:', 'Locale', 'Locale for formatting (e.g., fr, en-US). `locale:` is an alias.', 'lang:${1:en-US}');
     };
@@ -709,8 +733,32 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       relativeItem.detail = 'Relative Time Mode';
       relativeItem.documentation = new vscode.MarkdownString('Switch this inline timestamp to a relative "3 days ago" phrase (`<wa-relative-time>`)');
       completions.push(relativeItem);
-      pushFormatDateTokens();
-      pushRelativeTokens();
+      const modeItems: Array<[string, string]> = [
+        ['countdown', 'Count down to this date (`<wa-counter>`)'],
+        ['countup', 'Count up from this date (`<wa-counter direction="up">`)'],
+      ];
+      modeItems.forEach(([label, doc]) => {
+        const item = new vscode.CompletionItem(label, vscode.CompletionItemKind.Keyword);
+        item.detail = 'Counter Mode';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+      // A leading number (e.g. `[[[ 87% ]]]`) makes a number ticker instead.
+      if (/\[\[\[\s*-?\d+(?:\.\d+)?%?\s/.test(linePrefix) && !/\[\[\[\s*\d{4}-/.test(linePrefix)) {
+        pushTickerTokens();
+      } else if (/\b(countdown|countup)\b/.test(linePrefix)) {
+        pushCounterTokens();
+      } else {
+        pushFormatDateTokens();
+        pushRelativeTokens();
+      }
+      pushLangToken();
+    } else if (linePrefix.match(/^:::wa-counter\b/)) {
+      pushDateToken('up', 'Counter Direction', 'Count up from the date (default is down)');
+      pushCounterTokens();
+      pushLangToken();
+    } else if (linePrefix.match(/^:::wa-number-ticker\b/)) {
+      pushTickerTokens();
       pushLangToken();
     } else if (linePrefix.match(/^:::wa-format-date\b/)) {
       pushFormatDateTokens();
@@ -728,7 +776,8 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
         { name: 'cluster', doc: 'Inline wrapping items (tag clouds, button rows)' },
         { name: 'split', doc: 'Distribute items to opposite ends' },
         { name: 'flank', doc: 'Sidebar + main content layout' },
-        { name: 'frame', doc: 'Aspect-ratio container for media' }
+        { name: 'frame', doc: 'Aspect-ratio container for media' },
+        { name: 'lightbox', doc: 'Image/video gallery that opens a full-screen viewer (a wa-grid of thumbnails)' }
       ];
       layoutTypes.forEach(({ name, doc }) => {
         const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Module);
@@ -746,8 +795,34 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
       });
     }
 
+    // Lightbox flags after ::::lightbox / :::wa-lightbox (grid gap:/min: below)
+    if (linePrefix.match(/^(::::lightbox|:::wa-lightbox)\s+\S*$/)) {
+      const flags: Array<[string, string]> = [
+        ['loop', 'Wrap around past the first/last item'],
+        ['thumbnails', 'Show a thumbnail strip in the viewer (`with-thumbnails`)'],
+        ['no-nav', 'Hide the previous/next buttons (`without-navigation`)'],
+        ['no-counter', 'Hide the "1 of N" counter (`without-counter`)'],
+        ['no-zoom', 'Disable zooming (`without-zoom`)'],
+        ['square', 'Square-cropped thumbnails (default)'],
+        ['landscape', '4 / 3 thumbnails'],
+        ['portrait', '3 / 4 thumbnails'],
+        ['natural', 'Uncropped thumbnails'],
+      ];
+      flags.forEach(([label, doc]) => {
+        const item = new vscode.CompletionItem(label, vscode.CompletionItemKind.Property);
+        item.detail = 'Lightbox';
+        item.documentation = new vscode.MarkdownString(doc);
+        completions.push(item);
+      });
+      const labelItem = new vscode.CompletionItem('label:', vscode.CompletionItemKind.Property);
+      labelItem.detail = 'Lightbox Label';
+      labelItem.documentation = new vscode.MarkdownString('Accessible name for the viewer');
+      labelItem.insertText = new vscode.SnippetString('label:"${1:Gallery}"');
+      completions.push(labelItem);
+    }
+
     // Layout attribute completions after ::::type
-    if (linePrefix.match(/::::(grid|stack|cluster|split|flank|frame|wa-grid|wa-stack|wa-cluster|wa-split|wa-flank|wa-frame)\s+\S*$/)) {
+    if (linePrefix.match(/(::::(grid|stack|cluster|split|flank|frame|wa-grid|wa-stack|wa-cluster|wa-split|wa-flank|wa-frame)|::::lightbox|:::wa-lightbox)\s+\S*$/)) {
       const gaps = ['0', '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'];
       gaps.forEach(gap => {
         const item = new vscode.CompletionItem(`gap:${gap}`, vscode.CompletionItemKind.Property);
@@ -774,7 +849,7 @@ export class WebAwesomeCompletionProvider implements vscode.CompletionItemProvid
     }
 
     // Grid-specific: min attribute
-    if (linePrefix.match(/::::(grid|wa-grid)\s+\S*$/)) {
+    if (linePrefix.match(/(::::(grid|wa-grid|lightbox)|:::wa-lightbox)\s+\S*$/)) {
       const minItem = new vscode.CompletionItem('min:', vscode.CompletionItemKind.Property);
       minItem.detail = 'Grid Min Column Size';
       minItem.documentation = new vscode.MarkdownString('Minimum column size (e.g., `min:300px`, `min:20ch`)');

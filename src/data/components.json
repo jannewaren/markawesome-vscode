@@ -298,6 +298,40 @@
       "documentation": "Render a relative \"3 days ago\"-style phrase with `<wa-relative-time>`, optionally live-ticking. The browser formats it via `Intl.RelativeTimeFormat`.\n\n**Inline syntax** (primary): prefix the date with `relative`:\n```\nUpdated [[[relative 2026-06-20]]].\n```\n\n**Block syntax** (alternative):\n```\n:::wa-relative-time 2026-06-20 sync\n:::\n```\n\n**Parameters:**\n- **format:long|short|narrow** — phrasing width (default long)\n- **numeric:auto|always** — `auto` allows \"yesterday\"/\"tomorrow\"; `always` forces \"1 day ago\" (default auto)\n- **sync** — keep the phrase ticking live as time passes\n- **lang:**/**locale:** — the locale\n\nDate-formatting tokens (`style:`, `time:`, `month:`, …) are ignored in relative mode.\n\n**Static-site note:** like `<wa-icon>`, it renders generated text into shadow DOM with no light-DOM fallback — with Web Awesome's JS disabled it shows nothing."
     },
     {
+      "name": "Counter",
+      "primarySyntax": "[[[date countdown|countup largest:? smallest:? format:? no-labels? delimiter:\"…\"? label:\"…\"? finished:\"…\"? lang:?]]]",
+      "inlineSyntax": "[[[2026-12-24 countdown]]]",
+      "altSyntax": ":::wa-counter date up? tokens?",
+      "flags": ["countdown", "countup", "no-labels"],
+      "parameters": ["largest:years|months|days|hours|minutes|seconds", "smallest:years|months|days|hours|minutes|seconds", "format:long|short|narrow", "delimiter:\"text\"", "label:\"text\"", "finished:\"text\"", "lang:locale (or locale:)"],
+      "description": "Live countdown to / count up from a date (<wa-counter>)",
+      "example": ":::wa-counter 2027-01-01T00:00:00Z largest:hours no-labels delimiter:\":\"\n:::",
+      "inlineExample": "Launch in [[[ 2026-12-24T18:00:00Z countdown finished:\"We're live!\" ]]]",
+      "documentation": "A live `<wa-counter>` (Web Awesome 3.15.0, **experimental**) that counts down to, or up from, a date. It is a mode of the `[[[ … ]]]` date syntax: add **countdown** or **countup**.\n\n```\nLaunch in [[[ 2026-12-24T18:00:00Z countdown finished:\"We're live!\" ]]]\nUp for [[[ 2020-03-01 countup largest:years smallest:days format:short ]]]\n```\n\n**Block syntax:** `:::wa-counter <date> tokens` then `:::` (counts down unless `up`).\n\n**Tokens:**\n- **largest:** / **smallest:** `years|months|days|hours|minutes|seconds` — the unit range\n- **format:long|short|narrow** — unit label style\n- **no-labels** — hide unit labels; **delimiter:\":\"** — text between units (clock look)\n- **label:\"text\"** — accessible name\n- **finished:\"text\"** — shown instead of the units once a countdown reaches zero\n- **lang:**/**locale:**\n\nQuote values with spaces: `key:\"…\"`.\n\n**Static-site note:** renders into shadow DOM — with Web Awesome's JS disabled it shows nothing."
+    },
+    {
+      "name": "Number Ticker",
+      "primarySyntax": "[[[number currency:? display:? percent? from:? duration:? delay:? easing:? eager? no-grouping? decimals:? lang:?]]]",
+      "inlineSyntax": "[[[87%]]]",
+      "altSyntax": ":::wa-number-ticker number tokens?",
+      "flags": ["percent", "eager", "no-grouping"],
+      "parameters": ["currency:XXX", "display:symbol|narrowSymbol|code|name", "from:N", "duration:MS", "delay:MS", "easing:VALUE", "decimals:N", "lang:locale (or locale:)"],
+      "description": "Number that counts up when scrolled into view (<wa-number-ticker>)",
+      "example": ":::wa-number-ticker 12000 from:10000\n:::",
+      "inlineExample": "Raised [[[ 18452.75 currency:EUR ]]] so far",
+      "documentation": "A `<wa-number-ticker>` (Web Awesome 3.15.0, **experimental**) that counts up to a number when it scrolls into view. Start `[[[ … ]]]` with a number:\n\n```\nRaised [[[ 18452.75 currency:EUR ]]] so far\n[[[ 87% ]]] satisfaction\n[[[ 12000 from:10000 duration:1500 ]]] users\n```\n\n**Block syntax:** `:::wa-number-ticker <number> tokens` then `:::`.\n\n`87%` becomes `type=\"percent\" value=\"0.87\"` (shifted at build time).\n\n**Tokens:**\n- **currency:XXX** — ISO 4217 code; **display:symbol|narrowSymbol|code|name**\n- **percent** — percent formatting with the value as written\n- **from:N** — start value; **duration:MS**, **delay:MS**, **easing:VALUE**\n- **eager** — start immediately instead of on scroll-in\n- **no-grouping** — no thousands separators\n- **decimals:N** — fixed fraction digits\n- **lang:**/**locale:**\n\n**Static-site note:** renders into shadow DOM — with Web Awesome's JS disabled it shows nothing."
+    },
+    {
+      "name": "Lightbox",
+      "primarySyntax": "::::lightbox loop? thumbnails? no-nav? no-counter? no-zoom? square|landscape|portrait|natural? gap:? min:? label:\"…\"?",
+      "altSyntax": ":::wa-lightbox params?",
+      "flags": ["loop", "thumbnails", "no-nav", "no-counter", "no-zoom", "square", "landscape", "portrait", "natural"],
+      "parameters": ["label:\"text\"", "gap:SIZE", "min:CSS", "align:VALUE", "justify:VALUE"],
+      "description": "Image/video gallery: a grid of thumbnails opening a full-screen viewer (<wa-lightbox>)",
+      "example": "::::lightbox thumbnails\n![Tram](tram.jpg \"Tram 28\")\n[![Clip](poster.jpg)](clip.mp4 \"Clip\")\n::::",
+      "documentation": "A `<wa-lightbox>` gallery (Web Awesome 3.15.0, **experimental**): a grid of thumbnails that open a full-screen viewer with zoom, swipe and keyboard navigation. The fence is `::::lightbox` (4 colons — it *is* a `wa-grid`) closed by `::::`; or use `:::wa-lightbox … :::`.\n\n**Items** — one per line:\n- `![alt](src \"caption\")` — the image is both thumbnail and full-size\n- `[![alt](thumb.jpg)](full.jpg \"caption\")` — a linked image sets a separate thumbnail\n- a link to `.mp4`, `.webm`, `.mov`, `.ogv` or `.m4v` becomes a **video** item\n- the caption is the link title, else the image title; other lines render as Markdown in place\n\n**Fence tokens:** **loop**, **thumbnails** (thumbnail strip), **no-nav**, **no-counter**, **no-zoom**, **label:\"text\"**; thumbnail crop **square** (default), **landscape**, **portrait**, **natural**; grid **gap:SIZE**, **min:CSS**, **align:**, **justify:**.\n\nEvery item's `src` is a real link, so the gallery still works without JavaScript.\n\n```\n::::lightbox thumbnails loop min:10rem\n![Tram](tram.jpg \"Tram 28\")\n[![Bridge](bridge-thumb.jpg)](bridge.jpg \"25 de Abril\")\n[![Drone](poster.jpg)](drone.mp4 \"From above\")\n::::\n```"
+    },
+    {
       "name": "Grid Layout",
       "primarySyntax": "::::grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",
       "altSyntax": "::::wa-grid gap:SIZE? min:CSS? align:VALUE? justify:VALUE?",

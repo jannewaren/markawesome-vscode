@@ -33,6 +33,11 @@ Quick insertion of component templates with tab stops:
 | `wa-divider-vertical` | Vertical divider between inline items |
 | `wa-stepper`         | Display-only stepper (task list)    |
 | `wa-stepper-vertical` | Vertical stepper with icons and descriptions |
+| `wa-lightbox`        | Image/video gallery (wa-lightbox)   |
+| `wa-countdown`       | Live countdown to a date            |
+| `wa-countup`         | Live count-up from a date           |
+| `wa-ticker`          | Number ticker                       |
+| `wa-ticker-currency` | Currency number ticker              |
 | `wa-tag`             | Tag component                       |
 | `wa-copy`            | Copy button                         |
 | `wa-copy-placement`  | Copy button with tooltip placement  |
@@ -64,6 +69,8 @@ Intelligent autocomplete suggestions as you type:
 - Type `%%%` → Suggests button variants, the `xs`–`xl` size scale, and link `target`/`download`
 - Type `<<<` → Suggests copy-button placement, `tooltip:full|copy|none` mode, labels, duration, and `from`
 - Type `~~~~~~` → Suggests carousel parameters (including `autoplay-interval`)
+- Type `::::lightbox ` → Suggests `loop`, `thumbnails`, `no-nav`, `no-counter`, `no-zoom`, thumbnail shapes, `label:"…"` and the grid's `gap:`/`min:`
+- Inside `[[[ … ]]]` → Suggests `countdown`/`countup` (counter) and `relative`; after `countdown`/`countup` it offers `largest:`, `smallest:`, `format:`, `no-labels`, `delimiter:`, `label:`, `finished:`; after a leading number (`[[[ 87% `) it offers the ticker's `currency:`, `display:`, `from:`, `duration:`, `delay:`, `easing:`, `eager`, `no-grouping`, `decimals:`
 - Type `&&&` → Suggests popover placement and options
 - Type `(((` → Suggests tooltip placement and `distance:`
 - Type `$$$` → Inline icon hint; `:::wa-icon <name> ` suggests family/variant/animation
@@ -91,6 +98,7 @@ Access powerful commands via Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`):
 - `Markawesome: Wrap in Stepper` - Wrap a selected list in a stepper (choose orientation); an ordered list is turned into bullets
 - `Markawesome: Convert Images to Comparison` - Convert 2 selected images to a comparison component
 - `Markawesome: Convert Images to Carousel` - Convert multiple selected images to a carousel
+- `Markawesome: Convert Images to Lightbox` - Turn selected images (plain or linked thumbnails, captions kept) into a `::::lightbox` gallery
 - `Markawesome: Wrap in Popover` - Wrap selected text in a popover with placement selection
 - `Markawesome: Wrap in Tooltip` - Wrap selected text as a tooltip anchor with placement selection
 
@@ -165,6 +173,28 @@ Learn how to use Web Awesome components in your Jekyll site.
 ~~~
 ~~~~~~
 ```
+
+### Lightbox
+
+```markdown
+::::lightbox thumbnails loop min:10rem
+![Tram](tram.jpg "Tram 28 in Alfama")
+[![Bridge](bridge-thumb.jpg)](bridge-full.jpg "25 de Abril")
+[![Drone](drone-poster.jpg)](drone.mp4 "From above")
+::::
+```
+
+Each image line is an item and its title is the caption; a linked image sets a separate thumbnail, and a video link becomes a video item. `<wa-lightbox>` is experimental in Web Awesome 3.15.0.
+
+### Counter and Number Ticker
+
+```markdown
+Launch in [[[ 2026-12-24T18:00:00Z countdown finished:"We're live!" ]]]
+Up for [[[ 2020-03-01 countup largest:years smallest:days format:short ]]]
+Raised [[[ 18452.75 currency:EUR ]]] so far · [[[ 87% ]]] satisfaction
+```
+
+`countdown`/`countup` turn a date into a `<wa-counter>`; a leading number makes a `<wa-number-ticker>`. Both are experimental in Web Awesome 3.15.0.
 
 ### Details
 
