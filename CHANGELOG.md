@@ -4,6 +4,8 @@ All notable changes to the "markawesome-vscode" extension will be documented in 
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-11-20
+
 ### Added
 
 - **Lightbox** (`::::lightbox` around image lines, Web Awesome 3.15.0, experimental): Lightbox entry in the component reference (hover, Insert Component); `wa-lightbox` snippet; completions on the fence for `loop`, `thumbnails`, `no-nav`, `no-counter`, `no-zoom`, `square`/`landscape`/`portrait`/`natural`, `label:"…"` and the grid's `gap:`/`min:`/`align:`/`justify:`; hover on `::::lightbox`; the fence joins the layout grammar rule; and a **Markawesome: Convert Images to Lightbox** command (Command Palette + context menu) that keeps each image line as written, so captions and linked thumbnails survive.
